@@ -116,3 +116,15 @@ model.compile(loss='mse', optimizer=optimizer2)
 # Gradient vanishing (학습률 너무 낮음, global loss가 아닌 local loss에 빠져버리는 현상), Gradient explosion (학습률 너무 높음)
 
 # LSTM 시간 너무 걸림
+
+######
+# 0108
+# 과적합: 어떠한 훈련 데이터에 대해서 모델을 완벽하게 맞게 해서 만들면 나중에 다른 데이터가 들어오면 쓸모가 없음
+# test/validation에서 조금만 달라져도 정확도가 낮아짐, 훈련할 때 버릴 애들은 버리는 게 낫다
+# 그렇다면 과적합이 되지 않게 하려면 어떻게 해야 할까
+# 1. 훈련 데이터를 늘린다
+# 2. feature를 줄인다
+# (feature가 많다는 건 y = w1x1 + w2x2 + w3x3 + ... 이렇게 연산이 많아짐
+# 버릴 특성은 버린다, mnist할 때 600여개 feature이 있는데 100개 정도로 줄여야 한다)
+# 3. regularization (정규화) 실시
+# 4. Dropout (DL 됨, ML 안 됨)
