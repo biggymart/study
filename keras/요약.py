@@ -115,6 +115,7 @@ model.compile(loss='mse', optimizer=optimizer2)
 # SGD (Stochastic Gradient Descent): 가장 기본적인 optimizer
 # Gradient vanishing (학습률 너무 낮음, global loss가 아닌 local loss에 빠져버리는 현상), Gradient explosion (학습률 너무 높음)
 
+<<<<<<< HEAD
 # LSTM 시간 너무 걸림
 
 ######
@@ -128,3 +129,6 @@ model.compile(loss='mse', optimizer=optimizer2)
 # 버릴 특성은 버린다, mnist할 때 600여개 feature이 있는데 100개 정도로 줄여야 한다)
 # 3. regularization (정규화) 실시
 # 4. Dropout (DL 됨, ML 안 됨)
+=======
+# LSTM 시간 너무 걸림
+>>>>>>> 2fecad6895c5762cefa9725b877c70098141bef4
