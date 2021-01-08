@@ -1,0 +1,7 @@
+https://wikidocs.net/25280
+
+2021-01-07 (until 01-2)
+pip install Gensim
+prompt > jupyter notebook 주피터 노트북 실행
+혹은 웹브라우저 localhost:8888
+단축키: Shift + Enter --> Run Cells
