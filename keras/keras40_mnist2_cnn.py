@@ -36,7 +36,7 @@ model.add(Conv2D(filters=10, kernel_size=(2,2), batch_size=128, padding='same',
 model.add(MaxPooling2D(pool_size=2))
 model.add(Dropout(0.2))
 model.add(Flatten())
-model.Dense(10)
+model.add(Dense(10))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping
