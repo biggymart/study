@@ -43,6 +43,9 @@ Total params: 61
 Trainable params: 61
 Non-trainable params: 0
 _________________________________________________________________
+
+model.add(Conv2D(filters=10, kernel_size=(2,2), strides=1, input_shape=(10,10,1)))
+model.add(Dense(1))
 '''
 # 아니, 우리는 사람인지 아닌지만 구분하고 싶은 건데, Dense 레이어가 4차원을 뽑아내내? 뭔가 문제가 심각하다..
 
@@ -65,6 +68,10 @@ Total params: 861
 Trainable params: 861
 Non-trainable params: 0
 _________________________________________________________________
+
+model.add(Conv2D(filters=10, kernel_size=(2,2), strides=1, input_shape=(10,10,1)))
+model.add(Flatten())
+model.add(Dense(1))
 '''
 # 2차원으로 잘 나오는 것을 알 수 있다. (N, 5, 5, 1)이 (N, 25)로 평평해진 것임 (한 행 한 행 짤라서 한 줄로 나열하기)
 # Conv2D는 4차원을 받아서 4차원으로 출력한다
@@ -89,8 +96,15 @@ Total params: 1,108
 Trainable params: 1,108
 Non-trainable params: 0
 _________________________________________________________________
+
+model.add(Conv2D(filters=10, kernel_size=(2,2), strides=1, input_shape=(10,10,1)))
+model.add(Flatten())
+model.add(Conv2D(9, (2,3)))
+model.add(Conv2D(8, 2))
+model.add(Flatten())
+model.add(Dense(1))
 '''
-# Conv2D은 특성을 추출하는 것이라서 LSTM과 다르게 2개 이상을 쌓는다고 해서 성능이 떨어지는 것은 아니다
+# Conv2D는 특성을 추출하는 것이라서 LSTM과 다르게 2개 이상을 쌓는다고 해서 성능이 떨어지는 것은 아니다
 # param_number = output_channel_number * (input_channel_number * kernel_height * kernel_width + 1)
 # 10 * (1 * 2 * 2 + 1) = 50
 
@@ -117,6 +131,11 @@ Total params: 1,149
 Trainable params: 1,149
 Non-trainable params: 0
 _________________________________________________________________
+
+model.add(Conv2D(filters=10, kernel_size=(2,2), strides=1, padding='same', input_shape=(10,10,1)))
+model.add(Conv2D(9, (2,3)))
+model.add(Flatten())
+model.add(Dense(1))
 '''
 # shape이 안 줄어든 것을 확인할 수 있다. (인풋 들어온 크기로 아웃풋 나감)
 
@@ -124,7 +143,7 @@ _________________________________________________________________
 # 자르기 위해 건너뛰는 폭을 조절할 수 있음 (default는 1), 가로세로 다르게 할 수 있음 (e.g. strides=(1,2))
 # 겹치는 게 좀 더 특성을 잘 뽑아내는데 두번째 레이어부터 판단해보길, 데이터마다 다름
 
-# MaxPooling2D 적용 후
+# MaxPooling2D 적용 후 (MaxPooling2D(pool_size=2) 일 때)
 '''
 Model: "sequential"
 _________________________________________________________________
@@ -144,26 +163,10 @@ Total params: 564
 Trainable params: 564
 Non-trainable params: 0
 _________________________________________________________________
-'''
 
-# MaxPooling2D(pool_size=2) 일 때
-'''
-Model: "sequential"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #
-=================================================================
-conv2d (Conv2D)              (None, 10, 10, 10)        50        
-_________________________________________________________________
-max_pooling2d (MaxPooling2D) (None, 5, 5, 10)          0
-_________________________________________________________________
-conv2d_1 (Conv2D)            (None, 4, 4, 9)           369
-_________________________________________________________________
-flatten (Flatten)            (None, 144)               0
-_________________________________________________________________
-dense (Dense)                (None, 1)                 145
-=================================================================
-Total params: 564
-Trainable params: 564
-Non-trainable params: 0
-_________________________________________________________________
+model.add(Conv2D(filters=10, kernel_size=(2,2), strides=1, padding='same', input_shape=(10,10,1)))
+model.add(MaxPooling2D(pool_size=2))
+model.add(Conv2D(9, (2,3)))
+model.add(Flatten())
+model.add(Dense(1))
 '''

@@ -31,7 +31,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 
 model = Sequential()
-model.add(Conv2D(filters=10, kernel_size=(2,2), batch_size=128, padding='same',
+model.add(Conv2D(filters=10, kernel_size=(2,2), batch_size=64, padding='same',
                 strides=1, input_shape=(28,28,1)))
 model.add(MaxPooling2D(pool_size=2))
 model.add(Dropout(0.2))
