@@ -83,6 +83,7 @@ evaLoss, evaAcc = model.evaluate(testDatas, testLabels, verbose=0)
 print("evaluation loss :", evaLoss, "evaluation accuracy :", "{:3.2f}%".format(evaAcc*100))
 
 #7. Predict
+'''
 def showTestImage(idx):
     data = testDatas[idx].reshape(-1, 28, 28, 1)
     dataPred = model.predict(data.astype(float))
@@ -95,6 +96,8 @@ def showTestImage(idx):
 widget = interactive(showTestImage, idx=(0, 10000, 1))
 widget.display()
 
+# 2021-01-11 note: ipywidgets 더 공부하고 만들어보자
+'''
 #8. Error Find
 errsIdx = []
 testDatas = testDatas.reshape(-1, 28, 28, 1)

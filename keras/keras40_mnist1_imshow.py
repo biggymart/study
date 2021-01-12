@@ -1,4 +1,5 @@
 # 인공지능계의 Hello, World라 불리는 mnist
+# x에서 값이 더 클수록(0~255) 더 밝음(255: 흰색), 빛의 3원색 사용
 
 import numpy as np
 import matplotlib.pyplot as plt

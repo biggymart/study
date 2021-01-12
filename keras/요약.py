@@ -115,11 +115,12 @@ model.compile(loss='mse', optimizer=optimizer2)
 # SGD (Stochastic Gradient Descent): 가장 기본적인 optimizer
 # Gradient vanishing (학습률 너무 낮음, global loss가 아닌 local loss에 빠져버리는 현상), Gradient explosion (학습률 너무 높음)
 
-<<<<<<< HEAD
 # LSTM 시간 너무 걸림
 
 ######
 # 0108
+# Keywords: overfit, dropout, CNN, shape, hist and plt
+
 # 과적합: 어떠한 훈련 데이터에 대해서 모델을 완벽하게 맞게 해서 만들면 나중에 다른 데이터가 들어오면 쓸모가 없음
 # test/validation에서 조금만 달라져도 정확도가 낮아짐, 훈련할 때 버릴 애들은 버리는 게 낫다
 # 그렇다면 과적합이 되지 않게 하려면 어떻게 해야 할까
@@ -129,6 +130,23 @@ model.compile(loss='mse', optimizer=optimizer2)
 # 버릴 특성은 버린다, mnist할 때 600여개 feature이 있는데 100개 정도로 줄여야 한다)
 # 3. regularization (정규화) 실시
 # 4. Dropout (DL 됨, ML 안 됨)
-=======
 # LSTM 시간 너무 걸림
->>>>>>> 2fecad6895c5762cefa9725b877c70098141bef4
+
+# DNN => Regression,    (row, col)
+# RNN => Time-series,   (row, col, 1)
+# CNN => Image,         (N, row, col, rgb)
+
+
+######
+# 0111
+# Keywords: plt, ModelCheckPoint
+
+# 6x6 자료가 있다고 하면
+# (36, 1), (18, 2), (12, 3), (9, 4), (6, 6), (4, 9), (3, 12), (2, 18), (1, 36)
+# 이러한 조합이 가능한데 그 중 (9, 4), (4, 9) 같은 경우에는 자료가 원래 형태를 유지하지 않고
+# 짤리게 된다. 한 줄에 6개 인데 4개씩 자르면 2번째 줄 앞 2개가 위에 있는 것과 함께 묶이게 된다.
+# 짜를 때 약수로 묶는 게 좋다.
+
+# Early Stopping의 문제점
+# 마지막 최저점을 1 patience cycle만큼 지나쳐서 stop하게 된다.
+# 매 최저점의 지점을 찍히는 코드를 만들면 어떨까
