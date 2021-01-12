@@ -38,7 +38,7 @@ model.fit(x_train, y_train, validation_split=0.2, epochs=10000, callbacks=[early
 
 #4. evaluate and predict
 loss = model.evaluate(x_test, y_test)
-print(loss)
+print("[categorical_crossentropy, acc] :", loss)
 
 y_pred = model.predict(x_test[-5:])
 for i in y_pred:

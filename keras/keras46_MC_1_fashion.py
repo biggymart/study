@@ -31,7 +31,7 @@ model.add(Dense(10, activation=softmax))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint ### Point1 ###
-modelpath = './modelCheckPoint/k46_fashion_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
+modelpath = '../data/modelCheckpoint/k46_fashion_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
 check_point = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto') ### Point3 ###
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
@@ -50,7 +50,7 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # Visualization ### Point5 ###
-import matplotlib.pyplot as plt # Matplotlib 한글 미지원
+import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째
@@ -74,3 +74,7 @@ plt.xlabel('epoch')
 plt.legend(loc='upper right')
 
 plt.show()
+
+# 결과
+# [categorical_crossentropy, acc] : [0.2757051885128021, 0.8977000117301941]
+# 9 9/2 2/1 1/1 1/6 6/1 1/4 4/6 6/5 5/7 7/

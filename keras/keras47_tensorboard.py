@@ -35,10 +35,10 @@ model.add(Dense(10, activation=softmax))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard ### Point1 ###
-modelpath = './modelCheckPoint/k47_tensorboard_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
+modelpath = '../data/modelCheckPoint/k47_tensorboard_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
 cp = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
 es = EarlyStopping(monitor='loss', patience=3, mode='auto')
-tb = TensorBoard(log_dir='./graph', histogram_freq=0, write_graph=True, write_images=True) ### Point3 ###
+tb = TensorBoard(log_dir='../data/graph', histogram_freq=0, write_graph=True, write_images=True) ### Point3 ###
 
 from tensorflow.keras.optimizers import Adam
 model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['acc']) 
@@ -54,7 +54,7 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # Visualization
-import matplotlib.pyplot as plt # Matplotlib 한글 미지원
+import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째

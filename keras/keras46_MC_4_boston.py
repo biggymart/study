@@ -31,7 +31,7 @@ model.add(Dense(1))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint ### Point1 ###
-modelpath = './modelCheckPoint/k46_boston_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
+modelpath = '../data/modelCheckpoint/k46_boston_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
 check_point = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto') ### Point3 ###
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
@@ -56,7 +56,7 @@ r2 = r2_score(y_test, y_predict)
 print('R2 :', r2)
 
 # Visualization ### Point5 ###
-import matplotlib.pyplot as plt # Matplotlib 한글 미지원
+import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째

@@ -1,4 +1,5 @@
 # 윤영선, 딥러닝으로 걷는 시계열 예측
+# 네이버블로그 gema0000
 
 '''
 === introduction ===
@@ -152,4 +153,7 @@ model.compile(loss='mse', optimizer=optimizer2)
 # 매 최저점의 지점을 찍히는 코드를 만들면 어떨까
 
 # 0112
-# numpy, pandas 저장하고 불러오기 
+# Keywords: load_model
+# numpy data 저장하고 불러오기 
+# 모델 저장하고 불러오기 (지점이 중요함: #2 이후 혹은 #3 이후)
+# <가중치 저장>이란 개념이 처음 등장! => 또 다시 훈련할 필요가 없어서 시간을 많이 절약할 수 있음

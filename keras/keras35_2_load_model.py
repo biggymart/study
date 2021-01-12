@@ -2,7 +2,7 @@
 # 필요한 api부터 임포트하자
 
 from tensorflow.keras.models import load_model
-model = load_model('./model/save_keras35.h5')
+model = load_model('../data/h5/save_keras35.h5')
 
 model.summary()
 # summary가 잘 되면 잘 불러져왔다는 의미겠지

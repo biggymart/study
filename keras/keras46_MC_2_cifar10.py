@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import cifar10
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
-#1-1. 데이터 전처리
+#1-1. preprocessing
 x_train = x_train.reshape(50000, 32, 32, 3).astype('float32')/255. # 0 ~ 1 사이의 숫자로 만듦
 x_test = x_test.reshape(10000, 32, 32, 3)/255. # 0 ~ 1 사이의 숫자로 만듦
 # (x_test.reshape(x_test.shape[0], x_test.shape[1], x_test.shape[2], 1))
@@ -31,13 +31,13 @@ model.add(Dense(10, activation=softmax))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint ### Point1 ###
-modelpath = './modelCheckPoint/k46_cifar10_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
+modelpath = '../data/modelCheckpoint/k46_cifar10_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
 check_point = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto') ### Point3 ###
-early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
+early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
 from tensorflow.keras.optimizers import Adam
 model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['acc']) # 다중분류에서 loss는 반드시 categorical_crossentropy
-hist = model.fit(x_train, y_train, epochs=100, batch_size=1024, callbacks=[early_stopping, check_point], validation_split=0.2)  ### Point4 ###
+hist = model.fit(x_train, y_train, epochs=1000, batch_size=1024, callbacks=[early_stopping, check_point], validation_split=0.2)  ### Point4 ###
 
 # evaluate and predict
 loss = model.evaluate(x_test, y_test)
@@ -49,7 +49,7 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # Visualization ### Point5 ###
-import matplotlib.pyplot as plt # Matplotlib 한글 미지원
+import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째
@@ -73,3 +73,7 @@ plt.xlabel('epoch')
 plt.legend(loc='upper right')
 
 plt.show()
+
+# 결과
+# [categorical_crossentropy, acc] : [0.9674845933914185, 0.6621999740600586]
+# 3 3/8 8/8 8/0 8/6 4/6 6/1 1/6 6/3 3/1 1/

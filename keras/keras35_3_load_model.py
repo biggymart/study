@@ -39,7 +39,7 @@ x_pred = x_pred.reshape(1, 4, 1)
 #2. model
 ###  (2) 활용할 부분 ###
 from tensorflow.keras.models import load_model
-model = load_model('./model/save_keras35.h5')
+model = load_model('../data/h5/save_keras35.h5')
 
 # model.summary()
 # 제대로 된다면 1 파일에서 만든 모델이 구동이 된다는 것이고, 모델에 맞게 데이터의 shape을 맞춰야한다

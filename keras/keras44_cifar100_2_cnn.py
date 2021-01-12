@@ -27,7 +27,7 @@ model.add(MaxPooling2D(pool_size=2, strides=(2,2)))
 model.add(Flatten())
 model.add(Dense(256, activation=relu))
 model.add(Dropout(0.5))
-model.add(Dense(10, activation=softmax))
+model.add(Dense(100, activation=softmax))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping
@@ -45,3 +45,7 @@ y_pred = model.predict(x_test)
 idx = 10
 for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
+
+# 결과
+# [categorical_crossentropy, acc] : [2.8704073429107666, 0.3034999966621399]
+# 49 12/33 80/72 15/51 51/71 71/92 31/15 80/14 7/23 71/0 83/

@@ -31,7 +31,7 @@ model.add(Dense(10, activation=softmax))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint ### Point1 ###
-modelpath = './modelCheckPoint/k45_mnist_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
+modelpath = '../data/modelCheckpoint/k45_mnist_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
 check_point = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto') ### Point3 ###
 # filepath: 최저점을 찍을 때마다 해당 지점의 가중치가 들어간 파일을 만듦, 궁극의 w가 저장된다
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
@@ -52,7 +52,7 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # Visualization ### Point5 ###
-import matplotlib.pyplot as plt # Matplotlib 한글 미지원
+import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째
@@ -73,10 +73,14 @@ plt.grid() # 격자
 plt.title('Accuracy')
 plt.ylabel('loss')
 plt.xlabel('epoch')
-plt.legend(loc='upper right')
+plt.legend(loc='upper right') # keras36_hist0.py line 69처럼, label 값을 지정할수도 있다
 
 plt.show()
 
 # 과제
 # val_loss와 loss가 교차하는 시점이 생김 (과적합 진입), 
 # val_loss의 최저점을 매번 최신화하여 찍어주는 ModelCheckPoint를 적용해라.
+
+# 결과
+# [categorical_crossentropy, acc] : [0.0743413120508194, 0.9768000245094299]
+# 7 7/2 2/1 1/0 0/4 4/1 1/4 4/9 9/5 6/9 9/

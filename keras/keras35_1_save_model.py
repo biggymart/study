@@ -39,10 +39,10 @@ Non-trainable params: 0
 _________________________________________________________________'''
 
 # model.save("path")
-model.save("./model/save_keras35.h5")
-model.save(".//model//save_keras35_1.h5")
-model.save(".\model\save_keras35_2.h5")
-model.save(".\\model\\save_keras35_3.h5")
+model.save("../data/h5/save_keras35.h5")
+model.save("..//data//h5//save_keras35_1.h5")
+model.save("..\data\h5\save_keras35_2.h5")
+model.save("..\\data\\h5\\save_keras35_3.h5")
 # (1) . 현재 폴더, 비주얼 스튜디오에서는 study가 현재 폴더, pycharm은 해당 file이 있는 폴더가 현재 폴더; (2) 당분간 저장용 확장자는 h5
 # 실행해보면 모델 폴더 아래 "save_keras35.h5"라는 파일이 생성됨
 

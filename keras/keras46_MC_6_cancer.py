@@ -30,7 +30,7 @@ model.add(Dense(1, activation='sigmoid'))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint ### Point1 ###
-modelpath = './modelCheckPoint/k46_cancer_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
+modelpath = '../data/modelCheckPoint/k46_cancer_{epoch:02d}-{val_loss:.4f}.hdf5' ### Point2 ###
 check_point = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto') ### Point3 ###
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='min')
 
@@ -49,7 +49,7 @@ print(y_pred)
 print(y_test[-10:])
 
 # Visualization ### Point5 ###
-import matplotlib.pyplot as plt # Matplotlib 한글 미지원
+import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째
@@ -63,13 +63,18 @@ plt.xlabel('epoch')
 plt.legend(loc='upper right')
 
 plt.subplot(2, 1, 2) # 2행 1열 그래프 중 두번째
-plt.plot(hist.history['mae'], marker='.', c='red', label='mae')
-plt.plot(hist.history['val_mae'], marker='.', c='blue', label='val_mae')
+plt.plot(hist.history['acc'], marker='.', c='red', label='acc')
+plt.plot(hist.history['val_acc'], marker='.', c='blue', label='val_acc')
 plt.grid() # 격자
 
-plt.title('MAE')
+plt.title('Acc')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(loc='upper right')
 
 plt.show()
+
+# 결과
+# binary_crossentropy, acc : [0.26619717478752136, 0.9561403393745422]
+# [0 1 1 1 0 1 0 1 1 1]
+# [0 1 1 1 0 1 0 1 1 1]
