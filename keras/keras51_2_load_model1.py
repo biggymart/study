@@ -40,7 +40,7 @@ Trainable params: 1,387,434
 Non-trainable params: 0
 _________________________________________________________________
 
-정상적으로 모델이 불러져오는 것을 확인할 수 있음
+This summary comfirms that the model has been loaded
 '''
 
 #3. compile and fit
@@ -50,10 +50,8 @@ check_point = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_
 early_stopping = EarlyStopping(monitor='loss', patience=5, mode='auto')
 
 from tensorflow.keras.optimizers import Adam
-model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0001), 
-              metrics=['acc']) 
-hist = model.fit(x_train, y_train, epochs=50, batch_size=1024, 
-                callbacks=[early_stopping, check_point], validation_split=0.2)
+model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['acc']) 
+model.fit(x_train, y_train, epochs=50, batch_size=1024, callbacks=[early_stopping, check_point], validation_split=0.2)
 
 # evaluate and predict
 loss = model.evaluate(x_test, y_test)
@@ -63,32 +61,6 @@ y_pred = model.predict(x_test)
 idx = 10
 for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
-
-# Visualization
-import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 6))
-
-plt.subplot(2, 1, 1) 
-plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
-plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
-plt.grid()
-
-plt.title('Cost Loss')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(loc='upper right')
-
-plt.subplot(2, 1, 2) 
-plt.plot(hist.history['acc'], marker='.', c='red', label='accuracy')
-plt.plot(hist.history['val_acc'], marker='.', c='blue', label='val_accuracy')
-plt.grid()
-
-plt.title('Accuracy')
-plt.ylabel('loss')
-plt.xlabel('epoch')
-plt.legend(loc='upper right')
-
-plt.show()
 
 # 결과
 # [categorical_crossentropy, acc] : [0.07719344645738602, 0.9761000275611877]

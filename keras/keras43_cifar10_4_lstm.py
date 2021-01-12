@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import cifar10
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
-print(x_train.shape) # (60000, 28, 28)
+print(x_train.shape) # (50000, 32, 32, 3)
 
 #1-1. 데이터 전처리
-x_train = x_train.reshape(60000, 7 * 7, 16).astype('float32')/255. ### Point1 ###
-x_test = x_test.reshape(10000, 7 * 7, 16)/255. 
+x_train = x_train.reshape(50000, 8 * 8, 48).astype('float32')/255. ### Point1 ###
+x_test = x_test.reshape(10000, 8 * 8, 48)/255. 
 # (x_test.reshape(x_test.shape[0], idx[1], idx[2])) # idx[1] * idx[2] ==  x_test.shape[1] * x_test.shape[2]
 
 from tensorflow.keras.utils import to_categorical # OneHotEncoding from tensorflow
@@ -23,7 +23,7 @@ from tensorflow.keras.layers import Dense, Dropout, LSTM
 from tensorflow.keras.activations import relu, softmax
 
 model = Sequential()
-model.add(LSTM(32, input_shape=(7 * 7, 16), activation=relu)) ### Point2 ###
+model.add(LSTM(32, input_shape=(8 * 8, 48), activation=relu)) ### Point2 ###
 model.add(Dense(256, activation=relu))
 model.add(Dropout(0.5))
 model.add(Dense(10, activation=softmax))
@@ -46,3 +46,5 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # 결과
+# [categorical_crossentropy, acc] : [1.6182832717895508, 0.40450000762939453]
+# 3 5/8 1/8 8/0 8/6 2/6 6/1 5/6 6/3 5/1 1/

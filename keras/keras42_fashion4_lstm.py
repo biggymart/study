@@ -46,3 +46,5 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # 결과
+# [categorical_crossentropy, acc] : [0.553026556968689, 0.800000011920929]
+# 9 9/2 2/1 1/1 1/6 6/1 1/4 4/6 4/5 5/7 7/
