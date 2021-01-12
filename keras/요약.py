@@ -150,3 +150,6 @@ model.compile(loss='mse', optimizer=optimizer2)
 # Early Stopping의 문제점
 # 마지막 최저점을 1 patience cycle만큼 지나쳐서 stop하게 된다.
 # 매 최저점의 지점을 찍히는 코드를 만들면 어떨까
+
+# 0112
+# numpy, pandas 저장하고 불러오기 
