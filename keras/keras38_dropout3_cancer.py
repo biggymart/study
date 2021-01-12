@@ -33,7 +33,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='min')
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, epochs=10000, validation_split=0.2, callbacks=[early_stopping])
+hist = model.fit(x_train, y_train, epochs=10000, validation_split=0.2, callbacks=[early_stopping])
 
 #4. evaluate and predict
 loss = model.evaluate(x_test, y_test)
@@ -45,6 +45,21 @@ y_predict = np.transpose(y_predict)
 y_pred = np.transpose(y_pred)
 print(y_pred)
 print(y_test[-10:])
+
+# graph
+print(hist.history.keys()) # dict_keys(['loss', 'acc', 'val_loss', 'val_acc'])
+
+import matplotlib.pyplot as plt
+plt.plot(hist.history['loss']) 
+plt.plot(hist.history['val_loss'])
+plt.plot(hist.history['acc']) 
+plt.plot(hist.history['val_acc']) 
+
+plt.title('loss & acc')
+plt.ylabel('loss, acc')
+plt.xlabel('epoch')
+plt.legend(['train loss', 'val loss', 'train acc', 'val acc'])
+plt.show()
 
 # 결과 keras21_cancer1.py
 # binary_crossentropy, acc : [0.11954214423894882, 0.9561403393745422]

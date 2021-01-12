@@ -35,7 +35,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-model.fit(x_train, y_train, batch_size=1, epochs=1000, verbose=1, validation_data=(x_val, y_val), callbacks=[early_stopping])
+hist = model.fit(x_train, y_train, batch_size=1, epochs=1000, verbose=1, validation_data=(x_val, y_val), callbacks=[early_stopping])
 
 #4. evaluate and predict
 mse, mae = model.evaluate(x_test, y_test, batch_size=1)
@@ -53,6 +53,21 @@ print('RMSE :', RMSE(y_test, y_predict))
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict)
 print('R2 :', r2)
+
+# graph
+print(hist.history.keys()) # dict_keys(['loss', 'mae', 'val_loss', 'val_mae'])
+
+import matplotlib.pyplot as plt
+plt.plot(hist.history['loss']) # train loss
+plt.plot(hist.history['val_loss']) # val loss
+plt.plot(hist.history['mae']) # train mae
+plt.plot(hist.history['val_mae']) # val mae
+
+plt.title('loss & mae')
+plt.ylabel('loss, mae')
+plt.xlabel('epoch')
+plt.legend(['train loss', 'val loss', 'train mae', 'val mae'])
+plt.show()
 
 # 결과값 keras19_diabetes6, Dropout 전
 # mse : 3199.4365234375

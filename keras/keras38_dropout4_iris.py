@@ -34,7 +34,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=3, mode='min')
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
-model.fit(x_train, y_train, validation_split=0.2, epochs=10000, callbacks=[early_stopping])
+hist = model.fit(x_train, y_train, validation_split=0.2, epochs=10000, callbacks=[early_stopping])
 
 #4. evaluate and predict
 loss = model.evaluate(x_test, y_test)
@@ -44,6 +44,21 @@ y_pred = model.predict(x_test[-5:])
 for i in y_pred:
     print(np.max(i), np.argmax(i))
 print(y_test[-5:])
+
+# graph
+print(hist.history.keys()) # dict_keys(['loss', 'acc', 'val_loss', 'val_acc'])
+
+import matplotlib.pyplot as plt
+plt.plot(hist.history['loss']) 
+plt.plot(hist.history['val_loss'])
+plt.plot(hist.history['acc']) 
+plt.plot(hist.history['val_acc']) 
+
+plt.title('loss & acc')
+plt.ylabel('loss, acc')
+plt.xlabel('epoch')
+plt.legend(['train loss', 'val loss', 'train acc', 'val acc'])
+plt.show()
 
 # 결과 keras22_1_iris2_sklearn
 # [0.14184093475341797, 0.9666666388511658]

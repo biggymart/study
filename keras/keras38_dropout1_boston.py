@@ -1,23 +1,22 @@
 # keras18_EarlyStopping.py 카피
 
+#1. data
 import numpy as np
 from sklearn.datasets import load_boston
-
-#1. data
 dataset = load_boston()
 x = dataset.data
 y = dataset.target
 
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)
-_, x_val, _, y_val = train_test_split(x, y, test_size=0.2) # 전처리
+_, x_val, _, y_val = train_test_split(x, y, test_size=0.2)
 
 from sklearn.preprocessing import MinMaxScaler 
 scaler = MinMaxScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train) 
 x_test = scaler.transform(x_test)
-x_val = scaler.transform(x_val) # 전처리
+x_val = scaler.transform(x_val)
 
 # 실습: 모델을 구성하시오
 #2. model
@@ -45,16 +44,16 @@ model.add(Dense(1))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping
-early_stopping = EarlyStopping(monitor='loss', patience=20, mode='auto')
+early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-model.fit(x_train, y_train, batch_size=4, epochs=2000, verbose=1, validation_data=(x_val, y_val), callbacks=[early_stopping])
+hist = model.fit(x_train, y_train, batch_size=4, epochs=2000, verbose=1, validation_data=(x_val, y_val), callbacks=[early_stopping])
 
 #4. evalutate and predict
 mse, mae = model.evaluate(x_test, y_test, batch_size=4)
 print("mse :", mse, "\nmae :", mae)
 
-y_predict = model.predict(x_test) # 단순히 지표를 만들기 위해 만든 변수임
+y_predict = model.predict(x_test)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
@@ -66,6 +65,21 @@ print('RMSE :', RMSE(y_test, y_predict))
 from sklearn.metrics import r2_score
 r2 = r2_score(y_test, y_predict)
 print('R2 :', r2)
+
+# graph
+print(hist.history.keys()) # dict_keys(['loss', 'mae', 'val_loss', 'val_mae'])
+
+import matplotlib.pyplot as plt
+plt.plot(hist.history['loss']) # train loss
+plt.plot(hist.history['val_loss']) # val loss
+plt.plot(hist.history['mae']) # train mae
+plt.plot(hist.history['val_mae']) # val mae
+
+plt.title('loss & mae')
+plt.ylabel('loss, mae')
+plt.xlabel('epoch')
+plt.legend(['train loss', 'val loss', 'train mae', 'val mae'])
+plt.show()
 
 # 결과 keras18_EarlyStopping, Dropout 전
 # Epoch 214/2000

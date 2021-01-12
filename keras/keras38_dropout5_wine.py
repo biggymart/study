@@ -35,7 +35,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=3, mode='min')
 
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc']) # 다중분류에서 loss는 반드시 categorical_crossentropy
-model.fit(x_train, y_train, epochs=10000, callbacks=[early_stopping])
+hist = model.fit(x_train, y_train, epochs=10000, callbacks=[early_stopping])
 
 #4. evaluate and predict
 loss = model.evaluate(x_test, y_test)
@@ -45,6 +45,21 @@ y_pred = model.predict(x_test[-5:])
 for i in y_pred:
     print("(인덱스) 와인이름 :", np.argmax(i), dataset.target_names[np.argmax(i)], ", 값 :", np.max(i))
 print(y_test[-5:])
+
+# graph
+print(hist.history.keys()) # dict_keys(['loss', 'acc', 'val_loss', 'val_acc'])
+
+import matplotlib.pyplot as plt
+plt.plot(hist.history['loss']) 
+plt.plot(hist.history['val_loss'])
+plt.plot(hist.history['acc']) 
+plt.plot(hist.history['val_acc']) 
+
+plt.title('loss & acc')
+plt.ylabel('loss, acc')
+plt.xlabel('epoch')
+plt.legend(['train loss', 'val loss', 'train acc', 'val acc'])
+plt.show()
 
 # 결과 keras22_3_wine.py
 # Epoch 1730/10000
