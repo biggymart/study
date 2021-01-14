@@ -160,3 +160,12 @@ model.compile(loss='mse', optimizer=optimizer2)
 
 # fit: 공략법을 얻기 위해 주구장창 게임을 play 하는 것
 # weight: 여러 시행착오를 통해 얻은 공략법
+
+# 0113
+# numpy를 하다보면 느끼겠지만 한 종류의 자료형만 쓰는 것을 알았을 거야
+# R에서 가져온 것: pandas 자료형에 대해서 flexible 함; header, index 기본적으로 제공
+# pandas에서 가장 기본이 되는 자료:
+#   dataframe: Two-dimensional, size-mutable, potentially heterogeneous tabular data.
+#   series:    One-dimensional ndarray with axis labels (including time series).
+
+# pandas로 데이터프레임을 만들 수 있고, csv로 저장하고 불러올 수 있다

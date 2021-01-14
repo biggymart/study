@@ -1,0 +1,93 @@
+2021-01-13 과제
+
+pandas loc, iloc 개념 정리하기
+(각각 location, integer location의 약자)
+https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html
+
+0. 소개: 파이썬에서 제공되는 [] 혹은 넘파이에서 제공되는 . 보다 판다스에 더 표준적인 도구임
+### 기본적으로 pandas에서 slicing의 기준은 index인듯
+BUT, 해당 column만 짜르기
+df[['A', 'B']]
+
+=====
+1. 문법:
+object type     Indexers
+Series          s.loc[indexer]
+DataFrame       df.loc[row_indexer,column_indexer]
+
+=====
+2. 비교:
+loc  => label-based  e.g> df.loc['a', 'b', 'c']
+iloc => integer-based e.g> df.iloc[4, 3, 0]
+### df.iloc(해당 행)
+
+예시를 통해 이해:
+iloc를 이용해야 하는데 loc를 이용한 경우>
+
+# 1) 자료
+In [35]: dfl = pd.DataFrame(np.random.randn(5, 4), columns=list('ABCD'), index=pd.date_range('20130101', periods=5))
+
+In [36]: dfl
+Out[36]: 
+                   A         B         C         D
+2013-01-01  1.075770 -0.109050  1.643563 -1.469388
+2013-01-02  0.357021 -0.674600 -1.776904 -0.968914
+2013-01-03 -1.294524  0.413738  0.276662 -0.472035
+2013-01-04 -0.013960 -0.362543 -0.006154 -0.923061
+2013-01-05  0.895717  0.805244 -1.206412  2.565646
+
+# 2) 틀린 입력
+In [4]: dfl.loc[2:3]
+TypeError: cannot do slice indexing on <class 'pandas.tseries.index.DatetimeIndex'> with these indexers [2] of <type 'int'>
+
+# 3) 올바른 입력
+In [37]: dfl.loc['20130102':'20130104']
+Out[37]: 
+                   A         B         C         D
+2013-01-02  0.357021 -0.674600 -1.776904 -0.968914
+2013-01-03 -1.294524  0.413738  0.276662 -0.472035
+2013-01-04 -0.013960 -0.362543 -0.006154 -0.923061
+
+=====
+iloc 활용 예시>
+In [24]: x = pd.DataFrame({'x': [1, 2, 3], 'y': [3, 4, 5]})
+In [25]: x.iloc[1] = {'x': 9, 'y': 99}
+In [26]: x
+Out[26]: 
+   x   y
+0  1   3
+1  9  99
+2  3   5
+
+=====
+삼성전자 주가 날짜 뒤바꾸기
+df[::-1]
+
+
+keras54_conv1d_01_lstm.py
+
+모델 정리: 
+lstm과 마찬가지로 input shape이 2차원이다.
+주어진 데이터가 양이 많지 않기 때문에 많은 filter를 할 수 없다고 생각되서 6 정도가 좋다고 판단되었다.
+또한 주어진 데이터가 3을 기준으로 반복되는 형태라서 그의 배수인 3을 kernel_size로 정하였다
+데이터의 사이즈가 크지 않기 때문에 maxpool도 할 필요성을 느끼지 못하였다.
+바로 Dense 레이어에 넘겨주었고, Dropout 해본 결과가 더 나아서 추가하였다.
+
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+conv1d (Conv1D)              (None, 1, 6)              24
+_________________________________________________________________
+dense (Dense)                (None, 1, 16)             112
+_________________________________________________________________
+dropout (Dropout)            (None, 1, 16)             0
+_________________________________________________________________
+dense_1 (Dense)              (None, 1, 8)              136
+_________________________________________________________________
+dense_2 (Dense)              (None, 1, 1)              9
+=================================================================
+Total params: 281
+Trainable params: 281
+Non-trainable params: 0
+_________________________________________________________________
