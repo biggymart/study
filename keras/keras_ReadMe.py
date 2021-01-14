@@ -2,27 +2,50 @@
 # 네이버블로그 gema0000
 
 '''
+0 ~ 9: 기초적인 모델 구성
+
 === introduction ===
-keras00_numpy: numpy 라이브러리 import와 np.array 만들 수 있다, aliss의 개념도 덤으로 알게된다
-keras01_OverallWorkflow: 전반적인 작업순서를 파악할 수 있다 "data -> model -> compile and fit -> evaluate and predict", 모델은 Sequential, 레이어는 Dense
+00_numpy: numpy 라이브러리 import와 np.array 만들 수 있다, aliss의 개념도 덤으로 알게된다
+01_OverallWorkflow: 전반적인 작업순서를 파악할 수 있다 "data -> model -> compile and fit -> evaluate and predict", 모델은 Sequential, 레이어는 Dense
 
 === data ===
-keras02_1: 데이터를 훈련과 평가 세트로 나눌 필요성을 알게된다, 모델의 활성화 함수 'relu' 등장
-keras02_2: 예측의 개념과 predict 데이터를 만들 필요성을 알게된다
+02_1: 데이터를 훈련과 평가 세트로 나눌 필요성을 알게된다, 모델의 활성화 함수 'relu' 등장
+02_2: 예측의 개념과 predict 데이터를 만들 필요성을 알게된다
 
 === model evaluation ===
-keras03_metrics: compile에 metrics가 등장, mse와 mae의 개념을 따로 학습
-keras04_validation: fit에 validation_split 옵션이 등장, validation을 해야할 필요성을 알게된다
-keras05_RMSE: RMSE 개념을 따로 학습하고, scikitlearn과 함수의 개념 등장
-keras06_R2: R2 개념 등장 (회귀모델 지표)
-keras07_R2_test: hyperparameter tuning을 통해 R2 지표를 끌어올리는 실습
+03_metrics: compile에 metrics가 등장, mse와 mae의 개념을 따로 학습
+04_validation: fit에 validation_split 옵션이 등장, validation을 해야할 필요성을 알게된다
+05_RMSE: RMSE 개념을 따로 학습하고, scikitlearn과 함수의 개념 등장
+06_R2: R2 개념 등장 (회귀모델 지표)
+07_R2_test: hyperparameter tuning을 통해 R2 지표를 끌어올리는 실습
 
 === data split ===
-keras08_split1: list slicing
-keras08_split2: from sklearn.model_selection import train_test_split
-keras08_split3_val: model.fit(validation_split=0.2)
-keras08_split4_val2: model.fit(validation_data=(x_val, y_val))
-keras08_split5_size: train_test_split(train_size=float, test_size=float), a + b == 1
+08_split1: list slicing
+08_split2: from sklearn.model_selection import train_test_split
+08_split3_val: model.fit(validation_split=0.2)
+08_split4_val2: model.fit(validation_data=(x_val, y_val))
+08_split5_size: train_test_split(train_size=float, test_size=float), a + b == 1
+
+=== MLP (Multi-Layered Perceptron) ===
+09_mlp1: 다:1, 퍼셉트론 개괄
+09_mlp2: 다:1
+09_mlp3: 다:다
+09_mlp4: 다:다
+09_mlp5: 성능 떨어뜨려보기
+09_mlp6: 1:다
+
+=== more parameters ===
+10_verbose: fit parameter
+11_input_shape: model parameter
+
+=== model construction ===
+12_func1: 함수형 모델
+12_func2: 상동
+13_func_mlp1: 09_mlp2 복사 적용본
+13_func_mlp2: 09_mlp3 복사 적용본
+13_func_mlp3: 09_mlp6 복사 적용본
+
+
 
 '''
 
