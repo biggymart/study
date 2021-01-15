@@ -5,6 +5,7 @@ features = ['시가', '고가', '저가', '종가', '등락률', '거래량', '�
 target_feature = '시가'
 denomination_date = '2018-05-04'
 y_col = features.index(target_feature)
+future_day_gap = 2
 
 #0. basic functions
 def load_df(dir):
@@ -49,6 +50,19 @@ def four_plus_one(df, feature):
     df_after_deno = df_alltime.loc[denomination_date:,:]
     return df_after_deno
 
+def four_plus_two(df, feature1, feature2):
+    idx1 = plus_one.index(feature1)
+    idx2 = plus_one.index(feature2)
+
+    df_fix_col = df.loc[:,'시가':'종가']
+    df_sel_col1 = df.loc[:, plus_one[idx1]]
+    df_sel_col2 = df.loc[:, plus_one[idx2]]
+
+    df_alltime = pd.concat([df_fix_col, df_sel_col1, df_sel_col2], axis=1)
+    df_after_deno = df_alltime.loc[denomination_date:,:]
+    return df_after_deno
+
+# row 맞추는 함수 만들기
 
 def run_model(df, feature):
     df_numpy = df.to_numpy()
@@ -115,12 +129,11 @@ def run_model(df, feature):
 ### flow control
 running = True
 while running:
-    print('''Title: Four + One
-Let's predict a future stock price (종가)!
+    print('''Stock Price Predictor
 Program description:
     Step1. Load your first csv file. (MUST enter the full path)    
     Step2. You can optionally merge one or more other csv file(s) with the loaded csv file in Step1.
-    Step3. Type in a feature that you want as the fifth variable along with the other four (시가, 고가, 저가, 종가)
+    Step3. Type in a feature that you want as the fifth variable for samsung.
 Begin the journey...''')
     data1 = ask_load_file()
 
@@ -143,9 +156,11 @@ Begin the journey...''')
             print("Try again")
 
     # feature selection
-    ans2 = input("Select feature (등락률, 거래량, 금액(백만), 신용비, 개인, 기관, 외인(수량), 외국계, 프로그램, 외인비) :")
-    df_pandas = four_plus_one(data1, ans2)
-    result = run_model(df_pandas, ans2)
+    ans2_1 = input("Select feature for samsung (등락률, 거래량, 금액(백만), 신용비, 개인, 기관, 외인(수량), 외국계, 프로그램, 외인비) :")
+    df_pandas_1 = four_plus_one(data1, ans2_1)
+    ans2_2= input("Select feature for inverse (등락률, 거래량, 금액(백만), 신용비, 개인, 기관, 외인(수량), 외국계, 프로그램, 외인비) :")
+    df_pandas_2 = four_plus_two(data1, ans2_1)
+    result = run_model(df_pandas_2, ans2_1)
     print("loss(mse, mae)", result[0], "predict", result[1])
 
     switch2 = True
