@@ -5,7 +5,7 @@
 0 ~ 9: 기초적인 모델 구성
 
 === introduction ===
-00_numpy: numpy 라이브러리 import와 np.array 만들 수 있다, aliss의 개념도 덤으로 알게된다
+00_numpy: numpy 라이브러리 import와 np.array 만들 수 있다, alias의 개념도 덤으로 알게된다
 01_OverallWorkflow: 전반적인 작업순서를 파악할 수 있다 "data -> model -> compile and fit -> evaluate and predict", 모델은 Sequential, 레이어는 Dense
 
 === data ===
@@ -13,11 +13,11 @@
 02_2: 예측의 개념과 predict 데이터를 만들 필요성을 알게된다
 
 === model evaluation ===
-03_metrics: compile에 metrics가 등장, mse와 mae의 개념을 따로 학습
-04_validation: fit에 validation_split 옵션이 등장, validation을 해야할 필요성을 알게된다
-05_RMSE: RMSE 개념을 따로 학습하고, scikitlearn과 함수의 개념 등장
-06_R2: R2 개념 등장 (회귀모델 지표)
-07_R2_test: hyperparameter tuning을 통해 R2 지표를 끌어올리는 실습
+03_metrics: compile(metrics=['mse','mae']), mse와 mae 개념
+04_validation: fit에 validation_split 옵션, validation의 필요성
+05_RMSE: RMSE 개념, scikitlearn과 함수의 개념 등장
+06_R2: R2 개념
+07_R2_test: R2 올리는 실습
 
 === data split ===
 08_split1: list slicing
@@ -26,26 +26,47 @@
 08_split4_val2: model.fit(validation_data=(x_val, y_val))
 08_split5_size: train_test_split(train_size=float, test_size=float), a + b == 1
 
-=== MLP (Multi-Layered Perceptron) ===
-09_mlp1: 다:1, 퍼셉트론 개괄
-09_mlp2: 다:1
-09_mlp3: 다:다
-09_mlp4: 다:다
-09_mlp5: 성능 떨어뜨려보기
-09_mlp6: 1:다
+=== MLP (Multi-Layered Perceptron, DNN) ===
+09_mlp: 다:1, 다:1, 다:다, 다:다, 성능 떨어뜨려보기, 1:다
 
 === more parameters ===
 10_verbose: fit parameter
 11_input_shape: model parameter
 
 === model construction ===
-12_func1: 함수형 모델
-12_func2: 상동
-13_func_mlp1: 09_mlp2 복사 적용본
-13_func_mlp2: 09_mlp3 복사 적용본
-13_func_mlp3: 09_mlp6 복사 적용본
+12_func: 함수형 모델
+14_ensemble: ensemble 개념 소개, 2:2, 2:1, 2:1, 2:3, 2:2, 1:2
+16_Concatenate: # Concatenate()([mod1, mod2]) # concatenate([mod1, mod2])
+17_summary: 모델 만든 후 확인용
+18_boston: MinMaxScaler 전처리, sklearn 자료
+18_EarlyStopping: fit 제어도구, 
+
+19_diabetes: sklearn 자료 실습
+20_boston_keras: keras 자료
+21_cancer: sklearn 자료, binary classification
+22_iris_1: sklearn 자료, categorical classification,tensorflow.keras.utils.to_categorical, softmax
+22_iris_2: sklearn.preprocessing.OneHotEncoder
+22_wine: sklearn 자료
+
+=== RNN ===
+23_LSTM: 3차원 데이터, shape의 중요성
+24_SimpleRNN
+25_GRU
+28_LSTM_return_sequences: layer parameter 중 하나 
+30_LSTM_ensemble: 행 맞춰야 한다
+31_split_timeseries: 일반적인 array에서 시계열 데이터로 만드는 함수
+
+=== save and load model ===
+35_save_model: model.save('path')
 
 
+history
+dropout
+CNN
+MCP
+save and load npy, weight, MCP
+pandas
+Conv1D
 
 '''
 

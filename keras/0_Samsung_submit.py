@@ -1,7 +1,12 @@
 #1. data
 import numpy as np
-x_test = np.load('../data/npy/samsung_x_test.npy')
-y_test = np.load('../data/npy/samsung_y_test.npy')
+# np_Array=np.load('../data/npy/samsung.npz')
+# print(np_Array.files)
+
+npz_loaded = np.load('../data/npy/samsung.npz')
+x_test = npz_loaded['x_test']
+y_test = npz_loaded['y_test']
+x_pred = npz_loaded['x_pred']
 
 #2. model
 #3. compile and fit
@@ -11,8 +16,6 @@ model = load_model('../data/h5/samsung_lstm.h5')
 #4. evaluate and predict
 loss = model.evaluate(x_test, y_test, batch_size=32)
 print("loss(mse, mae) :", loss)
-
-x_pred = np.load('../data/npy/samsung_x_pred.npy')
 
 y_pred = model.predict(x_pred, batch_size=32)
 print(y_pred)
