@@ -14,6 +14,9 @@ x1 = np.transpose(x1); x2 = np.transpose(x2); y = np.transpose(y)
 
 x1_train, x1_test, x2_train, x2_test, y_train, y_test = train_test_split(x1, x2, y, train_size=0.8, shuffle=False)
 
+# print(x1_train.shape, x1_test.shape, x2_train.shape, x2_test.shape, y_train.shape, y_test.shape)
+# (80, 3) (20, 3) (80, 3) (20, 3) (80, 3) (20, 3)
+
 # 2. model
 # 2-1. first model
 input1 = Input(shape=(3,))

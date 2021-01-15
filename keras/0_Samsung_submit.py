@@ -1,7 +1,7 @@
 #1. data
 import numpy as np
-# np_Array=np.load('../data/npy/samsung.npz')
-# print(np_Array.files)
+# np_array=np.load('../data/npy/samsung.npz')
+# print(np_array.files)
 
 npz_loaded = np.load('../data/npy/samsung.npz')
 x_test = npz_loaded['x_test']
