@@ -79,7 +79,7 @@ def run_model(df1, df2):
     minmax_for_RNN(x2_list, scaler2)
 
     # print(x1_train.shape, x1_test.shape, x2_train.shape, x2_test.shape, y1_train.shape, y1_test.shape)
-    #    (528, 5)         (133, 5)       (528, 6)        (133, 6)       (528,)          (133,)
+    #      (528, 5)         (133, 5)       (528, 6)        (133, 6)       (528,)          (133,)
 
     np.savez('../data/npy/samsung_inverse1.npz', x1_test=x1_test, y1_test=y1_test, x1_pred=x1_pred)
     np.savez('../data/npy/samsung_inverse2.npz', x2_test=x2_test, x2_pred=x2_pred)
