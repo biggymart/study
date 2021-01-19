@@ -112,13 +112,14 @@ def run_model(df1, df2):
     model = Model(inputs=[input1, input2], outputs=output1)
 
     #3. compile and fit
-    from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+    from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
     modelpath = '../data/modelCheckpoint/samsung_inverse_{epoch:02d}-{val_loss:.4f}.hdf5'
     cp = ModelCheckpoint(filepath=modelpath, monitor='val_loss', save_best_only=True, mode='auto')
-    es = EarlyStopping(monitor='loss', patience=30, mode='auto')
+    es = EarlyStopping(monitor='loss', patience=10, mode='auto')
+    rlr = ReduceLROnPlateau(monitor='val_loss', patience=5, factor=0.5, verbose=1) 
 
     model.compile(loss='mse', optimizer='adam', metrics='mae')
-    model.fit([x1_train, x2_train], y1_train, epochs=1000, batch_size=32, verbose=1, callbacks=[es, cp], validation_split=0.2)
+    model.fit([x1_train, x2_train], y1_train, epochs=1000, batch_size=32, verbose=1, callbacks=[es, cp, rlr], validation_split=0.2)
 
     model.save('../data/h5/samsung_inverse.h5')
 
@@ -143,22 +144,27 @@ df_inv_featured = four_plus_two(data_inverse, plus_one[1], plus_one[2]) # 거래
 result = run_model(df_sam_featured, df_inv_featured)
 print("loss(mse, mae)", result[0], "\npredict", result[1], sep='')
 
-# 결과 trial=1
+# BEFORE rlr
+# trial=1
 # loss(mse, mae) [2394344.25, 1193.716064453125] 
 # predict [[94473.625] [93075.484]]
 
-# 결과 trial=2
+# trial=2
 # loss(mse, mae)[2672107.0, 1321.3719482421875]
 # predict[[94703.24] [93382.99]]
 
-# 결과 trial=3
+# trial=3
 # loss(mse, mae)[3970264.75, 1537.30615234375]
 # predict[[93362.77] [92040.91]]
 
-# 결과 trial=4
+# trial=4
 # loss(mse, mae)[3929277.75, 1491.656005859375]
 # predict[[91563.38] [90250.57]]
 
-# 결과 trial=5
+# trial=5
 # loss(mse, mae)[2528967.25, 1164.7802734375]
 # predict[[89505.] [87874.54]]
+
+# AFTER applying rlr
+# loss(mse, mae)[2011014.5, 1021.6205444335938]
+# predict[[91321.07] [90307.82]]
