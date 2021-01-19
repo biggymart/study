@@ -38,7 +38,7 @@ x_test = pd.concat(df_test)
 #2. model
 #3. compile and fit
 #4. evaluate and predict
-def run_model(x_train, x_eval, y_train, y_eval):
+def RNN(x_train, x_eval, y_train, y_eval):
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.layers import Dense, SimpleRNN, Dropout
     model = Sequential()
