@@ -57,7 +57,7 @@ def run_model(x_train, x_eval, y_train, y_eval):
     model.fit(x_train, y_train, epochs=1000, batch_size=32, callbacks=[es, rlr], validation_split=0.2)
     
     loss = model.evaluate(x_eval, y_eval)
-    pred = model.predict(x_eval)
+    pred = pd.Series(model.predict(x_eval).round(2))
     return loss, pred
 
 # Target1
