@@ -197,6 +197,6 @@ print("loss(mse, mae)", result[0], "\npredict", result[1], sep='')
 # loss(mse, mae)[3970264.75, 1537.30615234375]
 # predict[[93362.77] [92040.91]]
 
-# 결과 trial=3
+# 결과 trial=4
 # loss(mse, mae)[3929277.75, 1491.656005859375]
 # predict[[91563.38] [90250.57]]
