@@ -213,3 +213,16 @@ model.compile(loss='mse', optimizer=optimizer2)
 #   series:    One-dimensional ndarray with axis labels (including time series).
 
 # pandas로 데이터프레임을 만들 수 있고, csv로 저장하고 불러올 수 있다
+
+# 0120
+# https://machinelearningmastery.com/diagnose-overfitting-underfitting-lstm-models/Underfit model: train_loss < val_loss
+# LSTM basics
+# underfit model: train_loss < val_loss
+# (1) can be improved by increasing the number of the training epochs.
+# (2) underprovisioned (insufficient memory cells): increase the number of memory cells in a hidden layer or number of hidden layers.
+
+# Quantile Regression
+# point estimate: the estimate that minimizes squared deviations from reality
+# prediction interval: likely range rather than a single estimate
+# the most popular quantile is the median (50th percentile)
+# The quantile loss differs depending on the evaluated quantile, such that more negative errors are penalized more for higher quantiles and more positive errors are qenalized for lower quantile.

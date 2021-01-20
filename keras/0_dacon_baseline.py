@@ -6,8 +6,8 @@ import random
 import warnings
 warnings.filterwarnings("ignore")
 
-train = pd.read_csv('./data/train/train.csv')
-submission = pd.read_csv('./data/sample_submission.csv')
+train = pd.read_csv('C:/data/csv/dacon/train/train.csv')
+submission = pd.read_csv('C:/data/csv/dacon/sample_submission.csv')
 
 def preprocess_data(data, is_train=True):
     temp = data.copy()
@@ -24,7 +24,7 @@ df_train = preprocess_data(train)
 
 df_test = []
 for i in range(81):
-    file_path = './data/test/' + str(i) + '.csv'
+    file_path = 'C:/data/csv/dacon/test/' + str(i) + '.csv'
     temp = pd.read_csv(file_path)
     temp = preprocess_data(temp, is_train=False)
     df_test.append(temp)
