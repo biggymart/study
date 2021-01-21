@@ -5,6 +5,12 @@ import numpy as np
 train = pd.read_csv('C:/data/csv/dacon/train/train.csv') # (52560, 9) == (24 * 2 * 1094, 9) 1094 days
 submission = pd.read_csv('C:/data/csv/dacon/sample_submission.csv') # (7776, 10) == (24 * 2 * 2 * 81, 10) 81 sets of 2 days
 
+import tensorflow.keras.backend as K
+def quantile_loss_dacon(q, y_true, y_pred):
+	err = (y_true - y_pred)
+	return K.mean(K.maximum(q*err, (q-1)*err), axis=-1)
+quantiles = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
 def preprocess_data(data, is_train=True): # making Target columns 
     temp = data.copy()
     temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'WS', 'RH', 'T']]
@@ -63,12 +69,16 @@ def RNN(x_train, x_eval, y_train, y_eval, x_test):
     es = EarlyStopping(monitor='val_loss', patience=10, mode='auto')
     rlr = ReduceLROnPlateau(monitor='val_loss', patience=5, factor=0.5)
 
-    from tensorflow.keras.optimizers import Adam
-    model.compile(loss='mse', optimizer=Adam(learning_rate=0.001), metrics=['mae'])
-    model.fit(x_train, y_train, epochs=5, batch_size=32, callbacks=[es, rlr], validation_data=(x_eval, y_eval))
-    pred = model.predict(x_test) # <class 'numpy.ndarray'>, (3888, 1)
-    pred_rs = pred.reshape(pred.shape[0]) # (3888, )
-    pred_return = pd.Series(pred_rs) # in order to transform ndarray into pd.Series, needs to be 1 dimension
+    pred_return = pd.DataFrame() # [3888 rows x 9 columns], <class 'pandas.core.frame.DataFrame'>
+    for i in range(len(quantiles)):
+        from tensorflow.keras.optimizers import Adam
+        model.compile(loss = lambda y_true, y_pred: quantile_loss_dacon(quantiles[i], y_true, y_pred), optimizer=Adam(learning_rate=0.001), metrics=['mae'])
+        model.fit(x_train, y_train, epochs=100, batch_size=32, callbacks=[es, rlr], validation_data=(x_eval, y_eval))
+        pred = model.predict(x_test) # <class 'numpy.ndarray'>, (3888, 1)
+        pred_rs = pred.reshape(pred.shape[0]) # (3888, )
+        pred_pd = pd.Series(pred_rs)
+        pred_return = pd.concat([pred_return, pred_pd], axis=1)
+
     return pred_return, model
 
 def train_data(x_train, x_eval, y_train, y_eval, x_test):
@@ -92,12 +102,9 @@ results_2.sort_index()[:48]
 results_1.sort_index().iloc[:48]
 results_2.sort_index()
 
-print(results_1.shape, results_2.shape)
-print(results_1, results_2)
 submission.loc[submission.id.str.contains("Day7"), "q_0.1":] = results_1.sort_index().values
 submission.loc[submission.id.str.contains("Day8"), "q_0.1":] = results_2.sort_index().values
 submission.to_csv('C:/data/csv/dacon/submission_v3.csv', index=False)
-
 
 # https://towardsdatascience.com/deep-quantile-regression-c85481548b5a
 # https://dacon.io/competitions/official/235680/codeshare/2300?page=1&dtype=recent&ptype=pub
