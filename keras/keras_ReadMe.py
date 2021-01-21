@@ -1,4 +1,4 @@
-# 윤영선, 딥러닝으로 걷는 시계열 예측
+# 윤영선, 딥러닝으로 걷는 시계열 예측, 93학번
 # 네이버블로그 gema0000
 
 '''
@@ -226,3 +226,12 @@ model.compile(loss='mse', optimizer=optimizer2)
 # prediction interval: likely range rather than a single estimate
 # the most popular quantile is the median (50th percentile)
 # The quantile loss differs depending on the evaluated quantile, such that more negative errors are penalized more for higher quantiles and more positive errors are qenalized for lower quantile.
+
+# 0121
+# Keyword: StandardScaler
+# 표준점수로 변환 -> 표준편차
+# 편차: 관측값 - 중심값(평균 혹은 중앙값)
+# 분산: 편차의 제곱의 평균
+# 표준편차: 분산의 제곱근
+# 정규분포: 중심이 0이고 표준편차가 1인 분포
+# Standard Scaler: 한쪽으로 치우친 것을 좀 고르게 만들어줌
