@@ -58,11 +58,11 @@ x_test = x_test.reshape(-1, x_test.shape[1], 1)
 #4. evaluate and predict
 def RNN(x_train, x_eval, y_train, y_eval, x_test):
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense, SimpleRNN, Dropout
+    from tensorflow.keras.layers import Dense, LSTM, Dropout
     model = Sequential()
-    model.add(SimpleRNN(32, activation='relu', input_shape=(x_train.shape[1], 1)))
-    model.add(Dropout(0.5))
-    nodes = [16, 8, 4, 1]
+    model.add(LSTM(128, activation='relu', input_shape=(x_train.shape[1], 1)))
+    # model.add(Dropout(0.5))
+    nodes = [128, 64, 32, 16, 1]
     for i in nodes:
         model.add(Dense(i, activation='relu'))
     

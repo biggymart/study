@@ -5,3 +5,10 @@ pip install Gensim
 prompt > jupyter notebook 주피터 노트북 실행
 혹은 웹브라우저 localhost:8888
 단축키: Shift + Enter --> Run Cells
+
+2021-01-22
+pip install konlpy
+
+pandas
+series : values, index
+dataframe : values, index, columns
