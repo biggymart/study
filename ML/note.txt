@@ -1,0 +1,25 @@
+Introduction
+Exemplary fields of application of ML
+- DB mining
+- Just to have the machine learn (problems that cannot be achieved by hand coding)
+- Self-customized service
+- Understand human learning
+
+Next class.
+- more rigorous terminology
+
+=================
+What is ML?
+Arthur Samel (1959): computers learning w/o explicit programming e.g> checkers player
+Tom Michell (?): E experience, T task, P performance measure
+
+ML algorithms
+- Supervised learning
+- Unsupervised learning
+- Reinforcement learning
+- Recommender systems
+
+### This course provides practical tips for using this tool to solve real problems ###
+
+Next class
+- Supervised learning and Unsupervised learning

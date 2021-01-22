@@ -1,15 +1,16 @@
 import pandas as pd
 import numpy as np
 
-#1. data
-train = pd.read_csv('C:/data/csv/dacon/train/train.csv') # (52560, 9) == (24 * 2 * 1094, 9) 1094 days
-submission = pd.read_csv('C:/data/csv/dacon/sample_submission.csv') # (7776, 10) == (24 * 2 * 2 * 81, 10) 81 sets of 2 days
-
+#0. Pinball loss
 import tensorflow.keras.backend as K
 def quantile_loss_dacon(q, y_true, y_pred):
 	err = (y_true - y_pred)
 	return K.mean(K.maximum(q*err, (q-1)*err), axis=-1)
 quantiles = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+
+#1. data
+train = pd.read_csv('C:/data/csv/dacon/train/train.csv') # (52560, 9) == (24 * 2 * 1094, 9) 1094 days
+submission = pd.read_csv('C:/data/csv/dacon/sample_submission.csv') # (7776, 10) == (24 * 2 * 2 * 81, 10) 81 sets of 2 days
 
 def preprocess_data(data, is_train=True): # making Target columns 
     temp = data.copy()
@@ -25,11 +26,11 @@ def preprocess_data(data, is_train=True): # making Target columns
         temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'WS', 'RH', 'T']]     
         return temp.iloc[-48:, :] # slice only Day6
 
-# load train data
-df_train = preprocess_data(train) # after preprocessing (52464, 9), with Target columns, 2 days at the end sliced
+# train data
+df_train = preprocess_data(train) # after preprocessing: (52464, 9), with Target columns, 2 days at the end sliced
 from sklearn.model_selection import train_test_split
 x1_train, x1_eval, y1_train, y1_eval = train_test_split(df_train.iloc[:, :-2], df_train.iloc[:, -2], test_size=0.2, random_state=0) # Target 1, (41971, 7), (10493, 7)
-x2_train, x2_eval, y2_train, y2_eval = train_test_split(df_train.iloc[:, :-2], df_train.iloc[:, -1], test_size=0.2, random_state=0) # Target 2
+x2_train, x2_eval, y2_train, y2_eval = train_test_split(df_train.iloc[:, :-2], df_train.iloc[:, -1], test_size=0.2, random_state=0) # Target 2, (41971, 7), (10493, 7)
 
 # test data
 df_test = []
@@ -66,8 +67,8 @@ def RNN(x_train, x_eval, y_train, y_eval, x_test):
         model.add(Dense(i, activation='relu'))
     
     from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-    es = EarlyStopping(monitor='val_loss', patience=10, mode='auto')
-    rlr = ReduceLROnPlateau(monitor='val_loss', patience=5, factor=0.5)
+    es = EarlyStopping(monitor='val_loss', patience=6, mode='auto')
+    rlr = ReduceLROnPlateau(monitor='val_loss', patience=3, factor=0.5, verbose=1)
 
     pred_return = pd.DataFrame() # [3888 rows x 9 columns], <class 'pandas.core.frame.DataFrame'>
     for i in range(len(quantiles)):
@@ -90,21 +91,21 @@ def train_data(x_train, x_eval, y_train, y_eval, x_test):
     RNN_actual_pred = pd.concat([RNN_actual_pred, pred], axis=1)
     return RNN_models, RNN_actual_pred
 
+# Flow Control
 # Target1
-models_1, results_1 = train_data(x1_train, x1_eval, y1_train, y1_eval, x_test) 
-# <class 'pandas.core.frame.DataFrame'>, (3888, 1)
+models_1, results_1 = train_data(x1_train, x1_eval, y1_train, y1_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
 results_1.sort_index()[:48]
 
 # Target2
-models_2, results_2 = train_data(x2_train, x2_eval, y2_train, y2_eval, x_test)
-# <class 'pandas.core.frame.DataFrame'>, (3888, 1)
+models_2, results_2 = train_data(x2_train, x2_eval, y2_train, y2_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
 results_2.sort_index()[:48]
 results_1.sort_index().iloc[:48]
 results_2.sort_index()
 
 submission.loc[submission.id.str.contains("Day7"), "q_0.1":] = results_1.sort_index().values
 submission.loc[submission.id.str.contains("Day8"), "q_0.1":] = results_2.sort_index().values
-submission.to_csv('C:/data/csv/dacon/submission_v3.csv', index=False)
+submission.to_csv('C:/data/csv/dacon/submission_cyc.csv', index=False)
 
+# Reference:
 # https://towardsdatascience.com/deep-quantile-regression-c85481548b5a
 # https://dacon.io/competitions/official/235680/codeshare/2300?page=1&dtype=recent&ptype=pub
