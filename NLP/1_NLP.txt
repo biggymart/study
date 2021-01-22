@@ -7,8 +7,20 @@ prompt > jupyter notebook 주피터 노트북 실행
 단축키: Shift + Enter --> Run Cells
 
 2021-01-22
-pip install konlpy
+pip install nltk
+pip install konlpy 
+한국어 자연어처리 라이브러리
 
-pandas
+- pandas
 series : values, index
 dataframe : values, index, columns
+
+### Machine Learning Workflow ###
+1. Acquisition
+2. Inspection and Exploration (EDA)
+3. Preprocessing and Cleaning
+4. Modeling and Training
+5. Evaluation
+6. Deployment
+
+Tokenization

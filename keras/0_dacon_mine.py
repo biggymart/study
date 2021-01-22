@@ -58,11 +58,10 @@ x_test = x_test.reshape(-1, x_test.shape[1], 1)
 #4. evaluate and predict
 def RNN(x_train, x_eval, y_train, y_eval, x_test):
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense, LSTM, Dropout
+    from tensorflow.keras.layers import Dense, SimpleRNN
     model = Sequential()
-    model.add(LSTM(128, activation='relu', input_shape=(x_train.shape[1], 1)))
-    # model.add(Dropout(0.5))
-    nodes = [128, 64, 32, 16, 1]
+    model.add(SimpleRNN(32, activation='relu', input_shape=(x_train.shape[1], 1)))
+    nodes = [32, 16, 8, 1]
     for i in nodes:
         model.add(Dense(i, activation='relu'))
     
@@ -94,13 +93,9 @@ def train_data(x_train, x_eval, y_train, y_eval, x_test):
 # Flow Control
 # Target1
 models_1, results_1 = train_data(x1_train, x1_eval, y1_train, y1_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
-results_1.sort_index()[:48]
 
 # Target2
 models_2, results_2 = train_data(x2_train, x2_eval, y2_train, y2_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
-results_2.sort_index()[:48]
-results_1.sort_index().iloc[:48]
-results_2.sort_index()
 
 submission.loc[submission.id.str.contains("Day7"), "q_0.1":] = results_1.sort_index().values
 submission.loc[submission.id.str.contains("Day8"), "q_0.1":] = results_2.sort_index().values
