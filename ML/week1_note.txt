@@ -1,0 +1,51 @@
+1. Introduction
+What is ML?
+Arthur Samel (1959): computers learning w/o explicit programming e.g> checkers player
+Tom Michell (1998): E experience, T task, P performance measure
+
+" A computer is said to learn from experience (E) with respect to some task (T) and some performance measure (P),
+  if its performance on T, as measured by P, improves with E"
+
+ML algorithms
+- Supervised learning
+- Unsupervised learning
+- Reinforcement learning
+- Recommender systems
+=================
+2. Model and Cost function
+Univariate linear regression
+h(x) = th0 + th1*x
+
+Cost function: J(th0, th1) (mse)
+theta = parameters (weight and bias)
+contour plots/figure:
+- "A contour line of a two variable function has a constant value at all points of the same line", 등고선 비슷
+=================
+3. Parameter Learning
+Gradient descent
+- start with arbitrary parameters
+- change parameters to minimize them
+
+repeat until convergence:
+th1 := th1 - lr(d/d(th1) * J(th1))
+
+:= assignment operator
+=  truth assertion
+
+simultaneous update
+temp0 := th0 - lr*derivative of J(th0, th1)
+temp1 := th1 - lr*derivative of J(th0, th1)
+th0 := temp0
+th1 := temp1
+
+wrong way
+temp0 := th0 - lr*derivative of J(th0, th1)
+th0 := temp0
+temp1 := th1 - lr*derivative of J(th0, th1)
+th1 := temp1
+** do the right hand calculation altogether, and then assign them to the variables
+
+As slope decreases as we approach a local minimum, gradient descent will automatically take smaller steps.
+
+Batch: training examples used in each step of gradient descent
+Convex function : bowl-shaped
