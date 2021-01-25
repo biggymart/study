@@ -14,7 +14,8 @@ submission = pd.read_csv('C:/data/csv/dacon/sample_submission.csv') # (7776, 10)
 
 def preprocess_data(data, is_train=True): # making Target columns 
     temp = data.copy()
-    temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'RH', 'T']] # 'WS' 상관계수 낮아서 제거
+    temp.insert(1,'Hour_Minute', data['Hour'] * 2 + data['Minute'] // 30)
+    temp = temp[['Hour_Minute', 'TARGET', 'DHI', 'DNI', 'RH', 'T']] # 'WS' 상관계수 낮아서 제거
 
     if is_train==True: # train file here
         temp['Target1'] = temp['TARGET'].shift(-48).fillna(method='ffill') # new column for predicting tomorrow
@@ -23,14 +24,13 @@ def preprocess_data(data, is_train=True): # making Target columns
         return temp.iloc[:-48 * 2] # excluding rows w/o columns Target1 and Target2 
 
     elif is_train==False: # test file here
-        temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'RH', 'T']] # 'WS' 상관계수 낮아서 제거
+        temp = temp[['Hour_Minute', 'TARGET', 'DHI', 'DNI', 'RH', 'T']] # 'WS' 상관계수 낮아서 제거
         return temp.iloc[-48:, :] # slice only Day6
 
 # train data
 df_train = preprocess_data(train) # after preprocessing: (52464, 9), with Target columns, 2 days at the end sliced
 from sklearn.model_selection import train_test_split
-x1_train, x1_eval, y1_train, y1_eval = train_test_split(df_train.iloc[:, :-2], df_train.iloc[:, -2], test_size=0.2, random_state=0) # Target 1, (41971, 7), (10493, 7)
-x2_train, x2_eval, y2_train, y2_eval = train_test_split(df_train.iloc[:, :-2], df_train.iloc[:, -1], test_size=0.2, random_state=0) # Target 2, (41971, 7), (10493, 7)
+x_train, x_eval, y1_train, y1_eval, y2_train, y2_eval = train_test_split(df_train.iloc[:, :-2], df_train.iloc[:, -2], df_train.iloc[:, -1], test_size=0.2, random_state=0) # Target 1, (41971, 7), (10493, 7)
 
 # test data
 df_test = []
@@ -41,31 +41,20 @@ for i in range(81):
     df_test.append(temp)
 x_test = pd.concat(df_test) # (3888, 7) == (48 * 81, 7)
 
-x1_train = x1_train.to_numpy()
-x1_eval = x1_eval.to_numpy()
-x2_train = x2_train.to_numpy()
-x2_eval = x2_eval.to_numpy()
+x_train = x_train.to_numpy()
+x_eval = x_eval.to_numpy()
 x_test = x_test.to_numpy()
 
 # StandardScaler
 from sklearn.preprocessing import StandardScaler
-scaler1 = StandardScaler()
-scaler1.fit(x1_train)
-x1_train = scaler1.transform(x1_train)
-x1_eval = scaler1.transform(x1_eval)
-scaler2 = StandardScaler()
-scaler2.fit(x2_train)
-x2_train = scaler2.transform(x2_train)
-x2_eval = scaler2.transform(x2_eval)
-scaler3 = StandardScaler()
-scaler3.fit(x_test)
-x_test = scaler3.transform(x_test)
+scaler = StandardScaler()
+x_train = scaler.fit_transform(x_train)
+x_eval = scaler.transform(x_eval)
+x_test = scaler.transform(x_test)
 
 # reshape as RNN data
-x1_train = x1_train.reshape(-1, x1_train.shape[1], 1)
-x1_eval = x1_eval.reshape(-1, x1_eval.shape[1], 1)
-x2_train = x2_train.reshape(-1, x2_train.shape[1], 1)
-x2_eval = x2_eval.reshape(-1, x2_eval.shape[1], 1)
+x_train = x_train.reshape(-1, x_train.shape[1], 1)
+x_eval = x_eval.reshape(-1, x_eval.shape[1], 1)
 x_test = x_test.reshape(-1, x_test.shape[1], 1)
 
 #2. model
@@ -73,9 +62,9 @@ x_test = x_test.reshape(-1, x_test.shape[1], 1)
 #4. evaluate and predict
 def RNN(x_train, x_eval, y_train, y_eval, x_test):
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense, SimpleRNN
+    from tensorflow.keras.layers import Dense, LSTM
     model = Sequential()
-    model.add(SimpleRNN(32, activation='relu', input_shape=(x_train.shape[1], 1)))
+    model.add(LSTM(32, activation='relu', input_shape=(x_train.shape[1], 1)))
     nodes = [32, 16, 8, 1]
     for i in nodes:
         model.add(Dense(i, activation='relu'))
@@ -107,21 +96,25 @@ def train_data(x_train, x_eval, y_train, y_eval, x_test):
 
 # Flow Control
 # Target1
-models_1, results_1 = train_data(x1_train, x1_eval, y1_train, y1_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
+models_1, results_1 = train_data(x_train, x_eval, y1_train, y1_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
 
 # Target2
-models_2, results_2 = train_data(x2_train, x2_eval, y2_train, y2_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
+models_2, results_2 = train_data(x_train, x_eval, y2_train, y2_eval, x_test) # <class 'pandas.core.frame.DataFrame'>, (3888, 1)
 
 submission.loc[submission.id.str.contains("Day7"), "q_0.1":] = results_1.sort_index().values
 submission.loc[submission.id.str.contains("Day8"), "q_0.1":] = results_2.sort_index().values
 submission.to_csv('C:/data/csv/dacon/submission_cyc.csv', index=False)
 
 for model in models_1:
-    loss1 = models_1.evaluate(x1_eval, y1_eval)
+    loss1 = model.evaluate(x_eval, y1_eval)
     print(loss1)
 for model in models_2:
-    loss2 = models_2.evaluate(x2_eval, y2_eval)
+    loss2 = model.evaluate(x_eval, y2_eval)
     print(loss2)
+
+# [0.8175743222236633, 6.772909641265869]
+# [0.7797744870185852, 6.870870113372803]
+
 # Reference:
 # https://towardsdatascience.com/deep-quantile-regression-c85481548b5a
 # https://dacon.io/competitions/official/235680/codeshare/2300?page=1&dtype=recent&ptype=pub
