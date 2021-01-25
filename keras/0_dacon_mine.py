@@ -71,7 +71,7 @@ def RNN(x_train, x_eval, y_train, y_eval, x_test):
     
     from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
     es = EarlyStopping(monitor='val_loss', patience=6, mode='auto')
-    rlr = ReduceLROnPlateau(monitor='val_loss', patience=3, factor=0.5, verbose=1)
+    rlr = ReduceLROnPlateau(monitor='val_loss', patience=3, factor=0.3, verbose=1)
 
     pred_return = pd.DataFrame() # [3888 rows x 9 columns], <class 'pandas.core.frame.DataFrame'>
     for i in range(len(quantiles)):
@@ -120,6 +120,9 @@ for model in models_2:
 # [0.7762012481689453, 6.602396488189697]
 # [16.144023895263672, 17.937803268432617]
 
+# SimpleRNN rank94
+# [0.7704110145568848, 6.7175750732421875]
+# [0.7879319190979004, 6.898277282714844]
 # Reference:
 # https://towardsdatascience.com/deep-quantile-regression-c85481548b5a
 # https://dacon.io/competitions/official/235680/codeshare/2300?page=1&dtype=recent&ptype=pub
