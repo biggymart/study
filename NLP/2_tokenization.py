@@ -59,8 +59,10 @@ x = word_tokenize(s4)
 print(pos_tag(x))
 # [('I', 'PRP'), ('am', 'VBP'), ('actively', 'RB'), ('looking', 'VBG'), ('for', 'IN'), ('Ph.D.', 'NNP'), ('students', 'NNS'), ('.', '.'), ('and', 'CC'), ('you', 'PRP'), ('are', 'VBP'), ('a', 'DT'), ('Ph.D', 'NNP'), ('student', 'NN'), ('.', '.')]
 # PRP는 인칭 대명사, VBP는 동사, RB는 부사, VBG는 현재부사, IN은 전치사, NNP는 고유 명사, NNS는 복수형 명사, CC는 접속사, DT는 관사
-
+'''
 # KoNLPy: 사용할 수 있는 형태소 분석기로 Okt(Open Korea Text), 메캅(Mecab), 코모란(Komoran), 한나눔(Hannanum), 꼬꼬마(Kkma)
 from konlpy.tag import Kkma  
 kkma=Kkma()  
 print(kkma.morphs("열심히 코딩한 당신, 연휴에는 여행을 가봐요"))
+# 알 수 없는 이유로 안 된다
+'''

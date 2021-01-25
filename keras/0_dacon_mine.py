@@ -14,7 +14,7 @@ submission = pd.read_csv('C:/data/csv/dacon/sample_submission.csv') # (7776, 10)
 
 def preprocess_data(data, is_train=True): # making Target columns 
     temp = data.copy()
-    temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'WS', 'RH', 'T']]
+    temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'RH', 'T']] # 'WS' 상관계수 낮아서 제거
 
     if is_train==True: # train file here
         temp['Target1'] = temp['TARGET'].shift(-48).fillna(method='ffill') # new column for predicting tomorrow
@@ -23,7 +23,7 @@ def preprocess_data(data, is_train=True): # making Target columns
         return temp.iloc[:-48 * 2] # excluding rows w/o columns Target1 and Target2 
 
     elif is_train==False: # test file here
-        temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'WS', 'RH', 'T']]     
+        temp = temp[['Hour', 'TARGET', 'DHI', 'DNI', 'RH', 'T']] # 'WS' 상관계수 낮아서 제거
         return temp.iloc[-48:, :] # slice only Day6
 
 # train data
@@ -41,16 +41,31 @@ for i in range(81):
     df_test.append(temp)
 x_test = pd.concat(df_test) # (3888, 7) == (48 * 81, 7)
 
-# reshape as RNN data
 x1_train = x1_train.to_numpy()
-x1_train = x1_train.reshape(-1, x1_train.shape[1], 1)
 x1_eval = x1_eval.to_numpy()
-x1_eval = x1_eval.reshape(-1, x1_eval.shape[1], 1)
 x2_train = x2_train.to_numpy()
-x2_train = x2_train.reshape(-1, x2_train.shape[1], 1)
 x2_eval = x2_eval.to_numpy()
-x2_eval = x2_eval.reshape(-1, x2_eval.shape[1], 1)
 x_test = x_test.to_numpy()
+
+# StandardScaler
+from sklearn.preprocessing import StandardScaler
+scaler1 = StandardScaler()
+scaler1.fit(x1_train)
+x1_train = scaler1.transform(x1_train)
+x1_eval = scaler1.transform(x1_eval)
+scaler2 = StandardScaler()
+scaler2.fit(x2_train)
+x2_train = scaler2.transform(x2_train)
+x2_eval = scaler2.transform(x2_eval)
+scaler3 = StandardScaler()
+scaler3.fit(x_test)
+x_test = scaler3.transform(x_test)
+
+# reshape as RNN data
+x1_train = x1_train.reshape(-1, x1_train.shape[1], 1)
+x1_eval = x1_eval.reshape(-1, x1_eval.shape[1], 1)
+x2_train = x2_train.reshape(-1, x2_train.shape[1], 1)
+x2_eval = x2_eval.reshape(-1, x2_eval.shape[1], 1)
 x_test = x_test.reshape(-1, x_test.shape[1], 1)
 
 #2. model
@@ -101,6 +116,21 @@ submission.loc[submission.id.str.contains("Day7"), "q_0.1":] = results_1.sort_in
 submission.loc[submission.id.str.contains("Day8"), "q_0.1":] = results_2.sort_index().values
 submission.to_csv('C:/data/csv/dacon/submission_cyc.csv', index=False)
 
+for model in models_1:
+    loss1 = models_1.evaluate(x1_eval, y1_eval)
+    print(loss1)
+for model in models_2:
+    loss2 = models_2.evaluate(x2_eval, y2_eval)
+    print(loss2)
 # Reference:
 # https://towardsdatascience.com/deep-quantile-regression-c85481548b5a
 # https://dacon.io/competitions/official/235680/codeshare/2300?page=1&dtype=recent&ptype=pub
+
+'''
+# 시각화
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(font_scale=1.2)
+sns.heatmap(data=df_train.corr(), square=True, annot=True, cbar=True) # 사각형 형태, annotation 글씨 넣어주기, column bar
+plt.show()
+'''

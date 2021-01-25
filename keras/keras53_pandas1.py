@@ -51,7 +51,7 @@ print(df['target'].value_counts()) # y값에 몇 개씩 있는지 세어줌
 # 상관계수 correlation coefficient (Karl Pearson)
 # 두 변수 사이의 상관관계의 정도를 나타내는 수치, linear하게 계산한 결과
 # https://leedakyeong.tistory.com/
-print(df.corr()) # 각 변수 사이의 상관계수를 나타내줌, feature engineering 할 때 추가 및 제거하게 됨
+print(df.corr(method='pearson')) # 각 변수 사이의 상관계수를 나타내줌, feature engineering 할 때 추가 및 제거하게 됨
 
 # 시각화
 import matplotlib.pyplot as plt
