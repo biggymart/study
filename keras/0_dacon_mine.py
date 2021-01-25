@@ -62,9 +62,9 @@ x_test = x_test.reshape(-1, x_test.shape[1], 1)
 #4. evaluate and predict
 def RNN(x_train, x_eval, y_train, y_eval, x_test):
     from tensorflow.keras.models import Sequential
-    from tensorflow.keras.layers import Dense, LSTM
+    from tensorflow.keras.layers import Dense, SimpleRNN
     model = Sequential()
-    model.add(LSTM(32, activation='relu', input_shape=(x_train.shape[1], 1)))
+    model.add(SimpleRNN(32, activation='relu', input_shape=(x_train.shape[1], 1)))
     nodes = [32, 16, 8, 1]
     for i in nodes:
         model.add(Dense(i, activation='relu'))
@@ -112,8 +112,13 @@ for model in models_2:
     loss2 = model.evaluate(x_eval, y2_eval)
     print(loss2)
 
+# SimpleRNN
 # [0.8175743222236633, 6.772909641265869]
 # [0.7797744870185852, 6.870870113372803]
+
+# SimpleRNN
+# [0.7762012481689453, 6.602396488189697]
+# [16.144023895263672, 17.937803268432617]
 
 # Reference:
 # https://towardsdatascience.com/deep-quantile-regression-c85481548b5a
