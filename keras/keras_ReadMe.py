@@ -235,3 +235,13 @@ model.compile(loss='mse', optimizer=optimizer2)
 # 표준편차: 분산의 제곱근
 # 정규분포: 중심이 0이고 표준편차가 1인 분포
 # Standard Scaler: 한쪽으로 치우친 것을 좀 고르게 만들어줌
+
+# 0125
+## 데이터 이해하기 (간단한 EDA)
+
+# 1. 데이터의 사이즈는? 모델 학습에 적합한 형태인가?
+# 2. Train/Test는 어떻게 분리되어 있는가?
+# 3. Missing Value는?
+# 4. Target Variable의 분포는?
+# 5. 간단히 데이터 살펴보기
+# 6. 데이터의 특이한/주목해야할 부분은?
