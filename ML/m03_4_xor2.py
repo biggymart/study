@@ -8,7 +8,7 @@ y_data = [0, 1, 1, 0]
 
 #2. model
 # model = LinearSVC()
-model = SVC() ### Takeaway1 ###
+model = SVC() ### Takeaway1 ### new model
 
 #3. fit
 model.fit(x_data, y_data)

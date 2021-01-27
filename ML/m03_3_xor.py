@@ -7,7 +7,7 @@ x_data = [[0, 0], [1,0], [0,1], [1, 1]]
 y_data = [0, 1, 1, 0] ### Takeaway1 ###
 
 #2. model
-model = LinearSVC()
+model = LinearSVC() ### old model ###
 
 #3. fit
 model.fit(x_data, y_data)
