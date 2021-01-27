@@ -1,0 +1,8 @@
+Multivariate linear regression
+
+Mathematical definition:
+y = th0 + th1x1 + th2x2 + ... + thnxn
+if define x0 = 1, then
+y = th0 + th1x1 + th2x2 + ... + thnxn
+which is,
+y = thT * x     (thT = transposed, row vector)

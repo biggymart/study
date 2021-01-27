@@ -245,3 +245,7 @@ model.compile(loss='mse', optimizer=optimizer2)
 # 4. Target Variable의 분포는?
 # 5. 간단히 데이터 살펴보기
 # 6. 데이터의 특이한/주목해야할 부분은?
+
+# 0127
+# 1교시: keras45 datetime 추가하는 방법, string에 대한 join() ## 과제 실시간 업데이트되게 바꿔라
+# 2교시: keras01_2 scatter, difference btwn DL and ML (you mei you hidden layer)
