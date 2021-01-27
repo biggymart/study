@@ -20,6 +20,6 @@ However, one of the most notable figure in the field of
 캐글이라는 대회 5년 전만해도 텐서플로가 취급도 안 했음. XG부스터가 짱이었음.
 속도가 빠르고, 장비의 재원이 먹히지 않겠지. GPU 없어도 됨. 
 
-# sklearn이 keras보다 먼저 나온 모델임 (옛날꺼)
-# classification by ML
-# regression by ML
+# sklearn이 keras보다 먼저 나온 모델임
+# classification by ML (6가지)
+# regression by ML (4가지)

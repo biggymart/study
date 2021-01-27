@@ -1,17 +1,15 @@
 # DL w/o hidden layer
-from sklearn.svm import LinearSVC, SVC
 import numpy as np
+from sklearn.svm import LinearSVC, SVC
 from sklearn.metrics import accuracy_score
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 
 #1. OR data
 x_data = [[0, 0], [1,0], [0,1], [1, 1]]
 y_data = [0, 1, 1, 0] 
 
 #2. model
-# model = LinearSVC()
-# model = SVC()
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 model = Sequential()
 model.add(Dense(1, input_dim=2, activation='sigmoid'))
 

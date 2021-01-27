@@ -1,14 +1,14 @@
 # DL w hidden layer
-from sklearn.svm import LinearSVC, SVC
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from sklearn.svm import LinearSVC, SVC
 
 #1. OR data
 x_data = [[0, 0], [1,0], [0,1], [1, 1]]
 y_data = [0, 1, 1, 0]
 
 #2. model
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 model = Sequential()
 model.add(Dense(10, input_dim=2, activation='relu'))
 model.add(Dense(10, activation='relu'))

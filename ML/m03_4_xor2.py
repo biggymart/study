@@ -1,4 +1,4 @@
-from sklearn.svm import LinearSVC, SVC
+from sklearn.svm import SVC # new model
 import numpy as np
 from sklearn.metrics import accuracy_score
 
@@ -7,8 +7,7 @@ x_data = [[0, 0], [1,0], [0,1], [1, 1]]
 y_data = [0, 1, 1, 0] 
 
 #2. model
-# model = LinearSVC()
-model = SVC() ### Takeaway1 ### new model
+model = SVC() ### Takeaway1 ### 
 
 #3. fit
 model.fit(x_data, y_data)

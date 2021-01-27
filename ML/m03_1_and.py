@@ -1,13 +1,9 @@
-# 인공지능의 역사중에 겨울이 두 번 온다
+# 인공지능의 역사 중 두 차례의 겨울 있는데
+# 1번째 겨울: and, or, nor, nand gate 다 되는데 xor이 안 된다
 # https://ko.wikipedia.org/wiki/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5
 
-# 1번째 겨울: xor의 문제
-# 머신러닝의 여러 기법이 있는데, 회귀도 있는데, 분류도 있음
-# 문제 발생: 
-# and, or, nor, nand gate 다 되는데 xor이 안 된다
-
-from sklearn.svm import LinearSVC # support vector classifier
 import numpy as np
+from sklearn.svm import LinearSVC # support vector classifier
 from sklearn.metrics import accuracy_score # classification metrics in sklearn ### Takeaway1 ###
 
 #1. AND data

@@ -1,7 +1,6 @@
 #1. data (회귀)
 import numpy as np
 from sklearn.datasets import load_boston
-
 dataset = load_boston()
 x = dataset.data
 y = dataset.target
@@ -41,11 +40,19 @@ print("r2_score :", r2)
 ### 결과 ###
 # 1. MinMaxScaler
 #   1-1. KNeighborsRegressor
+#   r2_score : 0.5900872726222293
 #   1-2. DecisionTreeRegressor
+#   r2_score : 0.8058568011421567
 #   1-3. RandomForestRegressor
+#   r2_score : 0.9205336713604584
 #   1-4. LinearRegression
+#   r2_score : 0.8111288663608656
 # 2. StandardScaler
 #   2-1. KNeighborsRegressor
+#   r2_score : 0.5900872726222293
 #   2-2. DecisionTreeRegressor
+#   r2_score : 0.7071911527557457
 #   2-3. RandomForestRegressor
+#   r2_score : 0.9190443873119692
 #   2-4. LinearRegression
+#   r2_score : 0.8111288663608656
