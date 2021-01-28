@@ -24,7 +24,7 @@ model = KNeighborsClassifier()
 # model = DecisionTreeClassifier()
 # from sklearn.ensemble import RandomForestClassifier # Option 3
 # model = RandomForestClassifier()
-# from sklearn.linear_model import LogisticRegression # Option 4 (분류)
+# from sklearn.linear_model import LogisticRegression # Option 4 (이진분류)
 # model = LogisticRegression()
 # from sklearn.svm import LinearSVC # Option 5
 # model = LinearSVC()           

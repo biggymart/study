@@ -1,4 +1,5 @@
 2021-01-27
+keywords: overall workflow of ML, comparison btwn DL & ML, all_estimators
 Now, we begin to learn ML.
 
 # Introduction: little bit of history
@@ -23,3 +24,23 @@ However, one of the most notable figure in the field of
 # sklearn이 keras보다 먼저 나온 모델임
 # classification by ML (6가지)
 # regression by ML (4가지)
+
+2021-01-28
+keywords: k-fold, cross_val_score
+https://datascienceschool.net/intro.html
+https://3months.tistory.com/321
+오늘부터는 진짜로 케라스에 사용할 수 있는 것들임.
+m09_selectModel에서 여러가지 모델을 살펴보았는데 다 알 필요는 없고 몇가지 사용할만한 것을 알면 된다.
+데이터의 특성에 따라서 성능이 조금씩 다를 수 있다. trial마다 weight값이 다르기 때문에 결과가 다를 수 있다.
+
+intro. 문제제기
+데이터를 train, test, validation으로 split하는 것의 문제점?
+전체 데이터를 훈련시키지 않게 됨. 즉, 훈련에 반영되지 않는 데이터 일부분이 존재하게 됨. (낭비되는 데이터)
+하지만 그렇다고 모든 데이터를 훈련시키면 과적합 문제 발생.
+또한 train으로 나누는 비율에 따라서 결과가 달라지는 문제 존재.
+
+Let's suppose, 전체 데이터를 5등분하여 각 구간을 test로 범위를 설정하여 5번 돌림.
+k-fold cross validation 교차검증
+https://nonmeyet.tistory.com/entry/KFold-Cross-Validation%EA%B5%90%EC%B0%A8%EA%B2%80%EC%A6%9D-%EC%A0%95%EC%9D%98-%EB%B0%8F-%EC%84%A4%EB%AA%85
+https://devkor.tistory.com/entry/%EB%A8%B8%EC%8B%A0-%EB%9F%AC%EB%8B%9D-%EC%9E%85%EB%AC%B8%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%84%A4%EB%AA%85-%EA%B5%90%EC%B0%A8-%EA%B2%80%EC%A6%9DK-Fold-Cross-Validation
+

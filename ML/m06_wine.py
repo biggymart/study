@@ -17,17 +17,17 @@ scaler.transform(x_test)
 
 ### 분기점 2 ###
 #2. model
-from sklearn.neighbors import KNeighborsClassifier # Option 1
+from sklearn.neighbors import KNeighborsClassifier 
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import LinearSVC, SVC
+
 model = KNeighborsClassifier()
-# from sklearn.tree import DecisionTreeClassifier # Option 2 
 # model = DecisionTreeClassifier()
-# from sklearn.ensemble import RandomForestClassifier # Option 3
 # model = RandomForestClassifier()
-# from sklearn.linear_model import LogisticRegression # Option 4 (분류)
 # model = LogisticRegression()
-# from sklearn.svm import LinearSVC # Option 5
 # model = LinearSVC()           
-# from sklearn.svm import SVC # Option 6
 # model = SVC()
 
 #3. fit
@@ -44,27 +44,27 @@ print("accuracy_score :", acc)
 ### 결과 ###
 # 1. MinMaxScaler
 #   1-1. KNeighborsClassifier
-#   
+#   accuracy_score : 0.6944444444444444
 #   1-2. DecisionTreeClassifier
-#   
+#   accuracy_score : 0.9722222222222222
 #   1-3. RandomForestClassifier
-#   
+#   accuracy_score : 1.0
 #   1-4. LogisticRegression
-#   
+#   accuracy_score : 0.9722222222222222
 #   1-5. LinearSVC
-#   
+#   accuracy_score : 0.6388888888888888
 #   1-6. SVC
-#   
+#   accuracy_score : 0.6944444444444444
 # 2. StandardScaler
 #   2-1. KNeighborsClassifier
-#   
+#   accuracy_score : 0.6944444444444444
 #   2-2. DecisionTreeClassifier
-#   
+#   accuracy_score : 0.9166666666666666
 #   2-3. RandomForestClassifier
-#   
+#   accuracy_score : 1.0
 #   2-4. LogisticRegression
-#   
+#   accuracy_score : 0.9722222222222222
 #   2-5. LinearSVC
-#   
+#   accuracy_score : 0.7777777777777778
 #   2-6. SVC
-#   
+#   accuracy_score : 0.6944444444444444
