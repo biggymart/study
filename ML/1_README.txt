@@ -26,7 +26,7 @@ However, one of the most notable figure in the field of
 # regression by ML (4가지)
 
 2021-01-28
-keywords: k-fold, cross_val_score
+keywords: k-fold, cross_val_score, GridSearchCV, parameters, model.best_estimator_, RandomizedSearchCV
 https://datascienceschool.net/intro.html
 https://3months.tistory.com/321
 오늘부터는 진짜로 케라스에 사용할 수 있는 것들임.
@@ -39,8 +39,8 @@ intro. 문제제기
 하지만 그렇다고 모든 데이터를 훈련시키면 과적합 문제 발생.
 또한 train으로 나누는 비율에 따라서 결과가 달라지는 문제 존재.
 
-Let's suppose, 전체 데이터를 5등분하여 각 구간을 test로 범위를 설정하여 5번 돌림.
 k-fold cross validation 교차검증
+Let's suppose, 전체 데이터를 5등분하여 각 구간을 test로 범위를 설정하여 5번 돌림.
 https://nonmeyet.tistory.com/entry/KFold-Cross-Validation%EA%B5%90%EC%B0%A8%EA%B2%80%EC%A6%9D-%EC%A0%95%EC%9D%98-%EB%B0%8F-%EC%84%A4%EB%AA%85
 https://devkor.tistory.com/entry/%EB%A8%B8%EC%8B%A0-%EB%9F%AC%EB%8B%9D-%EC%9E%85%EB%AC%B8%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%84%A4%EB%AA%85-%EA%B5%90%EC%B0%A8-%EA%B2%80%EC%A6%9DK-Fold-Cross-Validation
 
