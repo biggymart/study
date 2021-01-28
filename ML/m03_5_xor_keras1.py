@@ -1,7 +1,4 @@
 # DL w/o hidden layer
-import numpy as np
-from sklearn.svm import LinearSVC, SVC
-from sklearn.metrics import accuracy_score
 
 #1. OR data
 x_data = [[0, 0], [1,0], [0,1], [1, 1]]

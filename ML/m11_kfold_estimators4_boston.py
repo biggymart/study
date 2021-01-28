@@ -1,4 +1,3 @@
-# kfold + estimators
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.utils.testing import all_estimators # 추정치
 from sklearn.datasets import load_boston

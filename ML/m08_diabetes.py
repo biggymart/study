@@ -17,14 +17,14 @@ scaler.transform(x_test)
 
 ### 분기점 2 ###
 #2. model
-from sklearn.neighbors import KNeighborsRegressor # Option 1
-model = KNeighborsRegressor()
-# from sklearn.tree import DecisionTreeRegressor # Option 2 
-# model = DecisionTreeRegressor()
-# from sklearn.ensemble import RandomForestRegressor # Option 3
-# model = RandomForestRegressor()
-# from sklearn.linear_model import LinearRegression # Option 4 (회귀)
-# model = LinearRegression()
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+model = DecisionTreeRegressor() # Option 1 
+# model = KNeighborsRegressor() # Option 2
+# model = LinearRegression() # Option 3 (회귀)
+# model = RandomForestRegressor() # Option 4
 
 #3. fit
 model.fit(x_train, y_train)

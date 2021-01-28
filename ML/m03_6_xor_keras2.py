@@ -1,6 +1,4 @@
 # DL w hidden layer
-import numpy as np
-from sklearn.svm import LinearSVC, SVC
 
 #1. OR data
 x_data = [[0, 0], [1,0], [0,1], [1, 1]]

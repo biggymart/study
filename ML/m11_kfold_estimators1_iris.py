@@ -1,9 +1,9 @@
-# kfold + estimators
+# kfold + all_estimators
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.utils.testing import all_estimators # 추정치
 from sklearn.datasets import load_iris
 import numpy as np
-np.set_printoptions(precision=2)
+np.set_printoptions(precision=2) # my personal code, render a short number for prints
 import warnings
 warnings.filterwarnings('ignore')
 

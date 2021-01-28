@@ -1,5 +1,4 @@
 from sklearn.svm import SVC # new model
-import numpy as np
 from sklearn.metrics import accuracy_score
 
 #1. OR data
@@ -7,7 +6,7 @@ x_data = [[0, 0], [1,0], [0,1], [1, 1]]
 y_data = [0, 1, 1, 0] 
 
 #2. model
-model = SVC() ### Takeaway1 ### 
+model = SVC() ### new model ### 
 
 #3. fit
 model.fit(x_data, y_data)

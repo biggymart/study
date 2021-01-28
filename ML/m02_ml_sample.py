@@ -1,11 +1,9 @@
 # keras22_1_iris1_keras.py Copy and Paste
 # Study objective: Able to compare the overall structure (and terms) btwn DL and ML
 # ML: data -> model -> fit -> score and predict
-import numpy as np
-from sklearn.datasets import load_iris
 
 #1. data
-# ML does not need OneHotEncoding ### Takeaway1 ###
+from sklearn.datasets import load_iris
 dataset = load_iris()
 x = dataset.data
 y = dataset.target
@@ -18,6 +16,7 @@ scaler = MinMaxScaler() # or Standardscaler()
 scaler.fit_transform(x_train)
 scaler.transform(x_test)
 
+# ML does not need OneHotEncoding ### Takeaway1 ###
 # OneHotEncoding, tensorflow
 # from tensorflow.keras.utils import to_categorical
 # y_train = to_categorical(y_train)

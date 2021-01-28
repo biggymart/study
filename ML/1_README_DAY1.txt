@@ -1,8 +1,14 @@
 2021-01-27
-keywords: overall workflow of ML, comparison btwn DL & ML, all_estimators
-Now, we begin to learn ML.
+range: m01 - m09
 
-# Introduction: little bit of history
+keywords: 
+(1) brief history, 
+(2) overall workflow of ML (+ comparison btwn DL & ML), 
+(3) XOR problem, 
+(4) 6 & 4 models (classification and regression), 
+(5) sklearn.utils testing -> all_estimators
+
+(1) Brief History
 Although we began this course by learning DL, historically speaking, the concept of ML was introduced well before DL.
 There are different views on when artificial intelligence actually took place. Some say it started from the ancient Greece; others pick different time. 
 However, one of the most notable figure in the field of   
@@ -21,26 +27,42 @@ However, one of the most notable figure in the field of
 캐글이라는 대회 5년 전만해도 텐서플로가 취급도 안 했음. XG부스터가 짱이었음.
 속도가 빠르고, 장비의 재원이 먹히지 않겠지. GPU 없어도 됨. 
 
+(2) Overall Workflow of ML (+ comparison btwn DL & ML)
+# ML: data -> model -> fit -> score and predict
+# (1) 전처리에서 OneHotEncoding 불필요 
+# (2) 모델에서 히든레이어 구성 불필요
+# (3) 컴파일 불필요 
+# (4) evaluate 대신 score 사용, evaluate은 loss와 metrics를 반환하는 한편 score는 회귀/분류에 맞는 지표를 반환
+cf> m02_ml_sample.py
+
+(3) XOR problem, 
+XOR 문제 해결 방식 2가지
+(1) ML: LinearSVC -> SVC  (cf> m03_4_xor2.py)
+(2) DL: hidden layer 구성 및 activation 'sigmoid' -> 'relu'  (cf> m03_6_xor_keras2.py)
+
+(4) 6 & 4 models (classification and regression), 
 # sklearn이 keras보다 먼저 나온 모델임
 # classification by ML (6가지)
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC, SVC
 # regression by ML (4가지)
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 
-2021-01-28
-keywords: k-fold, cross_val_score, GridSearchCV, parameters, model.best_estimator_, RandomizedSearchCV
-https://datascienceschool.net/intro.html
-https://3months.tistory.com/321
-오늘부터는 진짜로 케라스에 사용할 수 있는 것들임.
-m09_selectModel에서 여러가지 모델을 살펴보았는데 다 알 필요는 없고 몇가지 사용할만한 것을 알면 된다.
-데이터의 특성에 따라서 성능이 조금씩 다를 수 있다. trial마다 weight값이 다르기 때문에 결과가 다를 수 있다.
+### (유치한) 암 기 법 ###
+Classifier or Regressor
+"나무" 주위에서     --> DecisionTree
+"이웃"들이          --> KNeighbors
+"일직선"으로 서서    --> Logistic/Linear + Regression
+"앙상블" 연주를 한다 --> RandomForest
 
-intro. 문제제기
-데이터를 train, test, validation으로 split하는 것의 문제점?
-전체 데이터를 훈련시키지 않게 됨. 즉, 훈련에 반영되지 않는 데이터 일부분이 존재하게 됨. (낭비되는 데이터)
-하지만 그렇다고 모든 데이터를 훈련시키면 과적합 문제 발생.
-또한 train으로 나누는 비율에 따라서 결과가 달라지는 문제 존재.
+(5) sklearn.utils testing -> all_estimators
+# 선생님은 m09의 파일명을 selectModel 이라고 명명했지만 (모든 모델을 쫙 깔아놓고 골라라골라 하는 거라는 의미에서)
+# 나는 원문에 더 가깝게 하기 위해서 allEstimators 라고 했다
 
-k-fold cross validation 교차검증
-Let's suppose, 전체 데이터를 5등분하여 각 구간을 test로 범위를 설정하여 5번 돌림.
-https://nonmeyet.tistory.com/entry/KFold-Cross-Validation%EA%B5%90%EC%B0%A8%EA%B2%80%EC%A6%9D-%EC%A0%95%EC%9D%98-%EB%B0%8F-%EC%84%A4%EB%AA%85
-https://devkor.tistory.com/entry/%EB%A8%B8%EC%8B%A0-%EB%9F%AC%EB%8B%9D-%EC%9E%85%EB%AC%B8%EC%9E%90%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%84%A4%EB%AA%85-%EA%B5%90%EC%B0%A8-%EA%B2%80%EC%A6%9DK-Fold-Cross-Validation
 

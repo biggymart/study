@@ -10,7 +10,7 @@ y = dataset.target # (150, )
 
 #1-0. preprocessing
 seed = 66
-from sklearn.model_selection import KFold, cross_val_score
+from sklearn.model_selection import KFold, cross_val_score ### Takeaway0 ###
 kfold = KFold(n_splits=5, shuffle=True, random_state=seed) ### Takeaway1 ### 전체 데이터에서 5등분
 
 #2. model
@@ -19,7 +19,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression # (이진분류)
 from sklearn.svm import LinearSVC, SVC
-
 m1 = KNeighborsClassifier()
 m2 = DecisionTreeClassifier()
 m3 = RandomForestClassifier()

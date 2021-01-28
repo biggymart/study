@@ -17,18 +17,17 @@ scaler.transform(x_test)
 
 ### 분기점 2 ###
 #2. model
-from sklearn.neighbors import KNeighborsClassifier # Option 1
-model = KNeighborsClassifier()
-# from sklearn.tree import DecisionTreeClassifier # Option 2 
-# model = DecisionTreeClassifier()
-# from sklearn.ensemble import RandomForestClassifier # Option 3
-# model = RandomForestClassifier()
-# from sklearn.linear_model import LogisticRegression # Option 4 (분류)
-# model = LogisticRegression()
-# from sklearn.svm import LinearSVC # Option 5
-# model = LinearSVC()           
-# from sklearn.svm import SVC # Option 6
-# model = SVC()
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC, SVC
+model = DecisionTreeClassifier() # Option 1
+# model = KNeighborsClassifier() # Option 2
+# model = LogisticRegression() # Option 3 (이진분류)
+# model = RandomForestClassifier() # Option 4
+# model = LinearSVC() # Option 5
+# model = SVC() # Option 6
 
 #3. fit
 model.fit(x_train, y_train)
