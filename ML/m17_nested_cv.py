@@ -32,3 +32,5 @@ score = cross_val_score(model, x_train, y_train, cv=kfold)
 # 총 25번 돌아감
 
 print("교차검증점수 :", score)
+
+# 교차검증점수 : [1.         0.95833333 0.95833333 1.         1.        ]

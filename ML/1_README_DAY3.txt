@@ -1,7 +1,10 @@
 2021-01-29
-range: m14 ~
+range: m14 ~ m23
 
 keywords: Pipeline, make_pipeline
+
+오늘은 Tree계열을 배우는 것
+뭔가 실습이 많은 느낌이다... 벅차군
 
 1교시
 머신러닝 전체에 대해서 리뷰를 좀 해보자.
@@ -39,4 +42,14 @@ scaler와 model을 엮어주는 것이 pipeline이다
 
 4교시
 test set을 사용할 수 있는 다른 방법 없을까?
+nested cv
 
+5교시
+오후에는 중요한 거 한다고 했지
+이제부터는 중요한 거 할거니까 정신 바짝 차려라
+
+6교시
+plot 해보고 feature importances 파악하고 중요하지 않은 feature를 줄여라
+
+7교시
+m21, 22 실습
