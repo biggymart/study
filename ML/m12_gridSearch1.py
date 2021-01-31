@@ -1,5 +1,6 @@
 # 선별적으로 모델을 선택하고 파라미터 튜닝까지 함
 # 촘촘한 망처럼 다 싸그리 낚아올리겠다 "Grid: 격자 --> 그물망"
+# One of generic method for parameter searching
 # https://machinelearningmastery.com/hyperparameter-optimization-with-random-search-and-grid-search/
 import warnings
 warnings.filterwarnings('ignore')

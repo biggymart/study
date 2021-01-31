@@ -27,7 +27,7 @@ def plot_feature_importances_dataset(model):
     plt.yticks(np.arange(n_features), dataset.feature_names)
     plt.xlabel("Feature Importances")
     plt.ylabel("Features")
-    plt.ylim(-1, n_features)
+    plt.ylim(-1, n_features) # y축의 한계 설정
 
 plot_feature_importances_dataset(model)
 plt.show()

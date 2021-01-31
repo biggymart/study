@@ -12,7 +12,7 @@ model = DecisionTreeClassifier(max_depth=4) ### Takeaway1 ###
 #3. fit
 model.fit(x_train, y_train)
 
-#4. score and predict
+#4. score
 acc = model.score(x_test, y_test)
 
 print(model.feature_importances_) ### Takeaway2 ###
