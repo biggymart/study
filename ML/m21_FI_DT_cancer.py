@@ -1,16 +1,20 @@
-# FI가 0인 칼럼을 제거하여 데이터셋을 재구성
-# DesicionTree로 모델을 돌려서 acc를 확인해보시오
+# Task requirement:
+# Reconstuct dataset by removing columns which FI is 0
+# Use DesicionTree as model and check its accuracy_score
 
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 #1. data
 dataset = load_breast_cancer()
 df = pd.DataFrame(dataset.data, columns=dataset.feature_names)
 
 x_feature_names = ['worst perimeter', 'worst texture', 'worst radius']
+### m24 함수 확인해보길 ###
 df_trim = df[x_feature_names]
 
 x = df_trim.to_numpy()
@@ -28,11 +32,9 @@ acc = model.score(x_test, y_test)
 print(model.feature_importances_)
 print("acc :", acc)
 
-import matplotlib.pyplot as plt
-import numpy as np
 
 def plot_feature_importances_dataset(model):
-    n_features = x.shape[1]
+    n_features = dataset.data.shape[1]
     plt.barh(np.arange(n_features), model.feature_importances_, align='center')
     plt.yticks(np.arange(n_features), x_feature_names)
     plt.xlabel("Feature Importances")
@@ -53,3 +55,18 @@ plt.show()
 # 이후 결과
 # [0.88905842 0.09991873 0.01102285]
 # acc : 0.9473684210526315
+
+'''
+def cut_columns(feature_importances, columns, number):
+    temp = []
+    print(len(feature_importances))
+    for i in feature_importances:
+        temp.append(i)
+    temp.sort()
+    temp=temp[:number]
+    result = []
+    for j in temp:
+        index = feature_importances.tolist().index(j)
+        result.append(columns[index])
+    return result
+'''

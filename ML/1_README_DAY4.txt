@@ -4,7 +4,7 @@ kfold, cross_val_score, GridSearchCV, RandomizedSearchCV, Feature_importances (f
 XGB 느림, 성능은 좋음
 느려서 나온 게 (Light Gradient Boosting Machine)
 
-keywords: PCA
+keywords: PCA (Feature engineering, 불필요 칼럼으로 속도 향상)
 
 PCA (비지도 학습에서 쓰임, 차원축소, Principal Component Analysis)
 FI 의 비중에 따라 feature를 줄일지 고려해야

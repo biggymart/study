@@ -1,6 +1,16 @@
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_feature_importances_dataset(model):
+    n_features = dataset.data.shape[1]
+    plt.barh(np.arange(n_features), model.feature_importances_, align='center')
+    plt.yticks(np.arange(n_features), dataset.feature_names)
+    plt.xlabel("Feature Importances")
+    plt.ylabel("Features")
+    plt.ylim(-1, n_features) # y축의 한계 설정
 
 #1. data
 dataset = load_iris()
@@ -18,17 +28,7 @@ acc = model.score(x_test, y_test)
 print(model.feature_importances_)
 print("acc :", acc)
 
-import matplotlib.pyplot as plt
-import numpy as np
-
-def plot_feature_importances_dataset(model):
-    n_features = dataset.data.shape[1]
-    plt.barh(np.arange(n_features), model.feature_importances_, align='center')
-    plt.yticks(np.arange(n_features), dataset.feature_names)
-    plt.xlabel("Feature Importances")
-    plt.ylabel("Features")
-    plt.ylim(-1, n_features) # y축의 한계 설정
-
+#5. visualization
 plot_feature_importances_dataset(model)
 plt.show()
 

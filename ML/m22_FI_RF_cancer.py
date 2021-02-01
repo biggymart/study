@@ -1,4 +1,4 @@
-# https://towardsdatascience.com/extracting-plotting-feature-names-importance-from-scikit-learn-pipelines-eb5bfa6a31f4
+# model: RandomForest, reduce lowest 25% features
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import load_breast_cancer
@@ -10,7 +10,7 @@ import pandas as pd
 def plot_feature_importances_dataset(model):
     n_features = x.shape[1]
     plt.barh(np.arange(n_features), model.feature_importances_, align='center')
-    plt.yticks(np.arange(n_features), x_feature_names)
+    plt.yticks(np.arange(n_features), dataset.feature_names)
     plt.xlabel("Feature Importances")
     plt.ylabel("Features")
     plt.ylim(-1, n_features)
@@ -20,7 +20,7 @@ def plot_feature_importances_dataset(model):
 
 #1. data
 dataset = load_breast_cancer()
-# 랜덤포레스트로 결과치 보고 하위 25% 피쳐 줄여서 만들기
+
 # 힌트: 결과를 sort해라
 
 df = pd.DataFrame(dataset.data, columns=dataset.feature_names)
@@ -52,3 +52,6 @@ print("acc :", acc)
 #  0.01756259 0.0134522  0.03051694 0.11599532 0.01525499 0.00679884] 
 # FI의 값이 아니라 이름을 반환하는 건 없나?
 # 하위 25%에 해당하는 피처가 무엇인지 알아내는 과정? 
+
+
+# https://towardsdatascience.com/extracting-plotting-feature-names-importance-from-scikit-learn-pipelines-eb5bfa6a31f4

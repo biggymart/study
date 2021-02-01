@@ -1,7 +1,7 @@
 2021-01-29
 range: m14 ~ m23
 
-keywords: Pipeline, make_pipeline
+keywords: Pipeline, make_pipeline (+ grid/randomizedSearch), Feature Importances (fit 이후에 가능)
 
 오늘은 Tree계열을 배우는 것
 뭔가 실습이 많은 느낌이다... 벅차군
