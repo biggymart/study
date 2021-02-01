@@ -1,18 +1,18 @@
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.utils.testing import all_estimators # 추정치
-from sklearn.datasets import load_iris
 import warnings
 warnings.filterwarnings('ignore')
 
+from sklearn.datasets import load_iris
 dataset = load_iris()
 x = dataset.data
 y = dataset.target
 
+from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state = 44)
 
+from sklearn.utils.testing import all_estimators # 추정치
 allAlgorithms = all_estimators(type_filter='classifier') ### Takeaway1 ###
 
+from sklearn.metrics import accuracy_score
 for (name, algorithm) in allAlgorithms: # 인자 두 개를 가짐
     try: # 예외처리
         model = algorithm()
@@ -24,8 +24,9 @@ for (name, algorithm) in allAlgorithms: # 인자 두 개를 가짐
         print(name, '은 없는 놈!')
 
 import sklearn
-print(sklearn.__version__) # 0.23.2 
+# print(sklearn.__version__) # 0.23.2 
 
+# 이 버전에 있는 모든 Classifier 나타내줌
 # AdaBoostClassifier 의 정답률 :                0.9666666666666667
 # BaggingClassifier 의 정답률 :                 0.9666666666666667
 # BernoulliNB 의 정답률 :                       0.3
