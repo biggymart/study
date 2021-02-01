@@ -2,7 +2,8 @@ review on last week
 range: m24 ~ 34
 
 keywords: 
-(1) PCA (Feature engineering, 불필요 칼럼 제거"차원축소"로 속도 향상)
+(1) XGB
+(2) PCA (Feature engineering, 불필요 칼럼 제거"차원축소"로 속도 향상)
 
 
 kfold, cross_val_score, GridSearchCV, RandomizedSearchCV, Feature_importances (feature engineering), pipeline, 트리계열 DT, RF, GB, XGB, LGBM
