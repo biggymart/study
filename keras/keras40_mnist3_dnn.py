@@ -39,7 +39,7 @@ early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
 from tensorflow.keras.optimizers import Adam
 model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0001), metrics=['acc']) # 다중분류에서 loss는 반드시 categorical_crossentropy
-model.fit(x_train, y_train, epochs=100, batch_size=1024, callbacks=[early_stopping], validation_split=0.2)
+model.fit(x_train, y_train, epochs=100, batch_size=32, callbacks=[early_stopping], validation_split=0.2)
 
 # evaluate and predict
 loss = model.evaluate(x_test, y_test)

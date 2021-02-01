@@ -8,13 +8,13 @@ import pandas as pd
 
 # 데이터
 datasets = load_breast_cancer()
-x_train,x_test,y_train,y_test = train_test_split(datasets.data, datasets.target, test_size=0.15)
+x_train, x_test, y_train, y_test = train_test_split(datasets.data, datasets.target, test_size=0.15)
 
 # 모델
 model = XGBClassifier(n_jobs = -1)
 
 # 훈련
-model.fit(x_train,y_train)
+model.fit(x_train, y_train)
 y = datasets.target
 # 평가, 예측
 acc = model.score(x_test,y_test)

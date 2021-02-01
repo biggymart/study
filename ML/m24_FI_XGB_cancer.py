@@ -27,10 +27,10 @@ def plot_feature_importances_datasets(model, datasets):
     plt.ylim(-1, n_features)
 
 #1. data
-#2. model
 datasets = load_breast_cancer()
 x_train, x_test, y_train, y_test = train_test_split(datasets.data, datasets.target, test_size=0.2)
 
+#2. model
 model = XGBClassifier(n_jobs = -1, use_label_encoder=False)
 
 df = pd.DataFrame(datasets.data, columns=datasets.feature_names)
