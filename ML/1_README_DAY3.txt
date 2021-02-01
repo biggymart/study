@@ -58,5 +58,6 @@ cf> m17_nested_cv.py, m18_nested_cv_pipeline_wine.py 참고
 오후에는 "중요"한 거 한다고 했지, 이제부터는 "중요"한 거 할거니까 정신 바짝 차려라
 plot 해보고 feature importances 파악하고 중요하지 않은 feature를 줄여라 -> m20_FI_plot_func_iris.py
 각종 Tree 모델에 적용하는 실습 -> m21_FI_TreeModels_cancer.py (DecisionTree, RandomForest, GradientBoosting)
+# 원래 21, 22, 23에 각 모델이 있었는데 한 파일로 합침
 
 오늘 FI는 수작업으로 피쳐를 줄이는 거라면, 내일 배울 PCA는 자동 압축
