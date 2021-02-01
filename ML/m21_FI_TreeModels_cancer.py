@@ -1,9 +1,14 @@
+# Task requirement:
+# Reconstuct dataset by removing columns which FI is 0
+# Use DesicionTree as model and check its accuracy_score
+
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
-from xgboost import XGBClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
+import numpy as np
 
 def cut_columns(feature_importances, columns, number):
     temp = []
@@ -28,15 +33,13 @@ def plot_feature_importances_datasets(model, datasets):
     return plt
 
 #1. data
-datasets = load_breast_cancer()
-x_train, x_test, y_train, y_test = train_test_split(datasets.data, datasets.target, test_size=0.2)
+dataset = load_breast_cancer()
+x_train, x_test, y_train, y_test = train_test_split(dataset.data, dataset.target, test_size=0.2)
 
-#2. model
-model = XGBClassifier(n_jobs = -1, use_label_encoder=False)
+model = DecisionTreeClassifier(max_depth=4) # RandomForestClassifier, GradientBoostingClassifier
 
-df = pd.DataFrame(datasets.data, columns=datasets.feature_names)
-df.drop(cut_columns(model.feature_importances_, datasets.feature_names, 4), axis=1, inplace=True)
-print(cut_columns(model.feature_importances_, datasets.feature_names, 4))
+df = pd.DataFrame(dataset.data, columns=dataset.feature_names)
+df.drop(cut_columns(model.feature_importances_, dataset.feature_names, 4), axis=1, inplace=True)
 
 #3. fit
 model.fit(x_train, y_train, eval_metric='logloss')
@@ -46,14 +49,14 @@ acc = model.score(x_test, y_test)
 print("acc : ",acc)
 
 #5. visualization
-plot_feature_importances_datasets(model, datasets)
+plot_feature_importances_datasets(model, dataset)
 plt.show()
 
-# n_jobs : -1   # 신뢰가 가지 않는군
-# 0:00:00.420282
-# n_jobs : 8
-# 0:00:00.416464
-# n_jobs : 4
-# 0:00:00.427209
-# n_jobs : 1
-# 0:00:00.464287
+
+### 실행해보고 결과 기록 ###
+
+# DecisionTreeClassifier
+
+# RandomForestClassifier
+
+# GradientBoostingClassifier

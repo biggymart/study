@@ -11,6 +11,7 @@ def plot_feature_importances_dataset(model):
     plt.xlabel("Feature Importances")
     plt.ylabel("Features")
     plt.ylim(-1, n_features) # y축의 한계 설정
+    return plt
 
 #1. data
 dataset = load_iris()

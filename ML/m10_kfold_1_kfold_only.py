@@ -35,6 +35,7 @@ for model in model_lst:
     print('{0} scores : {1}'.format(str(model), scores))
 # 모델과 데이터가 엮이는 지점, fit과 score 모두 포함되어 있음
 
+# As you can see from the results, we can verify that the model has been run for 5 rounds, with each round setting different range for validation set.
 # KNeighborsClassifier() scores :   [0.97 0.97 1.   0.9  0.97]
 # DecisionTreeClassifier() scores : [0.93 0.97 1.   0.9  0.93]
 # RandomForestClassifier() scores : [0.97 0.97 1.   0.9  0.97]

@@ -15,11 +15,10 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_
 
 kfold = KFold(n_splits=5, shuffle=True, random_state=66)
 
-allAlgorithms = all_estimators(type_filter='classifier')
-for (name, algorithm) in allAlgorithms: # 인자 두 개를 가짐
+allEstimators = all_estimators(type_filter='classifier') # 'estimator' is similar to 'algorithm'
+for (name, estimator) in allEstimators: # 인자 두 개를 가짐
     try:
-        model = algorithm()
-
+        model = estimator()
         scores = cross_val_score(model, x_train, y_train, cv=kfold) # cv=5 가능하지만 셔플이 안 됨
         print(name, '의 정답률 : ', scores)
     except:

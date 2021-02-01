@@ -1,5 +1,5 @@
 # 이 종류에서는 끝판왕 급이지만 어려울 건 없다
-# 전처리까지 합치는 걸 pipeline이라고 한다
+# scaling까지 합치는 걸 pipeline이라고 한다
 
 #1. data
 import numpy as np
