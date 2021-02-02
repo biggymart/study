@@ -26,3 +26,6 @@ m38에서는 시각화한다.
 
 m39 ~ m41은 모델을 저장(model, weight save)하는 3가지 방식을 다룬다. (한 파일로 압축함)
 python에서 제공하는 기능인 pickle과 joblib, xgb 자체의 model save가 있다.
+
+xgboosting의 각종 기능
+early_stopping, model save
