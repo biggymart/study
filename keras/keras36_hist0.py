@@ -30,7 +30,7 @@ model.add(Dense(5, name='new_layer1'))
 model.add(Dense(1, name='new_layer2'))
 
 from tensorflow.keras.callbacks import EarlyStopping
-es =EarlyStopping(monitor='loss', patience=10, mode='auto')
+es = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
 #3. compile and fit
 model.compile(loss='mse', optimizer='adam', metrics=['acc']) # 미친 척하고 acc 매트릭스 넣어보자
