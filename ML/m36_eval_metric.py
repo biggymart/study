@@ -24,8 +24,8 @@ model = XGBClassifier(n_estimators=3, learning_rate=0.01, n_jobs=8, use_label_en
 # model.fit(x_train, y_train, verbose=1, eval_metric=['rmse', 'mae'], eval_set=[(x_train, y_train), (x_test, y_test)]) # regression
 # model.fit(x_train, y_train, verbose=1, eval_metric=['mlogloss', 'merror'], eval_set=[(x_train, y_train), (x_test, y_test)]) # multi classification
 model.fit(x_train, y_train, verbose=1, eval_metric=['logloss', 'error'], eval_set=[(x_train, y_train), (x_test, y_test)]) # binary classification
-'''
 
+'''
 # eval_metric
 eval_metric: 설정 한 objective기본 설정 값이 지정되어 있습니다.
 rmse : 제곱 평균 제곱근 오차

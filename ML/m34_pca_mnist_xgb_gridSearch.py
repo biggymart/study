@@ -29,9 +29,11 @@ model = XGBClassifier(n_jobs = -1, use_label_encoder=False)
 model_search = GridSearchCV(model, parameters, cv=kfold) # n_estimator == epochs
 
 #3. fit
-model_search.fit(x_train_pca, y_train, eval_metric='mlogloss', verbose=True, eval_set=[(x_train_pca, y_train), (x_test_pca, y_test)], early_stopping_rounds=5)
+model_search.fit(x_train_pca, y_train, eval_metric='mlogloss', verbose=True, eval_set=[(x_train_pca, y_train), (x_test_pca, y_test)], early_stopping_rounds=3)
 results = model_search.score(x_test_pca, y_test)
 print(results)
+
+model.save_model("../data/xgb_save/m34.xgb.model")
 
 # n_compo = 154; GridSearchCV
 # n_compo = 713; GridSearchCV
