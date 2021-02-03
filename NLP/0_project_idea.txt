@@ -1,0 +1,15 @@
+딥러닝 기반의 음성인식 기술
+https://blog.naver.com/whyihere/221179469265
+http://www.comworld.co.kr/news/articleView.html?idxno=50123
+마인즈랩
+https://biz.chosun.com/site/data/html_dir/2016/09/20/2016092002046.html'
+
+연세대 일반대학원 언어정보
+국립국어원
+https://kcorpus.korean.go.kr/
+모두의 말뭉치
+https://corpus.korean.go.kr/
+한국어-영어 번역(병렬) 말뭉치 AI데이터
+https://www.aihub.or.kr/aidata/87
+2020년 인공지능 학습용 데이터 구축 사업
+http://aidatacs.aihub.or.kr/

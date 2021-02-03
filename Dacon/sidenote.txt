@@ -1,0 +1,19 @@
+'''
+https://dacon.io/competitions/official/235626/codeshare/1624
+혹시 sklearn.preprocessing import binarizer 에서 threshold 넘는 개념을 적용해서 이미지 중첩했을 때 gradient magnitude가 작은 것이 선택되는 알고리즘 가능?
+
+sklearn으로 이미지 분류하는 것 쉽게 알려주는
+https://kapernikov.com/tutorial-image-classification-with-scikit-learn/
+문제의 성격: 다중분류
+특징: 
+(1) 의도적인 노이즈 첨가됨
+(2) train의 양이 적음
+
+3위
+https://dacon.io/competitions/official/235626/codeshare/1682?page=1&dtype=recent&ptype=pub
+이미지 증강법
+https://dacon.io/competitions/official/235626/codeshare/1633?page=2&dtype=recent&ptype=pub
+baseline code
+https://dacon.io/competitions/official/235626/codeshare/1538?page=3&dtype=recent&ptype=pub
+
+'''
