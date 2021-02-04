@@ -27,6 +27,7 @@ outputs = Dense(2)(dense3)
 model = Model(inputs=input1, outputs=outputs) # 처음과 끝을 명시해줌, 모델을 다 구성한 후 형을 선언한다
 # model.summary() # 레이어 노드: 1, 5, 3, 4, 1, 파라미터 갯수: 49
 
+'''
 # 위 모델과 표현방식만 다를 뿐 성능이 똑같다
 model = Sequential() # 모델을 구성하기 전 형을 선언한다
 # model.add(Dense(10, input_dim=1))
@@ -35,7 +36,7 @@ model.add(Dense(3))
 model.add(Dense(4))
 model.add(Dense(2))
 # model.summary() # 레이어 노드: 5, 3, 4, 1, 파라미터 갯수: 49
-
+'''
 
 #3. compile and fit
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
