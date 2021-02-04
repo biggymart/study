@@ -1,6 +1,9 @@
 # 연속된 데이터
 # 주의해야 하는 부분: X의 shape, input의 shape
 
+# input_shape / input_length / input_dim 
+# shape = timesteps and features
+
 #1. data
 import numpy as np
 

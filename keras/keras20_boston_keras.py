@@ -1,6 +1,4 @@
-# 실습> 2개의 파일을 만드시오:
-# 1. EarlyStopping을 적용하지 않은 최고의 모델
-# 2. EarlyStopping을 적용한 최고의 모델
+# 1. EarlyStopping을 적용한 최고의 모델 만들것
 # (단, 사용 모듈: from tensorflow.keras.datasets import boston_housing)
 # Tip: sklearn과 제공한 데이터와 비슷하지만 x와 y로 나누지 않음
 
@@ -33,7 +31,10 @@ model = Model(inputs=input1, outputs=output1)
 #3. compile and fit
 model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
-model.fit(x_train, y_train, batch_size=1, epochs=150, verbose=1, validation_split=0.2)
+from tensorflow.keras.callbacks import EarlyStopping
+early_stopping = EarlyStopping(monitor='loss', patience=15, mode='min')
+
+model.fit(x_train, y_train, batch_size=1, epochs=150, verbose=1, validation_split=0.2, callbacks=[early_stopping],)
 
 #4. evaluate and predict
 mse, mae = model.evaluate(x_test, y_test, batch_size=1)
@@ -57,3 +58,9 @@ print('R2 :', r2)
 # mae : 2.69653582572937
 # RMSE : 4.045888636971458
 # R2 : 0.8033582642580341
+
+# 결과 ver 2
+# mse : 12.786617279052734
+# mae : 2.4296789169311523
+# RMSE : 3.5758383028528646
+# R2 : 0.8463956220728037

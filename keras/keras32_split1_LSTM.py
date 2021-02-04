@@ -1,9 +1,23 @@
-# LSTM 모델을 구성하시오
+# 과제 및 실습 (LSTM 모델)
+# 전처리, EarlyStopping 등등 다 포함
+# 데이터 1~100 /
+# x                 y
+# 1,2,3,4,5         6
+# ...
+# 95,96,97,98,99    100
+
+# predict를 만들 것
+# 96,97,98,99,100   101
+# ...
+# 100,101,102,103,104   105
+# 예상 predict는 (101,102,103,104,105) 
 
 # 제공된 데이터
 import numpy as np
-a = np.array(range(1,11))
-size = 5
+a = np.array(range(1,101))
+b = np.array(range(96,106))
+size = 6
+
 
 # keras31_split.py 함수
 def split_x(seq, size):
@@ -15,9 +29,14 @@ def split_x(seq, size):
 
 #1. data
 dataset = split_x(a, size)
-x = dataset[:, :4] # (6,4) array[row, column]
-y = dataset[:, 4] # (6,)
+predictset = split_x(b, size)
+x = dataset[:, :5] # (100,5) array[row, column]
+y = dataset[:, 5] # (100,)
 
+x_pred = predictset[:, :5]
+y_pred = predictset[:, 5]
+
+#1-1. preprocessing
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)
 
@@ -30,16 +49,14 @@ x_test = scaler.transform(x_test)
 x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], 1) # LSTM용 데이터로 가공
 x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], 1)
 
-x_pred = np.array([7, 8, 9, 10]) # (4,)
-x_pred = x_pred.reshape(1, -1)
 x_pred = scaler.transform(x_pred)
-x_pred = x_pred.reshape(1, 4, 1)
+x_pred = x_pred.reshape(x_pred.shape[0], x_pred.shape[1], 1)
 
 #2. model
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, LSTM, Input
 
-input1 = Input(shape=(4,1))
+input1 = Input(shape=(5, 1))
 lstm1 = LSTM(10, activation='relu')(input1)
 dense1 = Dense(20)(lstm1)
 dense1 = Dense(10)(dense1)
@@ -50,16 +67,21 @@ model = Model(inputs=input1, outputs=output1)
 from tensorflow.keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
 
-model.compile(loss='mse', optimizer='adam')
-model.fit(x_train, y_train, epochs=1000, batch_size=1, callbacks=[early_stopping])
+model.compile(loss='mse', optimizer='adam', metrics='mae')
+model.fit(x_train, y_train, epochs=1000, batch_size=4, callbacks=[early_stopping], validation_split=0.2)
 
 #4. evaluate and predict
-loss = model.evaluate(x_test, y_test)
-print("loss(mse) :", loss)
+loss = model.evaluate(x_test, y_test, batch_size=4)
+print("loss(mse, mae) :", loss)
 
-y_predict = model.predict(x_pred)
-print("y_predict :", y_predict) # 예상값 11
+y_pred = model.predict(x_pred)
+print("y_predict :", y_pred)
 
-# 결과 keras32_split1_LSTM
-# loss(mse) : 0.009372422471642494
-# y_predict : [[11.276264]]
+# 결과 keras32_split3_LSTM
+# loss(mse, mae) : [0.22615131735801697, 0.3781367838382721]
+# y_predict : 
+# [[102.59343 ]
+#  [103.81069 ]
+#  [105.0351  ]
+#  [106.26664 ]
+#  [107.505165]]

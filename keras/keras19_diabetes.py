@@ -1,4 +1,4 @@
-# 실습: keras18을 참고하여 총 6가지의 버전을 만드시오
+# 실습: keras18을 참고하여 diabetes 데이터에 적용
 import numpy as np
 from tensorflow.keras import Model
 from tensorflow.keras.layers import Input, Dense
@@ -10,12 +10,18 @@ dataset = load_diabetes()
 x = dataset.data
 y = dataset.target
 
-x = (x - np.min(x)) / (np.max(x) - np.min(x))
-
-# print(np.min(x), np.max(x)) # 0.0 1.0
-# print(np.min(x), np.max(x)) # -0.137767225690012 0.198787989657293
-
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size= 0.8)
+
+'''
+# 데이터 파악하기
+print(x[:5]) # 일부 데이터를 보고 이 모델이 회귀일지 분류일지 파악
+print(y[:10])
+print(x.shape, y.shape) # (442, 10) (442,)
+
+print(np.max(x), np.min(x)) # 전처리가 되었는지 파악하기, 안 되었네
+print(dataset.feature_names) # ['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6'], 10개 features
+print(dataset.DESCR) # 데이터 설명서 불러오기
+'''
 
 #2. model
 input1 = Input(shape=(10,))
@@ -52,9 +58,3 @@ print('R2 :', r2)
 # mae : 47.651283264160156
 # RMSE : 60.986330591424206
 # R2 : 0.3942092465679128
-
-# 결과값 ver2
-# mse : 3216.4775390625 
-# mae : 45.81156921386719
-# RMSE : 56.71399227602712
-# R2 : 0.45881102256996287

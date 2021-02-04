@@ -1,5 +1,13 @@
-# 다:1 mlp
+# 다:1 mlp (3:1)
 # 실습 train과 test 분리해서 소스를 완성하시오
+
+# 다:다 mlp (3:3, reshape)
+# x1, x2, x3 = 환율, 금리, 국제 유가; y1, y2, y3 = 삼성전자주가, 내일환율, 내일금리;
+# 다음의 수식과 같이 모델링 됨: w1x1 + w2x2 + w3x3 + b = y1 + y2 + y3
+
+input_num = 3
+output_num = 1
+
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
@@ -21,10 +29,10 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, shuffl
 
 #2. model
 model = Sequential()
-model.add(Dense(10, input_dim=3)) # feature 3개
+model.add(Dense(10, input_dim=input_num)) # Input
 model.add(Dense(5))
 model.add(Dense(5))
-model.add(Dense(1))
+model.add(Dense(output_num)) # Output
 
 #3. compile and fit
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
