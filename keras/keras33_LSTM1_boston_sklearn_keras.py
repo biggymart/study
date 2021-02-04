@@ -8,6 +8,10 @@ dataset = load_boston()
 x = dataset.data
 y = dataset.target
 
+# import numpy as np
+# from tensorflow.keras.datasets import boston_housing
+# (x_train, y_train), (x_test, y_test) = boston_housing.load_data(test_split=0.2, seed=113)
+
 #1-1. preprocessing
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8)

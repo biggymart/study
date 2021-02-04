@@ -1,4 +1,4 @@
-# 과제> np.load를 활용하여 모델을 완성하시오
+# 과제> np.load를 활용하여 모델을 완성하시오 (boston, diabetes, cancer, wine, mnist, fashion_mnist, cifar10, cifar100)
 
 #1. data
 import numpy as np
