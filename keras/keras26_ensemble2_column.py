@@ -1,5 +1,5 @@
 # keras30_ensemble6_row 카피
-# 열이 다른 앙상블 모델
+# 앙상블은 열이 달라도 가능
 
 #1. data
 import numpy as np

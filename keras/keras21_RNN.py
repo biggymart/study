@@ -24,10 +24,10 @@ x = x.reshape(4, 3, 1)
 
 #2. model
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM
+from tensorflow.keras.layers import Dense, LSTM, SimpleRNN, GRU
 
 model = Sequential()
-model.add(LSTM(10, activation='relu', input_shape=(3,1))) 
+model.add(LSTM(10, activation='relu', input_shape=(3,1))) # SimpleRNN, GRU
 # 행무시 (사실상 면이지만 첫번째 숫자를 가리킴), 장황하게 설명했지만 코딩하면 한 줄
 # LSTM은 3차원을 받아들임
 model.add(Dense(20)) # 레이어의 첫번째 숫자는 아웃풋이야
@@ -145,3 +145,16 @@ g * (i + h + 1) * h ... (가 + 나)
 # 훈련이 데이터 후반에 영향을 줘서 성능을 높여주지만, 앞의 연산은 훈련의 효과를 못 봄
 # LSTM은 이런 한계점을 보완한 것
 # GRU는 LSTM에서 cell state을 빼서 더 가볍게 해준 것
+
+# 결과 SimpleRNN
+# 2.2976364562055096e-05
+# [[8.020421]]
+
+# 일반적으로 LSTM의 성능이 SimpleRNN보다 더 좋다고 한다
+# 이유는 연산이 더 많기 때문이다
+
+# 결과 GRU1
+# 0.0007098008063621819
+# [[7.958071]]
+
+# 각 모델의 summary 비교

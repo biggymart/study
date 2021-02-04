@@ -1,4 +1,4 @@
-# keras23_LSTM3_scale 을 함수형으로 코딩
+# 함수형으로 코딩
 
 import numpy as np
 

@@ -1,5 +1,4 @@
-# keras23_LSTM3_scale 을 DNN으로 코딩
-# 결과치 비교 / 23파일보다 loss 값이 더 낮게 만들 것
+# LSTM3 을 DNN으로 코딩
 
 #1. data
 import numpy as np
