@@ -1,4 +1,8 @@
 =======================================
+정리 깔끔하고 도식화 많이 되어 있는 블로그
+https://ebbnflow.tistory.com/133
+
+
 https://dacon.io/competitions/official/235626/codeshare/1624
 혹시 sklearn.preprocessing import binarizer 에서 threshold 넘는 개념을 적용해서 이미지 중첩했을 때 gradient magnitude가 작은 것이 선택되는 알고리즘 가능?
 sklearn으로 이미지 분류하는 것 쉽게 알려주는
