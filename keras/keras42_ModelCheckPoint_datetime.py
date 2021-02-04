@@ -82,3 +82,6 @@ plt.xlabel('epoch')
 plt.legend(loc='upper right') # keras36_hist0.py line 69처럼, label 값을 지정할수도 있다
 
 plt.show()
+
+# 추가실습
+# MCP를 각 모델에 적용할 수 있다 (fashion, cifar10, cifar100, boston, diabetes, cancer, iris, wine)

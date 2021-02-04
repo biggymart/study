@@ -1,10 +1,23 @@
-# cifar10
-
-#1. data
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.datasets import cifar10
-(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+from tensorflow.keras.datasets import cifar100
+
+(x_train, y_train), (x_test, y_test) = cifar100.load_data()
+
+print(x_train.shape, y_train.shape) # 
+print(x_test.shape, y_test.shape)   # 
+
+print(x_train[0])
+print(y_train[0]) #
+
+print(x_train[0].shape) #
+print(y_train.min(), y_train.max()) #
+
+plt.imshow(x_train[0], 'gray')
+plt.show()
+
+# cifar100
 
 #1-1. 데이터 전처리
 x_train = x_train.reshape(50000, 32, 32, 3).astype('float32')/255. # 0 ~ 1 사이의 숫자로 만듦
@@ -27,7 +40,7 @@ model.add(MaxPooling2D(pool_size=2, strides=(2,2)))
 model.add(Flatten())
 model.add(Dense(256, activation=relu))
 model.add(Dropout(0.5))
-model.add(Dense(10, activation=softmax))
+model.add(Dense(100, activation=softmax))
 
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping
@@ -47,5 +60,5 @@ for i in range(idx):
     print(np.argmax(y_test[i]), np.argmax(y_pred[i]), end='/')
 
 # 결과
-# [categorical_crossentropy, acc] : [1.1093847751617432, 0.6141999959945679]
-# 3 3/8 8/8 8/0 8/6 4/6 6/1 1/6 6/3 3/1 1/
+# [categorical_crossentropy, acc] : [2.8704073429107666, 0.3034999966621399]
+# 49 12/33 80/72 15/51 51/71 71/92 31/15 80/14 7/23 71/0 83/

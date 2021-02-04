@@ -1,4 +1,23 @@
 # 인공지능계의 Hello, World라 불리는 mnist
+# x에서 값이 더 클수록(0~255) 더 밝음(255: 흰색), 빛의 3원색 사용
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+from tensorflow.keras.datasets import mnist
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+print(x_train.shape, y_train.shape) # (60000, 28, 28) (60000,)
+print(x_test.shape, y_test.shape)   # (10000, 28, 28) (10000,)
+
+print(x_train[0])
+print(y_train[0]) # 5
+
+print(x_train[0].shape) # (28, 28)
+
+plt.imshow(x_train[0], 'gray')
+plt.show()
 
 # DNN 모델로 구성 가능
 # CNN으로 들어갈 수 있게 x.shape = (60000, 28, 28) --> x.reshape(-1, x.shape[1], x.shape[2], 1)
@@ -15,12 +34,6 @@
 # DNN (N, 764), 
 # LSTM (N, 764, 1) (1개씩 잘라서 쓰므로 느림, 꼭 경험해봐라) // 혹은 (N, 28*14, 2) 혹은 (N, 28*7, 4) 혹은 (N, 7*7, 16) // LSTM(input_shape=(28*28, 1)) 이렇게 될거야
 # CNN (N, 28, 28) 
-
-#1. data
-import numpy as np
-import matplotlib.pyplot as plt
-from tensorflow.keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 #1-1. 데이터 전처리
 x_train = x_train.reshape(60000, 28, 28, 1).astype('float32')/255. # 0 ~ 1 사이의 숫자로 만듦

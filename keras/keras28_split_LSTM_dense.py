@@ -46,11 +46,13 @@ scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
 
+##################
 x_train = x_train.reshape(x_train.shape[0], x_train.shape[1], 1) # LSTM용 데이터로 가공
 x_test = x_test.reshape(x_test.shape[0], x_test.shape[1], 1)
 
 x_pred = scaler.transform(x_pred)
 x_pred = x_pred.reshape(x_pred.shape[0], x_pred.shape[1], 1)
+##################
 
 #2. model
 from tensorflow.keras.models import Sequential, Model
@@ -62,7 +64,13 @@ dense1 = Dense(20)(lstm1)
 dense1 = Dense(10)(dense1)
 output1 = Dense(1)(dense1)
 model = Model(inputs=input1, outputs=output1)
-
+'''
+# Dense 모델의 경우 reshape 안 함
+model = Sequential()
+model.add(Dense(10, activation='relu', input_shape=(5,)))
+model.add(Dense(20))
+model.add(Dense(1))
+'''
 #3. compile and fit
 from tensorflow.keras.callbacks import EarlyStopping
 early_stopping = EarlyStopping(monitor='loss', patience=10, mode='auto')
@@ -85,3 +93,12 @@ print("y_predict :", y_pred)
 #  [105.0351  ]
 #  [106.26664 ]
 #  [107.505165]]
+
+# 결과 keras32_split4_Dense
+# loss(mse, mae) : [1.933873026993549e-11, 3.1119898267206736e-06]
+# y_predict : 
+# [[101.00001]
+#  [102.     ]
+#  [103.00001]
+#  [104.     ]
+#  [105.     ]]
