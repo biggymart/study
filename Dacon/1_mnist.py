@@ -91,8 +91,13 @@ model.fit_generator(train_generator, epochs=1000, callbacks=[es, reLR])
 #4. Evaluate, Predict
 result = 0
 result += model.predict(pred_generator, verbose=True)/40
+print(result)
+print(result.shape)
 
 submission['digit'] = result.argmax(1)
+print(result.argmax(1))
+print(result.shape)
+
 submission.to_csv(filepath + 'my_submission.csv', index=False)
 
 
