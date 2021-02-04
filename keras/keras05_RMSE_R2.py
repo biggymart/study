@@ -30,9 +30,11 @@ y_predict = model.predict(x_test)
 
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict): # 여러번 재사용하기 위해서 함수를 사용한다
-    return np.sqrt(mean_squared_error(y_test, y_predict))
+    return np.sqrt(mean_squared_error(y_test, y_predict))  # 매개변수 1: 실제값, 매개변수 2: 예측값
     # sklearn에서는 mse를 이렇게 구할 수 있다
     # np.sqrt(result[0]) 도 가능함
 print("RMSE :", RMSE(y_test, y_predict))
 
-# 실습: RMSE를 0.1 이하로 낮추시오 (하이퍼 파라미터 튜닝)
+from sklearn.metrics import r2_score
+r2 = r2_score(y_test, y_predict)
+print("R2 :", r2) # accuracy 와는 명확히 다른 지표; 1.0이 제일 좋음

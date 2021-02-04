@@ -2,36 +2,31 @@
 # 네이버블로그 gema0000
 
 '''
-0 ~ 9: 기초적인 모델 구성
-
 === introduction ===
-00_numpy: numpy 라이브러리 import와 np.array 만들 수 있다, alias의 개념도 덤으로 알게된다
-01_OverallWorkflow: 전반적인 작업순서를 파악할 수 있다 "data -> model -> compile and fit -> evaluate and predict", 모델은 Sequential, 레이어는 Dense
+00_numpy: import numpy as np; np.array()
+01_OverallWorkflow: 전반적인 작업순서 "data -> model -> compile and fit -> evaluate and predict", 모델은 Sequential, 레이어는 Dense
 
 === data ===
-02_1: 데이터를 훈련과 평가 세트로 나눌 필요성을 알게된다, 모델의 활성화 함수 'relu' 등장
-02_2: 예측의 개념과 predict 데이터를 만들 필요성을 알게된다
+02: 데이터를 훈련과 평가 세트로 나눌 필요성을 알게된다, 모델의 활성화 함수 'relu' 등장, 예측의 개념과 predict 데이터를 만들 필요성을 알게된다
 
 === model evaluation ===
-03_metrics: compile(metrics=['mse','mae']), mse와 mae 개념
-04_validation: fit에 validation_split 옵션, validation의 필요성
-05_RMSE: RMSE 개념, scikitlearn과 함수의 개념 등장
-06_R2: R2 개념
-07_R2_test: R2 올리는 실습
+03_metrics: compile(metrics=['mse','mae']); mse와 mae 개념
+04_validation: fit(validation_split=float); validation의 필요성
+05_RMSE: RMSE, R2 개념, scikit-learn과 함수의 개념 등장
 
 === data split ===
 08_split1: list slicing
 08_split2: from sklearn.model_selection import train_test_split
 08_split3_val: model.fit(validation_split=0.2)
 08_split4_val2: model.fit(validation_data=(x_val, y_val))
-08_split5_size: train_test_split(train_size=float, test_size=float), a + b == 1
+08_split5_size: train_test_split(train_size=0.8, test_size=0.2), a + b == 1
 
 === MLP (Multi-Layered Perceptron, DNN) ===
-09_mlp: 다:1, 다:1, 다:다, 다:다, 성능 떨어뜨려보기, 1:다
+09_mlp: 다:1, 다:다
 
 === more parameters ===
-10_verbose: fit parameter
-11_input_shape: model parameter
+10_verbose: fit(verbose=[0-3])
+11_input_shape: Dense(input_shape=(dim,))
 
 === model construction ===
 12_func: 함수형 모델
