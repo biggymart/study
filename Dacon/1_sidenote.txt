@@ -1,19 +1,33 @@
-'''
+=======================================
 https://dacon.io/competitions/official/235626/codeshare/1624
 혹시 sklearn.preprocessing import binarizer 에서 threshold 넘는 개념을 적용해서 이미지 중첩했을 때 gradient magnitude가 작은 것이 선택되는 알고리즘 가능?
-
 sklearn으로 이미지 분류하는 것 쉽게 알려주는
 https://kapernikov.com/tutorial-image-classification-with-scikit-learn/
-문제의 성격: 다중분류
-특징: 
-(1) 의도적인 노이즈 첨가됨
-(2) train의 양이 적음
-
 3위
 https://dacon.io/competitions/official/235626/codeshare/1682?page=1&dtype=recent&ptype=pub
 이미지 증강법
 https://dacon.io/competitions/official/235626/codeshare/1633?page=2&dtype=recent&ptype=pub
 baseline code
 https://dacon.io/competitions/official/235626/codeshare/1538?page=3&dtype=recent&ptype=pub
+ensemble basic course
+https://courses.analyticsvidhya.com/courses/take/ensemble-learning-and-ensemble-learning-techniques/texts/11091863-intuition-behing-ensemble-learning
+=====================================
 
-'''
+1. f score
+harmonic mean of the precision and recall -> measures accuracy
+조화평균: 화음은 주파수가 1:2:3 과 같이 간단한 정수 간격을 이룰 때 발생하는데, 현의 길이는 주파수의 역수이다. 즉 화음을 이루는 현의 길이를 구하기 위해서는, 역수(주파수)의 평균을 구하고, 다시 그 값의 역수(현의 길이)로 되돌아온다. (평균 속력 구하는 문제)
+
+2. XGB params
+한글로 파이퍼파라미터 튜닝 잘 설명됨
+https://www.kaggle.com/lifesailor/xgboost
+
+3. StratifiedKFold
+4. BatchNormalization
+5. np.expnad_dims
+6. pd.drop
+7. pd.values
+8. pd.get_dummies()
+블로그에 잘 설명되어 있음 (서로 간의 관계성 제거)
+https://devuna.tistory.com/67
+8. scaler 시점
+9. ImageDataGenerator

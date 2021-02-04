@@ -3,7 +3,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from sklearn.model_selection import train_test_split
 
-
 #1. data
 x = np.array([range(100), range(301, 401), range(1, 101), range(201, 301), range(401, 501)])
 x = np.transpose(x)
@@ -24,20 +23,15 @@ model.add(Dense(2))
 
 #3. compile and fit
 model.compile(loss='mse', optimizer='adam', metrics=['mae'])
-model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.2, verbose=0) 
-# validation 의 default 가 없다 (None) 
-# verbose=0 
+model.fit(x_train, y_train, epochs=100, batch_size=1, validation_split=0.2, verbose=0)
+# verbose=0 (silent)
 # (Epoch 생략), 출력하는 burden이 줄어들어서 조금 더 빨리 됨
-
-# verbose=1 (default) 
+# verbose=1 (warning, default) 
 # Epoch 100/100 64/64 [==============================] - 0s 1ms/step - loss: 2.0989e-09 - mae: 3.2406e-05 - val_loss: 9.0589e-10 - val_mae: 1.9103e-05
-
-# verbose=2 
+# verbose=2 (info)
 # Epoch 100/100 64/64 - 0s - loss: 4.1369e-09 - mae: 4.6221e-05 - val_loss: 6.3747e-09 - val_mae: 6.7979e-05
-
-# verbose=3
+# verbose=3 (debug)
 # Epoch 100/100
-
 
 #4. evaluate and predict
 loss, mae = model.evaluate(x_test, y_test)

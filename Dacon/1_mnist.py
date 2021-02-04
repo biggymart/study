@@ -43,8 +43,6 @@ sample_datagen = ImageDataGenerator(height_shift_range=(-1,1),width_shift_range=
 sample_generator = sample_datagen.flow(sample, batch_size=1)
 
 #2. Modeling
-result = 0
-
 train_generator = idg1.flow(x_train, y_train, batch_size=16)
 pred_generator = idg2.flow(x_test, shuffle=False)
 
@@ -87,10 +85,11 @@ model.add(Dense(10, activation='softmax'))
 reLR = ReduceLROnPlateau(patience=5, verbose=1, factor=0.5, monitor='acc')
 es = EarlyStopping(patience=10, verbose=1, monitor='acc')
 
-model.compile(loss='sparse_categorical_crossentropy', optimizer=Adam(lr=0.002, epsilon=None), metrics=['acc'])
+model.compile(loss='sparse_categorical_crossentropy', optimizer=Adam(lr=0.01, epsilon=None), metrics=['acc'])
 model.fit_generator(train_generator, epochs=1000, callbacks=[es, reLR])
 
 #4. Evaluate, Predict
+result = 0
 result += model.predict(pred_generator, verbose=True)/40
 
 submission['digit'] = result.argmax(1)

@@ -25,6 +25,3 @@ xgboost라는 강력한 아이를 배웠다 (결과가 잘 나오면 그냥 그�
 숙제:
 f score
 XGB 파라미터 정리
-
-# m26, 27 해야함
-Overall: all_estimators, cross_val_score, KFold, Grid/RandomizedSearchCV, Pipeline
