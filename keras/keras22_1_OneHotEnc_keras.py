@@ -2,6 +2,8 @@
 # OneHotEncoding: 이진분류와 구분되는 특징 (x와 y의 차원 모두 2차원, 'y를 벡터화' != 'y에 대한 전치리')
 # Output Layer node == number of classification
 
+# wine, breast_cancer 에서도 실습 가능
+
 import numpy as np
 from sklearn.datasets import load_iris
 
