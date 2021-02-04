@@ -31,6 +31,18 @@ from sklearn.svm import SVC
 model = GridSearchCV(SVC(), parameters, cv=kfold) ### Takeaway3 ###
 # Total running cycles: (4 + 6 + 8) * 5 = 90
 
+'''
+# 모델이 바뀌면 파라미터도 바뀌어야 한다
+
+parameters = [{"n_estimators" : [100, 200], "max_depth" : [6, 8, 10, 12],
+ "min_samples_leaf" : [3, 5, 7, 10], "min_samples_split" : [2, 3, 5, 10], "n_jobs" : [-1, 2, 4]}]
+# n_jobs 코어 사용 갯수, -1은 전부 사용
+
+#model
+from sklearn.ensemble import RandomForestClassifier
+model = GridSearchCV(RandomForestClassifier(), parameters, cv=kfold)
+'''
+
 #3. fit
 model.fit(x_train, y_train)
 
