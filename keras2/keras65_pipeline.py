@@ -73,6 +73,8 @@ print(search.best_estimator_)
 print(search.best_score_)
 print(search.cv_results_)
 
+search.save('../data/h5/k64.h5')
+
 # save model
 import pickle
 pickle.dump(search, open('../data/h5/k65.pickle.dat', 'wb')) #dump == save, write binary
