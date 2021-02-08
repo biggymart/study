@@ -62,8 +62,7 @@ print(search.best_estimator_)
 print(search.best_score_)
 print(search.cv_results_)
 
-
-from tensorflow.keras.models import save_model
-save_model(search, filepath='../data/h5/k64.h5')
+from sklearn.externals import joblib
+joblib.dump(search.best_estimator_, '../data/h5/k64.pkl', compress=1)
 
 

@@ -73,9 +73,8 @@ print(search.best_estimator_)
 print(search.best_score_)
 print(search.cv_results_)
 
-from tensorflow.keras.models import save_model
-save_model(search, filepath='../data/h5/k64.h5')
-
+from sklearn.externals import joblib
+joblib.dump(search.best_estimator_, '../data/h5/k64.pkl', compress=1)
 
 # Final score:  0.9860000014305115
 # {'optimizer': 'adam', 'drop': 0.1, 'batch_size': 40}
@@ -110,3 +109,10 @@ save_model(search, filepath='../data/h5/k64.h5')
 #   File "c:\Study\keras2\keras64_save.py", line 66, in <module>
 #     search.save('../data/h5/k64.h5')
 # AttributeError: 'RandomizedSearchCV' object has no attribute 'save'
+
+# Traceback (most recent call last):
+#   File "c:\Study\keras2\keras65_pipeline.py", line 77, in <module>
+#     save_model(search, filepath='../data/h5/k64.h5')
+#   File "C:\Users\ai\Anaconda3\lib\site-packages\tensorflow\python\keras\saving\save.py", line 121, in save_model
+#     if (not model._is_graph_network and  # pylint:disable=protected-access
+# AttributeError: 'RandomizedSearchCV' object has no attribute '_is_graph_network'
