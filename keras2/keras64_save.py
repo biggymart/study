@@ -63,11 +63,7 @@ print(search.best_score_)
 print(search.cv_results_)
 
 
-search.save('../data/h5/k64.h5')
-
-# save model
-import pickle
-pickle.dump(search, open('../data/h5/k64.pickle.dat', 'wb')) #dump == save, write binary
-print('pickle 저장 완료')
+from tensorflow.keras.models import save_model
+save_model(search, filepath='../data/h5/k64.h5')
 
 
