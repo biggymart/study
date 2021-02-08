@@ -35,3 +35,37 @@ https://www.kaggle.com/lifesailor/xgboost
 https://devuna.tistory.com/67
 8. scaler 시점
 9. ImageDataGenerator
+
+클래스에 대한 몇 가지 질문
+Q: __call이 무엇일까?
+A: __init__ 인스턴스 초기화 할 때 불러와지고, __call__은 인스턴스가 호출됐을 때 실행
+
+class A:
+    def __init__(self):
+        print('init')
+    def __call__(self):
+        print('call')
+
+>>> a = A()
+init====
+
+>>> a()
+call====
+
+Q: __len__은 무엇일까?
+A: 해당 클래스의 인스턴스에 len() 함수를 할 수 있게 해줌
+class A:
+    def __len__(self):
+        return len(self.attribute) # 길이로 지정하고 싶은 값 (df, list 등)
+
+Q: __getitem__은 무엇일까?
+A: index 접근으로 원하는 값을 얻을 수 있다
+class FrenchDeck:
+  def __getitem__(self, position): 
+    return self._cards[position]
+
+>>> deck = FrenchDeck() 
+>>> deck[0]
+Card(rank='2', suit='spades')
+
+src url: http://hyeonjae-blog.logdown.com/posts/776615-python-getitem-len

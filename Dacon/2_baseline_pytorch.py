@@ -49,8 +49,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # 디바
 #### 3. Dataset 구성
 
 dirty_mnist_answer = pd.read_csv("dirty_mnist_answer.csv")
-# dirty_mnist라는 디렉터리 속에 들어있는 파일들의 이름을 
-# namelist라는 변수에 저장
+# dirty_mnist라는 디렉터리 속에 들어있는 파일들의 이름을 namelist라는 변수에 저장
 namelist = os.listdir('./dirty_mnist/')
 
 # numpy를 tensor로 변환하는 ToTensor 정의
@@ -89,8 +88,7 @@ class DatasetMNIST(torch.utils.data.Dataset):
         # 참고) "12".zfill(5) => 000012
         #       "146".zfill(5) => 000145
         # cv2.IMREAD_GRAYSCALE : png파일을 채널이 1개인 GRAYSCALE로 읽음
-        image = cv2.imread(self.dir_path +                           str(self.meta_df.iloc[index,0]).zfill(5) + '.png',
-                           cv2.IMREAD_GRAYSCALE)
+        image = cv2.imread(self.dir_path + str(self.meta_df.iloc[index,0]).zfill(5) + '.png', cv2.IMREAD_GRAYSCALE)
         # 0 ~ 255의 값을 갖고 크기가 (256,256)인 numpy array를
         # 0 ~ 1 사이의 실수를 갖고 크기가 (256,256,1)인 numpy array로 변환
         image = (image/255).astype('float')[..., np.newaxis]
@@ -108,9 +106,7 @@ class DatasetMNIST(torch.utils.data.Dataset):
         return sample
 
 # %% [markdown]
-# ## 4. 학습 모델 구성
-
-# %%
+### 4. 학습 모델 구성
 # nn.Module을 상속 받아 MultiLabelResnet를 정의
 class MultiLabelResnet(nn.Module):
     def __init__(self):
@@ -138,9 +134,7 @@ model = MultiLabelResnet()
 model
 
 # %% [markdown]
-# ## 5. 학습
-
-# %%
+### 5. 학습
 # cross validation을 적용하기 위해 KFold 생성
 from sklearn.model_selection import KFold
 kfold = KFold(n_splits=5, shuffle=True, random_state=0)
@@ -179,11 +173,8 @@ for fold_index, (trn_idx, val_idx) in enumerate(kfold.split(dirty_mnist_answer),
     model.to(device)# gpu에 모델 할당
 
     # 훈련 옵션 설정
-    optimizer = torch.optim.Adam(model.parameters(),
-                                lr = 0.001)
-    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer,
-                                                step_size = 5,
-                                                gamma = 0.75)
+    optimizer = torch.optim.Adam(model.parameters(), lr = 0.001)
+    lr_scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size = 5, gamma = 0.75)
     criterion = torch.nn.BCELoss()
 
     # 훈련 시작
@@ -279,9 +270,7 @@ for fold_index, (trn_idx, val_idx) in enumerate(kfold.split(dirty_mnist_answer),
     best_models.append(best_model)
 
 # %% [markdown]
-# ## 6. 학습 결과 확인
-
-# %%
+### 6. 학습 결과 확인
 # gpu에 올라가 있는 tensor -> cpu로 이동 -> numpy array로 변환
 sample_images = images.cpu().detach().numpy()
 sample_prob = probs
@@ -296,10 +285,8 @@ print('예측값 : ',dirty_mnist_answer.columns[1:][sample_prob[idx] > 0.5])
 print('정답값 : ', dirty_mnist_answer.columns[1:][sample_labels[idx] > 0.5])
 
 # %% [markdown]
-# ## 7. 앙상블 적용
-
-# %%
-#test Dataset 정의
+### 7. 앙상블 적용
+# test Dataset 정의
 sample_submission = pd.read_csv("sample_submission.csv")
 test_dataset = DatasetMNIST("test_dirty_mnist/", sample_submission)
 batch_size = 128
@@ -311,8 +298,6 @@ test_data_loader = DataLoader(
     drop_last = False
 )
 
-
-# %%
 predictions_list = []
 # 배치 단위로 추론
 prediction_df = pd.read_csv("sample_submission.csv")
@@ -340,8 +325,6 @@ for model in best_models:
     # 채널을 하나 추가하여 list에 append
     predictions_list.append(prediction_array[...,np.newaxis])
 
-
-# %%
 # axis = 2를 기준으로 평균
 predictions_array = np.concatenate(predictions_list, axis = 2)
 predictions_mean = predictions_array.mean(axis = 2)
@@ -351,7 +334,7 @@ predictions_mean = (predictions_mean > 0.5) * 1
 predictions_mean
 
 # %% [markdown]
-# ## 8. 제출파일 생성
+### 8. 제출파일 생성
 
 sample_submission = pd.read_csv("sample_submission.csv")
 sample_submission.iloc[:,1:] = predictions_mean
