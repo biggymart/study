@@ -61,3 +61,7 @@ print(search.best_params_) # from the params that I choose
 print(search.best_estimator_) # from all the params available
 print(search.best_score_)
 
+# Final score:  0.9561403393745422
+# {'optimizer': 'adam', 'node': 512, 'drop': 0.3, 'batch_size': 10}
+# <tensorflow.python.keras.wrappers.scikit_learn.KerasClassifier object at 0x000001E808953FD0>
+# 0.9494505524635315
