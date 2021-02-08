@@ -53,7 +53,7 @@ re = ReduceLROnPlateau(monitor='val_loss', patience=3)
 cp = ModelCheckpoint(filepath='C:/data/modelCheckpoint/k61_{epoch:02d}_{val_loss:.4f}.hdf5',
                      monitor='val_loss', save_best_only=True, mode='auto')
 
-search.fit(x_train, y_train, verbose=1, epochs=100, validation_split=0.2, callbacks=[es, re, cp]) # takes precedence over KerasClassifier
+search.fit(x_train, y_train, verbose=1, epochs=1000, validation_split=0.2, callbacks=[es, re, cp]) # takes precedence over KerasClassifier
 
 score = search.score(x_test, y_test)
 print("Final score: ", score)
@@ -61,3 +61,7 @@ print(search.best_params_) # from the params that I choose
 print(search.best_estimator_) # from all the params available
 print(search.best_score_)
 
+# Final score:  -9.458123207092285
+# {'optimizer': 'adam', 'node': 256, 'drop': 0.1, 'batch_size': 20}
+# <tensorflow.python.keras.wrappers.scikit_learn.KerasRegressor object at 0x0000025F86079670>
+# -19.342860412597656
