@@ -8,7 +8,6 @@ dataset = load_wine()
 x = dataset.data # (178, 13)
 y = dataset.target
 
-
 from sklearn.preprocessing import OneHotEncoder
 enc = OneHotEncoder()
 y = enc.fit_transform(y.reshape(-1,1)).toarray()
@@ -66,3 +65,7 @@ print(search.best_params_) # from the params that I choose
 print(search.best_estimator_) # from all the params available
 print(search.best_score_)
 
+#Final score:  1.0
+# {'optimizer': 'rmsprop', 'node': 512, 'drop': 0.2, 'batch_size': 30}
+# <tensorflow.python.keras.wrappers.scikit_learn.KerasClassifier object at 0x00000269885FAB20>
+# 0.9788177251815796
