@@ -59,6 +59,12 @@ print("Final score: ", acc)
 print(search.best_params_) # from the params that I choose
 print(search.best_estimator_) # from all the params available
 print(search.best_score_)
+print(search.cv_results_)
+
+# save model
+import pickle
+pickle.dump(search, open('../data/h5/k64.pickle.dat', 'wb')) #dump == save, write binary
+print('pickle 저장 완료')
 
 # without wrappers
 # TypeError: If no scoring is specified, the estimator passed should have
