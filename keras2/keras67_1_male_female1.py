@@ -19,14 +19,14 @@ male_all = os.listdir(MALE_DIR) # 리스트 반환
 female_all = os.listdir(FEMALE_DIR)
 
 #2. equalize the length of directories list
-DATASET_LEN = min(len(male_all), len(female_all)) # 841 (895, 841)
+DATASET_LEN = min(len(male_all), len(female_all)) # 841 (male_all = 895, female_all = 841)
 male_resized = random.sample(male_all, DATASET_LEN) # type == list, size == 841
 female_resized = random.sample(female_all, DATASET_LEN)
 
 #3. prepare empty arrays for storing
-DIMENSION = 64
+DIMENSION = 256 ### HYPER-PARAMETER TUNNING 1 ###
 CHANNEL = 3
-X_male = np.empty((DATASET_LEN, DIMENSION, DIMENSION, CHANNEL)) # (841, 64, 64, 3)
+X_male = np.empty((DATASET_LEN, DIMENSION, DIMENSION, CHANNEL))
 X_female = np.empty((DATASET_LEN, DIMENSION, DIMENSION, CHANNEL))
 y_male = np.empty((DATASET_LEN), dtype=int) # 
 y_female = np.empty((DATASET_LEN), dtype=int) # 
@@ -60,6 +60,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, shuffl
 initial_model = VGG16(weights="imagenet", include_top=False, input_shape = (DIMENSION, DIMENSION, 3))
 last = initial_model.output
 
+NODE = 4096 ### HYPER-PARAMETER TUNNING 2 ###
+
 x = Flatten()(last)
 x = Dense(4096, activation='relu')(x)
 x = Dropout(0.4)(x)
@@ -81,8 +83,17 @@ model.fit(X_train, y_train, batch_size=32, epochs=100, validation_split=0.2, cal
 y_pred = model.predict(X_test)
 y_pred = [(y[0]>=0.5).astype(np.uint8) for y in y_pred]
 
+print('DIMENSION, NODE :', DIMENSION, NODE)
 print('Accuracy:', np.mean((y_test==y_pred)))
 
 # Reference
 # https://www.tensorflow.org/tutorials/load_data/images?hl=ko
+
+# DIMENSION, NODE : 64 4096
 # Accuracy: 0.8635014836795252
+
+# DIMENSION, NODE : 128 4096
+# Accuracy: 0.8991097922848664
+
+# DIMENSION, NODE : 256 4096
+# Accuracy: 0.913946587537092
