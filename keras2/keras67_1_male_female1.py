@@ -1,9 +1,6 @@
 # 실습: 남자 여자 구별
 import numpy as np
-import pandas as pd
 import os
-import pathlib
-import tensorflow as tf
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing import image
