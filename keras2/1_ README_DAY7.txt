@@ -3,4 +3,8 @@
 
 
 image generator
+save_to_dir
+증폭 (data augmentation)
 
+flow를 사용해서 66_5 완성
+ImageDataGenerator에서 데이터가 증폭이 되었다는 증거를 알아내기

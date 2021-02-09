@@ -60,3 +60,6 @@ print(xy_train)
 
 print(xy_train[0])
 # 첫번째 batch
+
+### 아직 증폭 안 한 상태임 ###
+# fit_generator는 batch_size가 딱 떨어질 필요 없이도 잘 돌아감

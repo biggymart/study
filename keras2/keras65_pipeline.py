@@ -12,8 +12,7 @@ from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.model_selection import KFold
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, KFold
 
 #1. data and preprocessing
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -40,28 +39,29 @@ def build_model(drop=0.5, optimizer='adam'):
     return model
 
 def create_hyperparameters():
-    batches = [10, 30, 50]
-    optimizers = ['rmsprop', 'adam', 'adadelta']
+    batches = [30, 50]
+    optimizers = ['rmsprop', 'adam']
     dropout = [0.2, 0.3]
-    return {"aaa__batch_size" : batches, 
-            "aaa__optimizer" : optimizers,
-            "aaa__drop" : dropout}
+    return {"clf__batch_size" : batches, 
+            "clf__optimizer" : optimizers,
+            "clf__drop" : dropout}
 hyperparameters = create_hyperparameters()
 
 # allows Grid/RandomizedSearch to understand keras models
 model2 = KerasClassifier(build_fn=build_model, verbose=1) 
 
-scaler = MinMaxScaler()
-pipe = Pipeline([("scaler", scaler), ('aaa', model2)])
+pipe = Pipeline([("scaler", MinMaxScaler()), ('clf', model2)])
 
 kfold = KFold(n_splits=3, shuffle=True, random_state=66)
 search = RandomizedSearchCV(pipe, hyperparameters, cv=kfold)
 
 es = EarlyStopping(monitor='val_loss', patience=5)
 re = ReduceLROnPlateau(monitor='val_loss', patience=3)
-cp = ModelCheckpoint(filepath='C:/data/modelCheckpoint/k61_{epoch:02d}_{val_loss:.4f}.hdf5', monitor='val_loss', save_best_only=True, mode='auto')
+cp = ModelCheckpoint(filepath='C:/data/modelCheckpoint/k65_{epoch:02d}_{val_loss:.4f}.hdf5',
+           monitor='val_loss', save_best_only=True, mode='auto')
 
-search.fit(x_train, y_train, aaa__epochs=100, aaa__validation_split=0.2, aaa__callbacks=[es, re, cp])
+search.fit(x_train, y_train, clf__epochs=30, 
+           clf__validation_split=0.2, clf__callbacks=[es, re, cp])
 
 
 print("best_params : ", search.best_params_)         
@@ -71,22 +71,9 @@ print("best_score : ", search.best_score_)
 acc = search.score(x_test, y_test)
 print("Score : ", acc)
 
-search.best_estimator_.model.save('../data/h5/k65_save.h5')
 
-# y_pred = search.predict(x_test)
-# r2 = r2_score(y_test, y_pred)
-# print("r2 : ", r2)
-
-# print("========model load========")
-# model3 = load_model('../data/h5/k64_save.h5')
-# print("best_score : ", model3.best_score_)           
-
-import pickle   # 실패
-pickle.dump(search, open('../data/h5/k65.pickle.data', 'wb')) # wb : write
-print("== save complete ==")
-
-print("========pickle load========")
-# model3 = pickle.load(open('../data/h5/k64.pickle.data', 'rb'))
-# print("== load complete ==")
-# r2_2 = model3.score(x_test, y_test)
-# print("r2_2 : ", r2_2)
+# best_params :  {'clf__optimizer': 'adam', 'clf__drop': 0.2, 'clf__batch_size': 30}
+# best_estimator :  Pipeline(steps=[('scaler', MinMaxScaler()),
+#                 ('clf', <tensorflow.python.keras.wrappers.scikit_learn.KerasClassifier object at 0x0000021AE8F4CBB0>)])
+# best_score :  0.9816333254178365
+# Score :  0.9840999841690063
