@@ -135,6 +135,3 @@ y_pred = model.predict(X_val)
 y_pred = [(y[0]>=0.5).astype(np.uint8) for y in y_pred]
 
 print('Accuracy without TTA:', np.mean((y_val==y_pred)))
-
-
-
