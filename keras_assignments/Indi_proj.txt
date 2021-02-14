@@ -1,0 +1,55 @@
+주제: 시각장애인을 위한 국내 캔맥주 분류기
+
+비트캠프 인공지능: 이미지 분석을 활용한 영상 속 인물 검출
+https://www.youtube.com/watch?v=mIYpwJGCqU8&t=3s
+
+후보: 하이트 / 카스 / 테라 / 클라우드 / 맥스 / 필라이트 / 필굿
+2개 -> 4개 -> 7개
+
+IN: 국내 캔맥주 이미지 혹은 영상
+(다중분류 CNN 모델)
+OUT: 캔맥주 이름
+
+문제:
+음료 34개 중 '점자' 제품명 있는 건 단 하나뿐
+https://post.naver.com/viewer/postView.nhn?volumeNo=30409748&memberNo=12282441&vType=VERTICAL
+
+'원샷 한솔'님과 함께 캔에 있는 점자를 살펴보았다 / 비디오머그
+https://www.youtube.com/watch?v=0-x438wjF8c
+
+==========
+데이터 수집방식:
+(1) 비디오 이미지 컨버터
+https://www.dvdvideosoft.com/products/dvd/Free-Video-to-JPG-Converter.htm
+
+(2) OpenCV (dlib, SIFT 등)
+OpenCV를 사용하여 손 검출하기 (Hand Detection using OpenCV HSV Color Space )
+https://www.youtube.com/watch?v=KtfhmpNvY7Y
+
+OpenPose를 사용하여 손가락 인식하는 OpenCV 예제
+https://www.youtube.com/watch?v=qD2y32qM5Zs
+
+OpenCV 손가락 점 추출
+https://www.youtube.com/watch?v=ql6EGfpuEr8
+
+사진 속에서 원하는 물체 찾기 (OpenCV, SIFT)
+https://www.youtube.com/watch?v=qp7TUci6gH4
+
+(3) 이미지 크롤링
+셀레니움 웹 크롤링
+
+==========
+모델 구성:
+VGG16 / ResNet 등 전이학습
+(출력 Dense 레이어 파라미터 튜닝)
+
+(+알파)
+tkinter을 이용한 GUI 구성
+
+==========
+타임 테이블
+1일차: 비디오 이미지 컨버터, OpenCV, 크롤링 방식 숙지 및 코딩 (유투브 영상 참고, 소스 따오기)
+2일차: 상동
+3일차: 7개 분류 데이터 수집
+4일차: 모델 구성 및 훈련
+5일차: 유지 보수
