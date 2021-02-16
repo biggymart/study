@@ -2,6 +2,11 @@
 # https://towardsdatascience.com/understanding-and-implementing-lenet-5-cnn-architecture-deep-learning-a2d531ebc342
 # https://hackmd.io/@bouteille/S1WvJyqmI
 # https://ivo-lee.tistory.com/91
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense
+import matplotlib.pyplot as plt
+import os
+import random
 
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input, decode_predictions
