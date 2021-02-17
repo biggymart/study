@@ -19,7 +19,7 @@ import random
 import os
 import matplotlib.pyplot as plt
 
-TRAIN_DIR = './cat-dog/train/'
+TRAIN_DIR = 'C:\data\mnist\dirty_mnist_2nd'
 f_train, f_valid = train_test_split(os.listdir(TRAIN_DIR), test_size=0.7, random_state=42)
 
 PATCH_DIM = 32

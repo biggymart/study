@@ -8,12 +8,78 @@ from tensorflow.keras import Model
 import numpy as np
 import pandas as pd
 import random
+import csv
 import os
 import string
 import matplotlib.pyplot as plt
+from PIL import Image
+
+
+# 이미지 파일 일부를 보도록 하자
+TRAIN_DIR = 'C:/data/mnist/dirty_mnist_2nd/'
+sample = plt.imread(os.path.join(TRAIN_DIR, random.choice(os.listdir(TRAIN_DIR))))
+print ('Visualize a sample of the image')
+print ('Image shape:', sample.shape) # (256, 256)
+# plt.imshow(sample)
+# plt.show()
+
+# 파일 디렉토리 리스트 만들자
+file_lst = os.listdir(TRAIN_DIR)
+print(file_lst[:5])
+# ['00000.png', '00001.png', '00002.png', '00003.png', '00004.png']
+
+# csv 로 만들고 100 이하인 값은 날려버리자
+
+# load original image
+img_50000 = []
+for file in file_lst[:5]:
+# Image -> np.array -> list -> csv 변환
+    img_256 = Image.open(TRAIN_DIR + file)
+    img_32 = img_256.resize((int(img_256.width / 8), int(img_256.height / 8)))
+    # img_np = np.array(Image.open(TRAIN_DIR + file)) # img_np.shape=(256, 256)
+    img_np = np.array(img_32)
+    img_np = img_np.flatten('C') # 256 * 256 = 65536
+    img_lst = img_np.tolist() # list of lists; len(img_lst)=256, len(img_lst[0])=256
+    img_50000.append(img_lst)
+print(img_50000[:5])
+
+for lst in img_50000:
+    with open('C:/data/mnist/mnist_data/train_mine.csv', mode='a', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter=',')
+        writer.writerow(lst)
+print("done")
+
+# # Save Greyscale values
+# value = np.asarray(img_file.getdata(), dtype=np.int)
+# # value = np.asarray(img_file.getdata(), dtype=np.int).reshape((img_file.size[1], img_file.size[0]))
+# # value = value.flatten()
+# print(value)
+# with open("img_pixels.csv", 'a') as f:
+#     writer = csv.writer(f)
+#     writer.writerow(value)
+
+
+
+# def csvWriter(fil_name, nparray):
+#     example = nparray.tolist()
+#     with open(fil_name+'.csv', 'w', newline='') as csvfile:
+#         writer = csv.writer(csvfile, delimiter=',')
+#         writer.writerows(example)
+
+# csvWriter("myfilename", img)
+
+
+
+# df = pd.read_csv('../data/csv/iris_sklearn.csv', index_col=0, header=0)
+
+'''
+
+
+
+
 
 # %%
-TRAIN_DIR = 'C:/data/data_2/dirty_mnist_2nd/'
+TRAIN_DIR = 'C:/data/mnist/dirty_mnist_2nd/'
 
 ###1-0. preprocessing
 f_train, f_valid = train_test_split(os.listdir(TRAIN_DIR), test_size=0.7, random_state=1)
@@ -135,3 +201,4 @@ y_pred = model.predict(X_val)
 y_pred = [(y[0]>=0.5).astype(np.uint8) for y in y_pred]
 
 print('Accuracy without TTA:', np.mean((y_val==y_pred)))
+'''
