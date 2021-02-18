@@ -1,15 +1,5 @@
 주제: 시각장애인을 위한 국내 캔맥주 분류기
 
-비트캠프 인공지능: 이미지 분석을 활용한 영상 속 인물 검출
-https://www.youtube.com/watch?v=mIYpwJGCqU8&t=3s
-
-후보: 하이트 / 카스 / 테라 / 클라우드 / 맥스 / 필라이트 / 필굿
-2개 -> 4개 -> 7개
-
-IN: 국내 캔맥주 이미지 혹은 영상
-(다중분류 CNN 모델)
-OUT: 캔맥주 이름
-
 문제:
 음료 34개 중 '점자' 제품명 있는 건 단 하나뿐
 https://post.naver.com/viewer/postView.nhn?volumeNo=30409748&memberNo=12282441&vType=VERTICAL
@@ -17,6 +7,18 @@ https://post.naver.com/viewer/postView.nhn?volumeNo=30409748&memberNo=12282441&v
 '원샷 한솔'님과 함께 캔에 있는 점자를 살펴보았다 / 비디오머그
 https://www.youtube.com/watch?v=0-x438wjF8c
 
+
+개략적인 모델 설명
+후보: 하이트 / 카스 / 필라이트 / 필굿 / 테라 / 클라우드 / 맥스 / 
+2개 -> 4개 -> 7개
+
+IN: 국내 캔맥주 이미지 혹은 영상
+(다중분류 CNN 모델)
+OUT: 캔맥주 이름
+
+참고영상
+비트캠프 인공지능: 이미지 분석을 활용한 영상 속 인물 검출
+https://www.youtube.com/watch?v=mIYpwJGCqU8&t=3s
 ==========
 데이터 수집방식:
 (1) 비디오 이미지 컨버터
