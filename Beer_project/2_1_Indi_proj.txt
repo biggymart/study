@@ -70,3 +70,20 @@ https://89douner.tistory.com/2?category=805215
 
 keras applications (vgg, resnet, inceptionv3)
 https://keras.io/api/applications/
+
+
+# Record for the sake of making presentation
+1. Collecting raw imgs with Selenium
+Naver, Google:
+- cass: 497, 538
+- hite: 501, 598
+- filite: 502, 331
+- filgood: 106, 574
+
+2. Delete duplicate images using "Image hashing"
+Naver, Google:
+- cass: 72 (425), 21 (517)
+- hite: 50 (451), 39 (559)
+- filite: 99 (403), 35 (296)
+- filgood: 0 (106), 1 (573)
+
