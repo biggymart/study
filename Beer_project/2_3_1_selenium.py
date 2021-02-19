@@ -3,9 +3,6 @@
 # WORD_LST = [
 #     '카스 캔맥주',
 #     '하이트 캔맥주',
-#     '테라 캔맥주',
-#     '클라우드 캔맥주',
-#     '맥스 캔맥주',
 #     '필라이트 캔맥주',
 #     '필굿 캔맥주'
 # ] cass, feel_good, filite, hite
@@ -29,12 +26,19 @@ import time
 
 urllib3.disable_warnings(InsecureRequestWarning)
 
-searchword1 = 'hite'
+
+# searchword1 = '카스'  # 카스, 하이트, 필라이트, 필굿
+# searchword2 = '캔맥주'
+# searchurl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=' + searchword1 + '+' + searchword2
+# dirs = 'C:/data/image/beer_selenium/cass/'
+# maxcount = 1000
+
+searchword1 = 'cass'
 searchword2 = 'beer can'
-# baseUrl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query='
+# searchurl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=' + searchword1 + '+' + searchword2
 searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
-dirs = 'C:/data/image/beer_selenium/hite/' 
-maxcount = 300
+dirs = 'C:/data/image/beer_selenium/cass/' 
+maxcount = 1000
 
 chromedriver = 'C:/Users/ai/Downloads/chromedriver_win32/chromedriver.exe'
 

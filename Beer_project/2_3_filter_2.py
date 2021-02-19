@@ -6,10 +6,10 @@
 # model_name = 'keras_model_beer'
 # model = load_model('../data/h5/{0}.h5'.format(model_name))
 
-from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.applications import mobilenet_v2
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
-model = ResNet50(weights='imagenet')
+model = mobilenet_v2(weights='imagenet')
 
 
 # predict and filter out
