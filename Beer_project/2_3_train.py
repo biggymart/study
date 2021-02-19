@@ -1,3 +1,5 @@
+# 비지도 다중분류 -> OneHotEncoding, softmax
+
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications.vgg16 import VGG16
 from tensorflow.keras import Model

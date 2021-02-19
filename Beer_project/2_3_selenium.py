@@ -1,4 +1,4 @@
-# 비지도 다중분류 -> OneHotEncoding, softmax
+
 
 # WORD_LST = [
 #     '카스 캔맥주',
@@ -8,7 +8,7 @@
 #     '맥스 캔맥주',
 #     '필라이트 캔맥주',
 #     '필굿 캔맥주'
-# ]
+# ] cass, feel_good, filite, hite
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -29,16 +29,12 @@ import time
 
 urllib3.disable_warnings(InsecureRequestWarning)
 
-# searchword1 = 'cat'
-# searchword2 = 'dog'
-# searchword3 = 'cartoon'
-# searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '+' + searchword3 + '&source=lnms&tbm=isch'
-
-searchword1 = 'filite'
+searchword1 = 'hite'
 searchword2 = 'beer can'
+# baseUrl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query='
 searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
-dirs = 'C:/data/image/beer/filite/' 
-maxcount = 1000
+dirs = 'C:/data/image/beer_selenium/hite/' 
+maxcount = 300
 
 chromedriver = 'C:/Users/ai/Downloads/chromedriver_win32/chromedriver.exe'
 
