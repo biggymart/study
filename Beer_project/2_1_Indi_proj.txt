@@ -34,8 +34,11 @@ https://www.youtube.com/watch?v=qD2y32qM5Zs
 OpenCV 손가락 점 추출
 https://www.youtube.com/watch?v=ql6EGfpuEr8
 
-사진 속에서 원하는 물체 찾기 (OpenCV, SIFT)
+사진 속에서 원하는 물체 찾기 (OpenCV, SIFT, SURF)
 https://www.youtube.com/watch?v=qp7TUci6gH4
+https://docs.opencv.org/master/da/df5/tutorial_py_sift_intro.html
+https://m.blog.naver.com/PostView.nhn?blogId=samsjang&logNo=220643446825&proxyReferer=https:%2F%2Fwww.google.com%2F
+https://m.blog.naver.com/samsjang/220651788585
 
 (3) 이미지 크롤링
 셀레니움 웹 크롤링
