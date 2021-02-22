@@ -1,12 +1,3 @@
-
-
-# WORD_LST = [
-#     '카스 캔맥주',
-#     '하이트 캔맥주',
-#     '필라이트 캔맥주',
-#     '필굿 캔맥주'
-# ] cass, feel_good, filite, hite
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
