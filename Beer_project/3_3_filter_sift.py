@@ -1,10 +1,10 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from PIL import Image, ImageOps
 from tensorflow.keras.models import load_model
-import cv2 
-import matplotlib.pyplot as plt
-import os
 from statistics import mean
+import cv2
+import os
 
 
 # SIFT 필터링 (대표 이미지, 로고)
@@ -14,13 +14,11 @@ beer_lst = os.listdir('C:/data/image/beer/') # ['cass', 'filgood', 'filite', 'hi
 # X: 맥주의 이름, y: 해당 맥주의 디렉토리 3가지
 def get_dir(beer):
     # archetypical image of beer can (첫번째 사진)
-    # std_img_dir = 'C:/data/image/beer/{0}/frame0.jpg'.format(beer)
-
-    # logo
-    std_img_dir = 'C:/data/image/beer/{0}_logo.png'.format(beer)
+    std_img_dir = 'C:/data/image/beer/{0}/frame0.jpg'.format(beer)
 
     # data from selenium
-    test_base_dir = 'C:/data/image/beer_selenium/{0}/'.format(beer)
+    test_base_dir = 'C:/data/image/beer_selenium/{0}/'.format(beer) # Naver
+    # test_base_dir = 'C:/data/image/beer_selenium/{0}1/'.format(beer) # Google
     test_img_lst = os.listdir(test_base_dir)
     return std_img_dir, test_base_dir, test_img_lst
 
@@ -64,7 +62,7 @@ def rmv_blw_avg(bucket, beer):
     dir0, dir1, dir2 = get_dir(beer)
     count = 0
 
-    print(int(mean(bucket)), "못 넘으면 죽는다")
+    print(beer, int(mean(bucket)), "못 넘으면 죽는다")
     # 명부 작성이요
     idx = []
     for i, v in enumerate(bucket):
@@ -83,4 +81,3 @@ rmv_blw_avg(bucket_cass, 'cass')
 rmv_blw_avg(bucket_filgood, 'filgood')
 rmv_blw_avg(bucket_filite, 'filite')
 rmv_blw_avg(bucket_hite, 'hite')
-

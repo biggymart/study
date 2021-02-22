@@ -87,3 +87,8 @@ Naver, Google:
 - filite: 99 (403), 35 (296)
 - filgood: 0 (106), 1 (573)
 
+3. SIFT filtering
+- cass: 219 (156)
+- hite: 219 (200)
+- filite: 209 (235)
+- filgood: 49 (135)

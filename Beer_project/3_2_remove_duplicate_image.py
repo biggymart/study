@@ -12,7 +12,7 @@ def file_hash(filepath):
         return hashlib.md5(f.read()).hexdigest()
 
 import os
-dirs = 'C:/data/image/beer_selenium/filgood1/' # cass, filgood, filite, hite
+dirs = 'C:/data/image/beer_selenium/hite/' # cass, filgood, filite, hite
 os.chdir(dirs)
 print(os.getcwd())
 

@@ -27,18 +27,18 @@ import time
 urllib3.disable_warnings(InsecureRequestWarning)
 
 ###1. crawling from Naver and Daum
-# searchword1 = '카스'  # 카스, 하이트, 필라이트, 필굿
-# searchword2 = '캔맥주'
-# dirs = 'C:/data/image/beer_selenium/cass/'
-# searchurl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=' + searchword1 + '+' + searchword2
-# maxcount = 1000
+searchword1 = '하이트'  # 카스, 하이트, 필라이트, 필굿
+searchword2 = '캔'
+dirs = 'C:/data/image/beer_selenium/hite/'
+searchurl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=' + searchword1 + '+' + searchword2
+maxcount = 1000
 
 ###2. crawling from Google
-searchword1 = 'filgood' # cass, hite, filite, filgood
-searchword2 = 'beer can'
-dirs = 'C:/data/image/beer_selenium/{0}1/'.format(searchword1)
-searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
-maxcount = 1000
+# searchword1 = 'hite' # cass, hite, filite, filgood
+# searchword2 = 'beer can'
+# dirs = 'C:/data/image/beer_selenium/{0}1/'.format(searchword1)
+# searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
+# maxcount = 1000
 
 chromedriver = 'C:/Users/ai/Downloads/chromedriver_win32/chromedriver.exe'
 
