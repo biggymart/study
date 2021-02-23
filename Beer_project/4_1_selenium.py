@@ -20,7 +20,7 @@ searchurl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=
 # searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
 maxcount = 1000
 
-browser = webdriver.Chrome('path_to_driver/chromedriver.exe')
+browser = webdriver.Chrome('C:/Users/ai/Downloads/chromedriver_win32/chromedriver.exe')
 browser.get(searchurl)
 time.sleep(1)
 

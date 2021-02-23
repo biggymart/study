@@ -94,6 +94,7 @@ plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세�
 
 plt.subplot(2, 1, 1) # 2행 1열 짜리 그래프를 만들겠다, 그 중 첫번째
 plt.plot(hist.history['loss'], marker='.', c='red', label='loss')
+plt.plot(hist.history['val_loss'], marker='.', c='blue', label='val_loss')
 plt.grid() # 격자
 
 plt.title('Cost Loss')
@@ -103,6 +104,7 @@ plt.legend(loc='upper right')
 
 plt.subplot(2, 1, 2) # 2행 1열 그래프 중 두번째
 plt.plot(hist.history['acc'], marker='.', c='red', label='accuracy')
+plt.plot(hist.history['val_acc'], marker='.', c='blue', label='val_loss')
 plt.grid()
 
 plt.title('Accuracy')
@@ -115,3 +117,7 @@ plt.show()
 # Epoch 46/1000
 # 125/125 [==============================] - 10s 82ms/step - loss: 0.2492 - acc: 0.9090 - val_loss: 0.4665 - val_acc: 0.8105
 # acc : 0.9089999794960022
+
+# Epoch 38/100
+# 125/125 [==============================] - 10s 83ms/step - loss: 0.6262 - acc: 0.7350 - val_loss: 0.8366 - val_acc: 0.6371
+# acc : 0.7350000143051147
