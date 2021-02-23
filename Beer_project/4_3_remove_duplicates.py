@@ -17,8 +17,6 @@ for index, filename in  enumerate(os.listdir('.')):
         else:
             duplicates.append((index,hash_keys[filehash]))
 
-print(len(duplicates))
 # Delete Files After Printing
 for index in duplicates:
     os.remove(file_list[index[0]])
-    print("deleted ", index)
