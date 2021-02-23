@@ -16,11 +16,13 @@ import time
 searchword1 = '하이트'  # 카스, 하이트, 필라이트, 필굿
 searchword2 = '캔맥주'
 dirs = 'C:/data/image/beer_selenium/hite/'
-searchurl = 'https://search.naver.com/search.naver?where=image&sm=tab_jum&query=' + searchword1 + '+' + searchword2
-# searchurl = 'https://www.google.com/search?q=' + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
+searchurl = 'https://search.naver.com/search.naver?\
+            where=image&sm=tab_jum&query=' + searchword1 + '+' + searchword2
+# searchurl = 'https://www.google.com/search?q='\
+#           + searchword1 + '+' + searchword2 + '&source=lnms&tbm=isch'
 maxcount = 1000
 
-browser = webdriver.Chrome('C:/Users/ai/Downloads/chromedriver_win32/chromedriver.exe')
+browser = webdriver.Chrome('path_to/chromedriver.exe')
 browser.get(searchurl)
 time.sleep(1)
 

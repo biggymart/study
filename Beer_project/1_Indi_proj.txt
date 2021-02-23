@@ -76,19 +76,27 @@ https://keras.io/api/applications/
 1. Collecting raw imgs with Selenium
 Naver, Google:
 - cass: 497, 538
-- hite: 501, 598
-- filite: 502, 331
 - filgood: 106, 574
+- filite: 502, 331
+- hite: 501, 598
 
 2. Delete duplicate images using "Image hashing"
 Naver, Google:
 - cass: 72 (425), 21 (517)
-- hite: 50 (451), 39 (559)
-- filite: 99 (403), 35 (296)
 - filgood: 0 (106), 1 (573)
+- filite: 99 (403), 35 (296)
+- hite: 50 (451), 39 (559)
 
 3. SIFT filtering
 - cass: 219 (156)
-- hite: 219 (200)
-- filite: 209 (235)
 - filgood: 49 (135)
+- filite: 209 (235)
+- hite: 219 (200)
+
+4. final
+- cass: 365
+- filgood: 230
+- filite: 415
+- hite: 240
+
+total: 1250
