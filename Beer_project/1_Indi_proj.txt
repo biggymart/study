@@ -98,5 +98,9 @@ Naver, Google:
 - filgood: 230
 - filite: 415
 - hite: 240
-
 total: 1250
+
+5. Model (acc)
+- MobileNetV2: 90, 87, 86, 62
+- DenseNet121: 33, 33, 33
+- NASNetMobile: 90, 94, 78
