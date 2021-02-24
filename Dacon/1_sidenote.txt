@@ -1,4 +1,7 @@
 =======================================
+파이토치 튜토리얼
+https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html
+
 정리 깔끔하고 도식화 많이 되어 있는 블로그
 https://ebbnflow.tistory.com/133
 
