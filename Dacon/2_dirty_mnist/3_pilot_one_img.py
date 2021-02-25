@@ -1,7 +1,39 @@
-# https://taeguu.tistory.com/24
-# https://towardsdatascience.com/understanding-and-implementing-lenet-5-cnn-architecture-deep-learning-a2d531ebc342
-# https://hackmd.io/@bouteille/S1WvJyqmI
-# https://ivo-lee.tistory.com/91
+### Description ###
+# 이미지 한 장에 대해서 전처리하도록 해보죠. 잘 되면 더 확장하도록 해요.
+# Date: 2021-02-25
+
+
+### 0. 라이브러리는 여기에 정리하도록 해요
+import os
+import cv2
+
+
+### 1. 가장 먼저, 디렉토리를 정리해봅시다!
+#1-1. 베이스 디렉토리
+train_base_dir = 'C:/data/mnist/dirty_mnist_2nd/'
+test_base_dir = 'C:/data/mnist/test_dirty_mnist_2nd/'
+
+#1-2. 파일명 리스트로 정리 (나중에 반복문을 위해)
+train_file_lst = os.listdir(train_base_dir)
+test_file_lst = os.listdir(test_base_dir)
+
+
+### 2. 정리한 디렉토리를 바탕으로 이미지를 한 장만 긁어와 볼까요?
+img_train = cv2.imread(train_base_dir + train_file_lst[0], flags=cv2.IMREAD_UNCHANGED)
+img_test = cv2.imread(test_base_dir + test_file_lst[0], flags=cv2.IMREAD_UNCHANGED)
+
+# 가져온 이미지를 확인해봐요
+cv2.imshow('image', img_train)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# 
+
+
+
+
+
+'''
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPool2D, Flatten, Dense
 import matplotlib.pyplot as plt
@@ -84,3 +116,8 @@ model.add(Flatten())
 model.add(Dense(256, activation='relu'))
 model.add(Dense(84, activation='relu'))
 model.add(Dense(10, activation='softmax'))
+'''
+
+### 참고문헌
+# 딥러닝과 OpenCV를 활용하여 사진 속 글자 검출하기
+# https://d2.naver.com/helloworld/8344782

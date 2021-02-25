@@ -52,10 +52,8 @@ class MnistDataset(Dataset):
 
         return image, target
 
-# %% [markdown]
-# ## 2. 이미지 어그멘테이션
-
 # %%
+# ## 2. 이미지 어그멘테이션
 transforms_train = transforms.Compose([
     transforms.RandomHorizontalFlip(p=0.5),
     transforms.RandomVerticalFlip(p=0.5),
@@ -82,10 +80,9 @@ testset = MnistDataset('data/test', 'data/sample_submission.csv', transforms_tes
 train_loader = DataLoader(trainset, batch_size=256, num_workers=8)
 test_loader = DataLoader(testset, batch_size=32, num_workers=4)
 
-# %% [markdown]
+# %%
 # ## 3. ResNet50 모형
 
-# %%
 class MnistModel(nn.Module):
     def __init__(self) -> None:
         super().__init__()
@@ -102,10 +99,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = MnistModel().to(device)
 print(summary(model, input_size=(1, 3, 256, 256), verbose=0))
 
-# %% [markdown]
-# ## 4. 학습하기
-
 # %%
+# ## 4. 학습하기
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
 criterion = nn.MultiLabelSoftMarginLoss()
 
@@ -130,10 +125,8 @@ for epoch in range(num_epochs):
             acc = (outputs == targets).float().mean()
             print(f'{epoch}: {loss.item():.5f}, {acc.item():.5f}')
 
-# %% [markdown]
-# ## 5. 추론하기
-
 # %%
+# ## 5. 추론하기
 submit = pd.read_csv('data/sample_submission.csv')
 
 model.eval()
