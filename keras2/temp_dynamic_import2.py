@@ -9,7 +9,9 @@ from os import getcwd
 print(ap.__file__)
 print(getcwd())
 # C:/Study
-importlib.import_module(MODULE_NAME[0], package='../Users/ai/Anaconda3/lib/site-packages/tensorflow/keras/applications/')
+aaa = importlib.import_module('C:/Study/Users/ai/Anaconda3/lib/site-packages/tensorflow/keras/applications/' + MODULE_NAME[0])
+print(aaa)
+# importlib.import_module(MODULE_NAME[0], package='../Users/ai/Anaconda3/lib/site-packages/tensorflow/keras/applications/')
 
 import sys
 from importlib.machinery import PathFinder
