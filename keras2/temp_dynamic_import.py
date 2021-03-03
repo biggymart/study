@@ -59,14 +59,6 @@ def load_module_func(module_name, class_name):
 #   return 최종리턴값
 
 
-# How to iteratively import python modules
-# https://www.tutorialspoint.com/Can-we-iteratively-import-python-modules-inside-a-for-loop
-# import importlib
-# modnames = ['densenet', 'efficientnet', 'imagenet_utils', 'inception_resnet_v2', 'inception_v3', 'mobilenet', 'mobilenet_v2','nasnet', 'resnet', 'resnet50', 'resnet_v2', 'vgg16', 'vgg19', 'xception']
-# for lib in modnames:
-#     globals()[lib] = importlib.import_module(lib, package='tensorflow.keras.applications')
-
-
 # 비슷하게 설명해주는 블로그
 ### https://codechacha.com/ko/dynamic-import-and-call/
 

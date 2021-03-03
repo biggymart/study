@@ -1,5 +1,4 @@
-  
-# 실습: 남자 여자 구별
+  # 실습: 남자 여자 구별
 import numpy as np
 import os
 import matplotlib.pyplot as plt

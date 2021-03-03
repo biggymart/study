@@ -1,35 +1,34 @@
 import importlib
 from tensorflow.keras import applications as ap
 
-tmp = dir(ap)[-14:]
-tmp.pop(2)
-MODULE_NAME = tmp # 모듈 13개
-print(tmp)
-from os import getcwd
-print(ap.__file__)
-print(getcwd())
-# C:/Study
-aaa = importlib.import_module('C:/Study/Users/ai/Anaconda3/lib/site-packages/tensorflow/keras/applications/' + MODULE_NAME[0])
-print(aaa)
-# importlib.import_module(MODULE_NAME[0], package='../Users/ai/Anaconda3/lib/site-packages/tensorflow/keras/applications/')
+# DIR
+mother_mod = 'tensorflow.keras.applications.'
 
-import sys
-from importlib.machinery import PathFinder
+tmp = dir(ap)[:26]
+MODULE_NAME = tmp
+# print(MODULE_NAME) 
+# ['DenseNet121', 'DenseNet169', 'DenseNet201', 'EfficientNetB0', 'EfficientNetB1', 'EfficientNetB2', 'EfficientNetB3', 'EfficientNetB4', 'EfficientNetB5', 'EfficientNetB6', 'EfficientNetB7', 'InceptionResNetV2', 'InceptionV3', 'MobileNet', 'MobileNetV2', 'NASNetLarge', 'NASNetMobile', 'ResNet101', 'ResNet101V2', 'ResNet152', 'ResNet152V2', 'ResNet50', 'ResNet50V2', 'VGG16', 'VGG19', 'Xception']
+# '''
 
-def find_and_load_module(complete_name):
-    """
-        Given a name and a path it will return a module instance
-        if found.
-        When the module could not be found it will raise ImportError
-    """
-    if complete_name in sys.modules:
-        return sys.modules[complete_name]
-    module = None
-    module_spec = PathFinder.find_spec(complete_name)
-    if module_spec:
-        loader = module_spec.loader
-        module = loader.load_module()
-        sys.modules[complete_name] = module
-    return module
+count = 0
+for i in MODULE_NAME:
+    model = importlib.import_module(mother_mod + i())
+    model.trainable = True
+    count += 1
 
-    # https://stackoverflow.com/questions/25808364/can-not-call-dynamically-imported-python-modules
+    print(count, i)
+    print(len(model.weights))
+    print(len(model.trainable_weights))
+
+
+
+# THE stackoverflow that solved my problem
+# https://stackoverflow.com/questions/24940545/import-modules-from-a-list-in-python/54284181
+# looping through list of functions in a function in python dynamically
+# https://stackoverflow.com/questions/39422641/looping-through-list-of-functions-in-a-function-in-python-dynamically
+# '''
+
+from inspect import getmembers, isfunction
+
+from somemodule import foo
+print(getmembers(foo, isfunction))
