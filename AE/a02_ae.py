@@ -13,7 +13,7 @@ def autoencoder(hidden_layer_size):
     model = Sequential()
     model.add(Dense(units=hidden_layer_size, input_shape=(784,),
                     activation='relu'))
-    model.add(Dense(units=784, activation='sigmoid'))
+    model.add(Dense(units=784, activation='sigmoid')) # input_shape 이랑 마지막 노드 개수 일치시키기
     return model
 
 model = autoencoder(hidden_layer_size=154)
