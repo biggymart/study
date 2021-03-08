@@ -48,7 +48,7 @@ def solution_model():
     training_datagen = ImageDataGenerator()
     # YOUR CODE HERE
 
-    train_generator = # YOUR CODE HERE
+    # train_generator = # YOUR CODE HERE
 
 
     model = tf.keras.models.Sequential([
