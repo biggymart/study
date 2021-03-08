@@ -14,7 +14,7 @@
 import numpy as np
 from xgboost import XGBClassifier, XGBRegressor
 from sklearn.datasets import load_boston
-from sklearn.model_selection import train_test_split, RandomizedSearchCV, KFold
+from sklearn.model_selection import train_test_split, RandomizedSearchCV, KFold, cross_val_score
 from sklearn.feature_selection import SelectFromModel
 from sklearn.metrics import r2_score, accuracy_score
 
@@ -25,19 +25,20 @@ x_train, x_test, y_train, y_test = train_test_split(
     x, y, train_size=0.8, shuffle=True, random_state=66
 )
 
-model = XGBRegressor(n_jobs=8)
-
 parameters = [
-    {"n_estimators" : [100, 200, 300], "learning_rate" : [0.001, 0.01, 0.1, 0.3], "max_depth" : [4, 5, 6]},
-    {"n_estimators" : [90, 100, 110], "learning_rate" : [0.001, 0.01, 0.1], "max_depth" : [4, 5, 6], "colsample_bytree" : [0.6, 0.9, 1]},
-    {"n_estimators" : [90, 110], "learning_rate" : [0.001, 0.1, 0.5], "max_depth": [4,5,6], "colsample_bytree" : [0.6, 0.9, 1], "colsample_bylevel" : [0.6, 0.7, 0.9]}
+    {"n_estimators" : [100, 200, 300], "learning_rate" : [0.001, 0.01, 0.1, 0.3],
+     "max_depth" : [4, 5, 6]},
+    {"n_estimators" : [90, 100, 110], "learning_rate" : [0.001, 0.01, 0.1],
+     "max_depth" : [4, 5, 6], "colsample_bytree" : [0.6, 0.9, 1]},
+    {"n_estimators" : [90, 110], "learning_rate" : [0.001, 0.1, 0.5], "max_depth": [4,5,6],
+     "colsample_bytree" : [0.6, 0.9, 1], "colsample_bylevel" : [0.6, 0.7, 0.9]}
 ]
 
 kfold = KFold(n_splits=5, shuffle=True, random_state=66)
-grid = RandomizedSearchCV(model, parameters, cv=kfold)
+grid = RandomizedSearchCV(XGBRegressor(n_jobs=8, eval_metric='mlogloss'), parameters, cv=kfold)
 grid.fit(x_train, y_train)
 
-score = grid.score(x_test, y_test)
+score = cross_val_score(grid, x_test, y_test, cv=kfold)
 print("R2 :", score)
 print("best_params_ :", grid.best_params_)
 
