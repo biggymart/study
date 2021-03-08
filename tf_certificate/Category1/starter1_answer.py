@@ -23,18 +23,33 @@
 # an input shape of [1]
 
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 
 def solution_model():
     xs = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
     ys = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype=float)
 
     # YOUR CODE HERE
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import Dense
+    
     model = Sequential()
-    model.add(Dense(32, activation='linear', input_shape=(1,)))
-    model.add(Dense(1))
+    model.add(Dense(32, input_shape =(1,), activation='linear'))
+    model.add(Dense(64, activation='linear'))
+    model.add(Dense(32, activation='linear'))
+    model.add(Dense(1, activation='linear'))
 
+    model.compile(loss='mse', optimizer='adam', metrics=['mae'])
+    model.fit(xs, ys, epochs=100, batch_size=20, validation_split=0.2)
+
+
+    loss = model.evaluate(xs, ys)
+    pred = model.predict([10.0])
+
+    print('loss : ', loss)
+    print('xs[10.0] : ', pred)
+    # loss :  [9.677754860604182e-05, 0.008350747637450695]
+    # xs[10.0] :  [[10.9585905]]
+    
     return model
 
 

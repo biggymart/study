@@ -22,30 +22,44 @@
 # (28,28) as the input shape only. If you amend this, the tests will fail.
 #
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv1D, Dense, MaxPooling1D
-from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.utils import to_categorical
-
 
 def solution_model():
     fashion_mnist = tf.keras.datasets.fashion_mnist
 
     # YOUR CODE HERE
-    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
-    scaler = MinMaxScaler()
-    scaler.fit_transform(x_train)
-    scaler.transform(x_test)
+    from tensorflow.keras.models import Sequential
+    from tensorflow.keras.layers import Conv1D, Dense, Flatten, MaxPool1D
+    from tensorflow.keras.utils import to_categorical
+    from tensorflow.keras.callbacks import EarlyStopping
 
-    y_train = to_categorical(y_train)
-    y_test = to_categorical(y_test)
+
+    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+
+    print(x_train.shape, y_train.shape)
+    print(x_test.shape, y_test.shape)
+
+    x_train = x_train/255.
+    x_test = x_test/255.
+
+    y_train = to_categorical(y_train)   #(60000, 28, 28) (60000,)
+    y_test = to_categorical(y_test)     #(10000, 28, 28) (10000,)
 
     model = Sequential()
-    model.add(Conv1D(64, 3, padding='same', activation='relu'))
-    model.add(MaxPooling1D())
-    model.add(Dense(128, activation='relu'))
+    model.add(Conv1D(filters=32, kernel_size=2, input_shape=(28,28), activation='relu', padding='same'))
+    model.add(MaxPool1D(2))
+    model.add(Flatten())
     model.add(Dense(32, activation='relu'))
+    model.add(Dense(64, activation='relu'))
     model.add(Dense(10, activation='softmax'))
+
+    er = EarlyStopping(monitor='val_loss', patience=15, mode='auto')
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
+    model.fit(x_train, y_train, epochs=100, validation_split=0.2, batch_size=32, callbacks=[er])
+
+    loss = model.evaluate(x_test, y_test) 
+    print('loss, acc : ', loss)
+    # loss, acc :  [0.41283154487609863, 0.8877000212669373]
+
     return model
 
 
