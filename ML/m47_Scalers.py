@@ -90,3 +90,19 @@ print('R2 :', r2)
 
 # PowerTransformer(method='box-cox')
 # ValueError: The Box-Cox transformation can only be applied to strictly positive data
+
+
+# PowerTransformer
+# 목표: 어떤 분포로부터 가우시안 분포에 근사하려고 함 (분산의 안정화 및 비대칭도의 최소화)
+# 특징: 비선형, 각 값의 순서는 보존됨, parametric
+
+# cf> Nonparametric
+# Non-parametric models differ from parametric models in that the model structure is not specified a priori but is instead determined from data.
+# Don't assume anything about the distribution.
+# e.g> histogram, distribution free, median
+
+# 가우시안 분포 == 종모양의 분포
+
+# MaxAbsScaler
+# 절댓값을 기준으로 최대인 값이 1.0이 되도록 함
+# 데이터의 중앙값 변화 없음, 희소성 변화 없음
