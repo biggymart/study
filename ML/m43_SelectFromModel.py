@@ -38,7 +38,10 @@ for thresh in thresholds:
     print("Thresh=%.3f, n=%d, R2: %.2f%%" %(thresh, select_x_train.shape[1],
             score*100))
 
-
+print(model.coef_)
+print(model.intercept_)
+# AttributeError: Coefficients are not defined for Booster type None
+# 트리형태로 짤라나가는 것이라서 기울기 없음
 
 # R2 : 0.9221188601856797
 # [0.00134153 0.00363372 0.01203115 0.01220458 0.01447935 0.01479119
