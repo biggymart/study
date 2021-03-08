@@ -1,9 +1,14 @@
+# 공식문서
+# https://scikit-learn.org/stable/modules/feature_selection.html#select-from-model
+
 from xgboost import XGBClassifier, XGBRegressor
 from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn.feature_selection import SelectFromModel
 from sklearn.metrics import r2_score, accuracy_score
+
+SelectFromModel()
 
 # feature importance 친구
 x, y = load_boston(return_X_y=True)
@@ -22,7 +27,9 @@ thresholds = np.sort(model.feature_importances_)
 print(thresholds) # np.sum 총합 1
 
 for thresh in thresholds:
-    selection = SelectFromModel(model, threshold=thresh, prefit=True)
+    selection = SelectFromModel(model, threshold=thresh, prefit=True,)
+    # prefit=True이므로 굳이 다시 모델을 fit해줄 필요 없이 바로 transform 가능
+    # 다만 prefit=True이면 cross_val_score이나 GridSearchCV 같은 것 사용 불가능
 
     select_x_train = selection.transform(x_train)
     print(select_x_train.shape)
