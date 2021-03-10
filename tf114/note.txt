@@ -1,0 +1,5 @@
+시간 많이 없으면 
+tf09_multiple_variables_3_loadtxt.py
+tf10_sigmoid.py
+
+볼 것; 전반적인 구조 잘 잡혀있음
