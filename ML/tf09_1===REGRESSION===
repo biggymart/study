@@ -1,0 +1,25 @@
+Step by step 학습기계 만드는 법
+
+1. 자료 구성
+학습할 데이터를 불러오고 데이터의 정보를 탐색
+- shape
+- slice into x and y (in case of supervised learning)
+- regression or classification
+
+2. 학습기계 설계
+- 데이터의 shape에 맞는 input을 받을 placeholder
+- 기계 내부적으로 작동하면서 변동할 Variable
+- *** 학습 매커니즘 *** (커리큘럼, 학습지표 whatever you call it)
+    (1) hypothesis (x*w + b(단/다변량 선형; 행렬 연산); 활성화 함수(relu, sigmoid 등))
+    (2) cost (머신의 예측값과 실제값의 차이를 어떻게 계산할 것인가; e.g> mse, binary_crossentropy)
+    (3) train (with optimizer; e.g> GradientDescentOptimizer, AdamOptimizer)
+
+3. 학습시켜라
+"Open a session and make the fucking machine learn" (by feed_dict)
+결정해야 할 것들:
+- epoch
+- verbose
+
+4. 평가해라
+- predict
+- r2score, accuracy
