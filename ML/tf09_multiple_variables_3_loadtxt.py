@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 tf.set_random_seed(66)
 
+# EDA, data
 dataset = np.loadtxt('../data/csv/data-01-test-score.csv', delimiter=',')
 x_data = dataset[:, :-1]
 # print(x_data.shape) # (25,3)
@@ -19,6 +20,7 @@ y_test = [[152],
           [196],
           [142]]
 
+# build machine
 x = tf.placeholder(tf.float32, shape=[None, 3])
 y = tf.placeholder(tf.float32, shape=[None, 1])
 

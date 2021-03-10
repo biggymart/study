@@ -1,3 +1,4 @@
+# shape의 중요성
 import tensorflow as tf
 tf.set_random_seed(66)
 

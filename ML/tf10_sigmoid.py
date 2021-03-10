@@ -6,13 +6,14 @@ x_data = [[1,2], [2,3], [3,1],
 y_data = [[0], [0], [0],
           [1], [1], [1]]
 
-x = tf.placeholder(tf.float32, shape=[None, 2])
+x = tf.placeholder(tf.float32, shape=[None, 2]) # 여기의 2와
 y = tf.placeholder(tf.float32, shape=[None, 1])
 
-w = tf.Variable(tf.random_normal([2,1]), name='weight')
+w = tf.Variable(tf.random_normal([2,1]), name='weight') # 여기의 2가 일치해야
 b = tf.Variable(tf.random_normal([1]), name='bias')
 
 hypothesis = tf.sigmoid(tf.matmul(x, w) + b) # activation='sigmoid'
+
 cost = -tf.reduce_mean(y*tf.log(hypothesis)+(1-y)*tf.log(1-hypothesis)) # binary_crossentropy
 train = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(cost)
 
