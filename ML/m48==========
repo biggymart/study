@@ -1,0 +1,48 @@
+가상환경 설정
+cmd
+conda create -n tf114 python=3.6.5
+(new tf114라는 가상환경 만들기)
+
+python
+Python 3.8.5 (default, Sep  3 2020, 21:29:08) [MSC v.1916 64 bit (AMD64)] :: Anaconda, Inc. on win32
+(내 환경)
+
+activate base
+(base) C:\Users\snu20>
+
+activate tf114
+
+conda deactivate
+
+conda env list
+# conda environments:
+#
+base                  *  C:\Users\snu20\anaconda3
+tf114                    C:\Users\snu20\anaconda3\envs\tf114
+
+conda search python
+
+pip list
+Package      Version
+------------ -------------------
+certifi      2020.12.5
+pip          21.0.1
+setuptools   52.0.0.post20210125
+wheel        0.36.2
+wincertstore 0.2
+
+conda remove --name tf114 --all
+(가상환경 삭제해줌)
+
+pip install tensorflow==1.14
+(cpu 버전임)
+Successfully built termcolor wrapt
+
+pip uninstall numpy
+
+conda search numpy
+(설치할 수 있는 버전 나옴)
+
+pip install numpy==1.16
+
+비주얼스튜디오코드 좌측 하단
