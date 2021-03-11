@@ -1,0 +1,20 @@
+# 초기값을 설정하는 것의 문제
+# 처음부터 정답과 비슷한 답을 내는 초기값을 설정하면 당연히 학습이 더 빠름
+# 예전에는 초기값을 랜덤하게 설정했지만
+# 이제는 Xavier 혹은 He initialization을 사용합니다
+
+# 1. Gaussian으로 초기화하고
+# 2. 인풋개수의 제곱근으로 나누면 Xavier
+# 3. 인풋개수의 절반의 제곱근으로 나누면 He
+
+#Xavier
+np.random.randn(n_input, n_output) / sqrt(n_input)
+#He
+np.random.randn(n_input, n_output) / sqrt(n_input/2)
+
+
+
+# 가중치 초기화
+# 커널 이니셜라이저
+# He
+# Xavier
