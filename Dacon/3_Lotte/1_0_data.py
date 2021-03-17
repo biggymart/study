@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 from keras.callbacks import ReduceLROnPlateau
 #########데이터 로드
 
-caltech_dir =  '../../data/image/train/'
+caltech_dir =  'C:/Users/ai/Downloads/LPD_competition/train'
 categories = []
 for i in range(0,1000) :
     i = "%d"%i
@@ -55,11 +55,12 @@ for idx, cat in enumerate(categories):
 X = np.array(X)
 y = np.array(y)
 
-np.save("../../data/npy/P_project_x4.npy", arr=X)
-np.save("../../data/npy/P_project_y4.npy", arr=y)
+np.save("C:/data/npy/P_project_x4.npy", arr=X)
+np.save("C:/data/npy/P_project_y4.npy", arr=y)
+np.save("C:/data/npy/P_project_test.npy", arr=)
 # x_pred = np.load("../data/npy/P_project_test.npy",allow_pickle=True)
-x = np.load("../../data/npy/P_project_x4.npy",allow_pickle=True)
-y = np.load("../../data/npy/P_project_y4.npy",allow_pickle=True)
+x = np.load("C:/data/npy/P_project_x4.npy",allow_pickle=True)
+y = np.load("C:/data/npy/P_project_y4.npy",allow_pickle=True)
 
 print(x.shape)
 print(y.shape)
