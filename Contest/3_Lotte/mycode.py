@@ -23,7 +23,7 @@ NODE = 1024
 
 TRAIN_DIR = 'C:/data/LPD_competition/train'
 TEST_DIR = 'C:/data/LPD_competition/test'
-model_path = '../data/modelCheckpoint/lotte_0316_1_{epoch:02d}-{val_loss:.4f}.hdf5'
+model_path = 'C:/data/modelCheckpoint/lotte_0318_1_{epoch:02d}-{val_loss:.4f}.hdf5'
 
 TRAINING_SIZE = 39000
 VALIDATION_SIZE = 9000
@@ -72,11 +72,11 @@ test_xy = test_gen.flow_from_directory(
     shuffle = False
 ) # Found 72000 images belonging to 1 classes.
 
-np.save('C:/data/LPD_competition/npy/LG_train_x.npy', arr=train_xy[0][0])
-np.save('C:/data/LPD_competition/npy/LG_train_y.npy', arr=train_xy[0][1])
-np.save('C:/data/LPD_competition/npy/LG_val_x.npy', arr=val_xy[0][0])
-np.save('C:/data/LPD_competition/npy/LG_val_y.npy', arr=val_xy[0][1])
-np.save('C:/data/LPD_competition/npy/LG_test_x.npy', arr=test_xy)
+# np.save('C:/data/LPD_competition/npy/LG_train_x.npy', arr=train_xy[0][0])
+# np.save('C:/data/LPD_competition/npy/LG_train_y.npy', arr=train_xy[0][1])
+# np.save('C:/data/LPD_competition/npy/LG_val_x.npy', arr=val_xy[0][0])
+# np.save('C:/data/LPD_competition/npy/LG_val_y.npy', arr=val_xy[0][1])
+# np.save('C:/data/LPD_competition/npy/LG_test_x.npy', arr=test_xy)
 
 # x_train = np.load('C:/data/LPD_competition/npy/LG_train_x.npy')
 
