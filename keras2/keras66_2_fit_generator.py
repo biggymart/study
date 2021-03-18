@@ -96,6 +96,7 @@ val_loss = hist.history['val_loss']
 print("acc :", acc[-1])
 print("val_acc :", val_acc[:-1])
 
+'''
 #5. Visualization
 import matplotlib.pyplot as plt
 plt.figure(figsize=(10, 6)) # 도화지 면적을 잡아줌, 가로가 10, 세로가 6
@@ -121,6 +122,5 @@ plt.xlabel('epoch')
 plt.legend(loc='upper right')
 
 plt.show()
-
-
+'''
 
