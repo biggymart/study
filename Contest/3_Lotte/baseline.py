@@ -17,7 +17,7 @@ from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_i
 
 
 ### HYPER-PARAMETER TUNNING ###
-DIMENSION = 256
+DIMENSION = 128
 BATCH = 128
 NODE = 1024
 
@@ -27,11 +27,13 @@ model_path = 'C:/data/modelCheckpoint/lotte_0318_1_{epoch:02d}-{val_loss:.4f}.hd
 
 TRAINING_SIZE = 39000
 VALIDATION_SIZE = 9000
+TEST_SIZE = 72000
 ##############################
 
 ### 1. data
 # generator declaration
 train_gen = ImageDataGenerator(
+    featurewise_center=True,
     rescale=1./255,
     horizontal_flip=True,
     width_shift_range=0.1,
@@ -64,19 +66,29 @@ val_xy = train_gen.flow_from_directory(
     subset="validation"
 ) # Found 9000 images belonging to 1000 classes.
 
-test_xy = test_gen.flow_from_directory(
-    TEST_DIR,
-    target_size=(DIMENSION, DIMENSION),
-    batch_size=BATCH,
-    class_mode=None,
-    shuffle = False
-) # Found 72000 images belonging to 1 classes.
+# 수동으로 numpy array인 test_x를 구성하기
+# prepare empty arrays for storing
+test_files = os.listdir(TEST_DIR)
+test_x = np.empty((TEST_SIZE, DIMENSION, DIMENSION, 3))
+#==== until here, only dir ====#
 
-# np.save('C:/data/LPD_competition/npy/LG_train_x.npy', arr=train_xy[0][0])
-# np.save('C:/data/LPD_competition/npy/LG_train_y.npy', arr=train_xy[0][1])
-# np.save('C:/data/LPD_competition/npy/LG_val_x.npy', arr=val_xy[0][0])
-# np.save('C:/data/LPD_competition/npy/LG_val_y.npy', arr=val_xy[0][1])
-# np.save('C:/data/LPD_competition/npy/LG_test_x.npy', arr=test_xy)
+# access to image files and make it into a numpy array (X, y)
+for i, f in enumerate(test_files):
+    img = image.load_img(os.path.join(TEST_DIR, f), target_size=(DIMENSION, DIMENSION)) # access to folder and load as image
+    x = image.img_to_array(img) # now dtype is array
+    x = np.expand_dims(x, axis=0) # MobileNet 전처리 위해서 4D tensor로 일단 만들어준다
+    x = preprocess_input(x)
+    x = np.squeeze(x) # 전처리했으니 다시 3D tensor로 만들어준다
+    test_x[i,:,:,:] = x
+
+print(test_x)
+print(test_x.shape)
+
+np.save('C:/data/LPD_competition/npy/LG_train_x.npy', arr=train_xy[0][0])
+np.save('C:/data/LPD_competition/npy/LG_train_y.npy', arr=train_xy[0][1])
+np.save('C:/data/LPD_competition/npy/LG_val_x.npy', arr=val_xy[0][0])
+np.save('C:/data/LPD_competition/npy/LG_val_y.npy', arr=val_xy[0][1])
+np.save('C:/data/LPD_competition/npy/LG_test_x.npy', arr=test_x)
 
 # x_train = np.load('C:/data/LPD_competition/npy/LG_train_x.npy')
 
@@ -106,7 +118,7 @@ re = ReduceLROnPlateau(monitor='val_loss', patience=3)
 cp = ModelCheckpoint(model_path, save_best_only= True)
 hist = model.fit_generator(train_xy,
         steps_per_epoch=compute_steps_per_epoch(TRAINING_SIZE),
-        epochs= 100, callbacks=[es, re, cp],
+        epochs= 10, callbacks=[es, re, cp],
         validation_data=val_xy,
         validation_steps=compute_steps_per_epoch(VALIDATION_SIZE)
 )
@@ -114,9 +126,8 @@ hist = model.fit_generator(train_xy,
 model = load_model(model_path)
 
 
-pred = model.predict(test_xy)
+pred = model.predict(test_x)
 pred = np.argmax(pred, 1)
 sub = pd.read_csv('C:/data/LPD_competition/sample.csv', header = 0)
 sub.loc[:,'prediction'] = pred
 sub.to_csv('C:/data/LPD_competition/csv/lotte01.csv', index = False)
-

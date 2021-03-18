@@ -26,7 +26,7 @@ FEMALE_DIR = 'C:/data/image/gender/female'
 male_all = os.listdir(MALE_DIR) # returns a list of filenames 
 female_all = os.listdir(FEMALE_DIR)
 
-#2. equalize the length of directories list
+#2. equalize the length of directories list + shuffle
 # (나중에 해당 폴더에 사진 크롤링하면 데이터 보강 가능)
 DATASET_LEN = min(len(male_all), len(female_all)) # 841 (male_all = 895 files, female_all = 841 files)
 male_resized = random.sample(male_all, DATASET_LEN) # type == list, size == 841
