@@ -73,63 +73,20 @@ test_x = np.empty((TEST_SIZE, DIMENSION, DIMENSION, 3))
 # access to image files and make it into a numpy array (X, y)
 for i, f in enumerate(test_files):
     # ver1
-    img = image.load_img(os.path.join(TEST_DIR, f), target_size=(DIMENSION, DIMENSION)) # access to folder and load as image
-    x = np.expand_dims(img, axis=0) # flow 위해서 4D tensor로 일단 만들어준다
-    test_x = test_gen.flow(x)
+    # img = image.load_img(os.path.join(TEST_DIR, f), target_size=(DIMENSION, DIMENSION)) # access to folder and load as image
+    # x = np.expand_dims(img, axis=0) # flow 위해서 4D tensor로 일단 만들어준다
+    # test_x = test_gen.flow(x)
 
     # ver2
-    # img = image.load_img(os.path.join(TEST_DIR, f), target_size=(DIMENSION, DIMENSION)) # access to folder and load as image
-    # x = image.img_to_array(img) # now dtype is array
-    # x = np.expand_dims(x, axis=0) # MobileNet 전처리 위해서 4D tensor로 일단 만들어준다
-    # x = preprocess_input(x)
-    # x = np.squeeze(x) # 전처리했으니 다시 3D tensor로 만들어준다
-    # test_x[i,:,:,:] = x
+    img = image.load_img(os.path.join(TEST_DIR, f), target_size=(DIMENSION, DIMENSION)) # access to folder and load as image
+    x = image.img_to_array(img) # now dtype is array
+    x = np.expand_dims(x, axis=0) # MobileNet 전처리 위해서 4D tensor로 일단 만들어준다
+    x = preprocess_input(x)
+    x = np.squeeze(x) # 전처리했으니 다시 3D tensor로 만들어준다
+    test_x[i,:,:,:] = x
 
 np.save('C:/data/LPD_competition/npy/L_train_x.npy', arr=train_xy[0][0])
 np.save('C:/data/LPD_competition/npy/L_train_y.npy', arr=train_xy[0][1])
 np.save('C:/data/LPD_competition/npy/L_val_x.npy', arr=val_xy[0][0])
 np.save('C:/data/LPD_competition/npy/L_val_y.npy', arr=val_xy[0][1])
 np.save('C:/data/LPD_competition/npy/L_test_x.npy', arr=test_x)
-
-# train_xy = np.load('C:/data/LPD_competition/npy/L_train_x.npy')
-# val_xy = np.load('C:/data/LPD_competition/npy/L_val_xy.npy')
-# test_x = np.load('C:/data/LPD_competition/npy/L_test_x.npy')
-
-# ### 2. modeling
-# initial_model = MobileNetV2(
-#      include_top=False,
-#      input_shape=(DIMENSION, DIMENSION, 3)
-# )
-# last = initial_model.output
-
-# x = Flatten()(last)
-# x = Dropout(0.2)(x)
-# x = Dense(NODE, activation='relu', kernel_initializer = 'he_normal')(x)
-# x = Dense(NODE, activation='relu', kernel_initializer = 'he_normal')(x)
-# preds = Dense(1000, activation='softmax')(x)
-# model = Model(initial_model.input, preds)
-
-# ### 3. compile
-# model.compile(optimizer='adam',
-#      loss='categorical_crossentropy',
-#     metrics=['acc'])
-
-# ### 4. fit
-# compute_steps_per_epoch = lambda x: int(math.ceil(1. * x / BATCH))
-# es = EarlyStopping(monitor='val_loss', patience=5)
-# re = ReduceLROnPlateau(monitor='val_loss', patience=3)
-# cp = ModelCheckpoint(model_path, save_best_only= True)
-# hist = model.fit_generator(train_xy,
-#         steps_per_epoch=compute_steps_per_epoch(TRAINING_SIZE),
-#         epochs= 10, callbacks=[es, re, cp],
-#         validation_data=val_xy,
-#         validation_steps=compute_steps_per_epoch(VALIDATION_SIZE)
-# )
-
-# # model = load_model(모델경로넣어라)
-
-# pred = model.predict(test_x)
-# pred = np.argmax(pred, 1)
-# sub = pd.read_csv('C:/data/LPD_competition/sample.csv', header = 0)
-# sub.loc[:,'prediction'] = pred
-# sub.to_csv('C:/data/LPD_competition/csv/lotte01.csv', index = False)

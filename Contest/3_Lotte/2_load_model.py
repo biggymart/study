@@ -29,11 +29,11 @@ VALIDATION_SIZE = 9000
 TEST_SIZE = 72000
 ##############################
 
-train_x = np.load('C:/data/LPD_competition/npy/LG_train_x.npy')
-train_y = np.load('C:/data/LPD_competition/npy/LG_train_y.npy')
-val_x = np.load('C:/data/LPD_competition/npy/LG_val_x.npy')
-val_y = np.load('C:/data/LPD_competition/npy/LG_val_y.npy')
-test_x = np.load('C:/data/LPD_competition/npy/LG_test_x.npy')
+train_x = np.load('C:/data/LPD_competition/npy/L_train_x.npy')
+train_y = np.load('C:/data/LPD_competition/npy/L_train_y.npy')
+val_x = np.load('C:/data/LPD_competition/npy/L_val_x.npy')
+val_y = np.load('C:/data/LPD_competition/npy/L_val_y.npy')
+test_x = np.load('C:/data/LPD_competition/npy/L_test_x.npy')
 
 ### 2. modeling
 initial_model = MobileNetV2(
