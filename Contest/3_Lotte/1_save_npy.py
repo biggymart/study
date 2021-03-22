@@ -17,8 +17,8 @@ from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_i
 
 
 ### HYPER-PARAMETER TUNNING ###
-DIMENSION = 64
-BATCH = 128
+DIMENSION = 128
+BATCH = 20
 NODE = 1024
 
 TRAIN_DIR = 'C:/data/LPD_competition/train'

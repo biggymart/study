@@ -1,20 +1,21 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.applications.mobilenet_v3 import preprocess_input
-from tensorflow.keras.applications import MobileNetV3Small
+from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+from tensorflow.keras.applications import MobileNetV2
 import os
+from natsort import natsorted
 
-# 100개의 판별 모델을 만들어서 competition 벌이는 대환장 소스코드!
+# 10개의 판별 모델을 만들어서 competition 벌이는 대환장 소스코드!
 
 
-atom = 10
+atom = 100
 
 TRAIN_DIR = 'C:/data/LPD_competition/train'
 TEST_DIR = 'C:/data/LPD_competition/test'
 model_path = 'C:/data/modelCheckpoint/lotte_0318_1_{epoch:02d}-{val_loss:.4f}.hdf5'
 
-train_folder_names = os.listdir(TRAIN_DIR)
-print(train_folder_names[0,10])
-'''
+train_fnames = os.listdir(TRAIN_DIR)
+train_fnames = natsorted(train_fnames)
+print(train_fnames[0:10])
 
 # 1000의 약수인지 확인해주는 함수
 def test_atom(atom):
@@ -24,7 +25,7 @@ def test_atom(atom):
         raise ValueError('atom should evenly divide 1000')
 test_atom(atom)
 
-    
+
 train_datagen = ImageDataGenerator(
     validation_split = 0.2,
     width_shift_range= 0.1,
@@ -42,7 +43,5 @@ for i in range(1000/atom):
     train_datagen.flow_from_directory(
         directory=TRAIN_DIR,
         class_mode='categorical',
-        classes=train_folder_names[i,i+atom]
+        classes=train_fnames
     )
-
-'''
