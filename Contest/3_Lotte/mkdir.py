@@ -1,5 +1,3 @@
-### 125 caterogories per model * 8 models = 1000 categories
-
 import os, shutil
 
 # path 지정해주고 폴더 만들기

@@ -23,7 +23,7 @@ NODE = 1024
 
 TRAIN_DIR = 'C:/data/LPD_competition/train'
 TEST_DIR = 'C:/data/LPD_competition/test'
-model_path = 'C:/data/modelCheckpoint/lotte_0318_1_{epoch:02d}-{val_loss:.4f}.hdf5'
+model_path = 'C:/data/LPD_competition/modelcheckpoint/lotte_0318_1_{epoch:02d}-{val_loss:.4f}.hdf5'
 
 TRAINING_SIZE = 39000
 VALIDATION_SIZE = 9000
