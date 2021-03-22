@@ -1,6 +1,6 @@
 # npy 만들자
 
-from var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, NODE, DROPOUT_RATE, train_datagen, test_datagen
+from .var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, NODE, DROPOUT_RATE, train_datagen, test_datagen
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
