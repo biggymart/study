@@ -1,6 +1,6 @@
 # 데이터 증식해주는 파일
 
-from .var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, NODE, DROPOUT_RATE, train_datagen, test_datagen
+from var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, NODE, DROPOUT_RATE, train_datagen, test_datagen
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
@@ -26,8 +26,8 @@ def test_atom(atom):
 # 각 폴더에 있는 사진을 뻥튀기해줌
 def augment_img(multiply_by=2): # 아무 값 안 주면 2배로 뿔려줌
     for idx, folder in enumerate(train_fnames): # 트레인 폴더는 1000개 있다
-        # if idx >= 1: # 폴더 X개만 해볼까
-        #     break
+        if idx >= 1: # 폴더 X개만 해볼까
+            break
 
         base_dir = TRAIN_DIR + '/' + folder + '/' # 각 폴더 디렉토리 'C:/data/LPD_competition/train/0'
         img_lst = natsorted(os.listdir(base_dir)) # 각 폴더 안에 있는 jpg 파일 리스트
@@ -60,4 +60,4 @@ def augment_img(multiply_by=2): # 아무 값 안 주면 2배로 뿔려줌
 ##### 함수 호출 (커맨드센터) #####
 if __name__ == "__main__":
     test_atom(atom)
-    augment_img(multiply_by=5)
+    augment_img(multiply_by=10)

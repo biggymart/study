@@ -24,15 +24,12 @@ atom = 100 # 각 모델이 구분할 class의 개수
 
 train_fnames = natsorted(os.listdir(TRAIN_DIR))
 test_fnames = natsorted(os.listdir(TEST_DIR))
-
-NODE = 4096
-DROPOUT_RATE = 0.2
 #######################################
 
 ##### 제너레이터 정의 (Initialize image data generator) #####
 ########################
 train_datagen = ImageDataGenerator(
-    validation_split = 0.2,
+    validation_split = 0.3,
     width_shift_range= 0.1,
     height_shift_range= 0.1,
     horizontal_flip=True,

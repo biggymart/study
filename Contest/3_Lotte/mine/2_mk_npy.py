@@ -1,20 +1,8 @@
 # npy 만들자
 
-from .var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, NODE, DROPOUT_RATE, train_datagen, test_datagen
+from var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, train_datagen, test_datagen
 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
-from tensorflow.keras.applications import MobileNetV2
-from tensorflow.keras.models import Model, load_model
-from tensorflow.keras.layers import Flatten, Dense, Dropout
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
-from natsort import natsorted
-import pandas as pd
-import cv2 as cv
 import numpy as np
-import os
-import gc
 
 
 # 1000의 약수인지 확인해주는 함수
