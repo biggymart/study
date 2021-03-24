@@ -111,6 +111,7 @@ for idx, img in enumerate(test_fnames): # test folder --> 72000 imgs
     gc.collect()
     tf.keras.backend.clear_session()
 
+
         
 
 print(empty_lst)

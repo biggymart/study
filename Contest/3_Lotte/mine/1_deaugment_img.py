@@ -15,8 +15,8 @@ original_img = ['0.jpg','1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg',
               '40.jpg','41.jpg','42.jpg','43.jpg','44.jpg','45.jpg','46.jpg','47.jpg']
 
 for idx, folder in enumerate(train_fnames): # 1000개의 폴더에 대하여
-    if idx >= 1: # 폴더 1개만 시험삼아 해보기
-        break
+    # if idx >= 1: # 폴더 1개만 시험삼아 해보기
+    #     break
 
     base_dir = TRAIN_DIR + '/' + folder + '/' # 'C:/data/LPD_competition/train/0/'
     img_lst = natsorted(os.listdir(base_dir))

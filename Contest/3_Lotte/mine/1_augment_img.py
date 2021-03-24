@@ -1,6 +1,6 @@
 # 데이터 증식해주는 파일
 
-from var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, NODE, DROPOUT_RATE, train_datagen, test_datagen
+from var_parameters import TRAIN_DIR, TEST_DIR, model_path, DIMENSION, atom, train_fnames, test_fnames, train_datagen, test_datagen
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
@@ -60,4 +60,4 @@ def augment_img(multiply_by=2): # 아무 값 안 주면 2배로 뿔려줌
 ##### 함수 호출 (커맨드센터) #####
 if __name__ == "__main__":
     test_atom(atom)
-    augment_img(multiply_by=10)
+    augment_img(multiply_by=2)
