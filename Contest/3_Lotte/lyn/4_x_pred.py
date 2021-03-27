@@ -21,7 +21,7 @@ from keras.applications.resnet import ResNet101,preprocess_input
 
 img1=[]
 for i in range(0,72000):
-    filepath='../../data/image/test/%d.jpg'%i
+    filepath='C:/data/LPD_competition/test/%d.jpg'%i
     image2=Image.open(filepath)
     image2 = image2.convert('RGB')
     image2 = image2.resize((128,128))
@@ -30,12 +30,12 @@ for i in range(0,72000):
     img1.append(image_data2)    
 
 # np.save('../data/csv/Dacon3/train4.npy', arr=img)
-np.save('../../data/npy/test2.npy', arr=img1)
+np.save('../data/LPD_competition/npy/test2.npy', arr=img1)
 # alphabets = string.ascii_lowercase
 # alphabets = list(alphabets)
 
 
 # x = np.load('../data/csv/Dacon3/train4.npy')
-x_pred = np.load('../../data/npy/test2.npy',allow_pickle=True)
+x_pred = np.load('../data/LPD_competition/npy/test2.npy',allow_pickle=True)
 
 print(x_pred.shape)

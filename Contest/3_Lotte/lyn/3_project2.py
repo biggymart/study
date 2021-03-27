@@ -14,9 +14,9 @@ from tensorflow.keras.applications.efficientnet import preprocess_input
 
 
 #데이터 지정 및 전처리
-x = np.load("../../data/npy/P_project_x5.npy",allow_pickle=True)
-x_pred = np.load('../../data/npy/test2.npy',allow_pickle=True)
-y = np.load("../../data/npy/P_project_y5.npy",allow_pickle=True)
+x = np.load("../data/LPD_competition/npy/Lotte_train_x5.npy",allow_pickle=True)
+x_pred = np.load('../data/LPD_competition/npy/test2.npy',allow_pickle=True)
+y = np.load("../data/LPD_competition/npy/Lotte_train_y5.npy",allow_pickle=True)
 # y1 = np.zeros((len(y), len(y.unique())))
 # for i, digit in enumerate(y):
 #     y1[i, digit] = 1
@@ -65,7 +65,7 @@ train_generator = idg.flow(x_train,y_train,batch_size=64, seed = 2048)
 valid_generator = idg2.flow(x_valid,y_valid)
 # test_generator = idg2.flow(x_pred)
 
-mc = ModelCheckpoint('../../data/modelcheckpoint/lotte_projcet9.h5',save_best_only=True, verbose=1)
+mc = ModelCheckpoint('C:/data/LPD_competition/modelcheckpoint/lotte_0326.h5',save_best_only=True, verbose=1)
 
 
 
@@ -84,16 +84,16 @@ a = Dense(1000, activation= 'softmax') (a)
 model = Model(inputs = efficientnet.input, outputs = a)
 
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-early_stopping = EarlyStopping(patience= 20)
-lr = ReduceLROnPlateau(patience= 10, factor=0.5)
+early_stopping = EarlyStopping(patience= 5)
+lr = ReduceLROnPlateau(patience= 3, factor=0.5)
 
 model.compile(loss='categorical_crossentropy', optimizer='adam',
                 metrics=['acc'])
-learning_history = model.fit_generator(train_generator,epochs=200, steps_per_epoch= len(x_train) / 64,
+learning_history = model.fit_generator(train_generator,epochs=30, steps_per_epoch= len(x_train) / 64,
     validation_data=valid_generator, callbacks=[early_stopping,lr,mc])
 
 # predict
-model.load_weights('../../data/modelcheckpoint/lotte_projcet9.h5')
+model.load_weights('C:/data/LPD_competition/modelcheckpoint/lotte_0326.h5')
 result = model.predict(x_pred,verbose=True)
 
 
@@ -101,6 +101,6 @@ result = model.predict(x_pred,verbose=True)
 
 
 
-sub = pd.read_csv('../../data/image/sample.csv')
+sub = pd.read_csv('C:/data/LPD_competition/sample.csv')
 sub['prediction'] = np.argmax(result,axis = 1)
-sub.to_csv('../../data/image/answer8.csv',index=False)
+sub.to_csv('C:/data/LPD_competition/answer.csv',index=False)
