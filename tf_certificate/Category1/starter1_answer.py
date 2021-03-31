@@ -39,7 +39,7 @@ def solution_model():
     model.add(Dense(1, activation='linear'))
 
     model.compile(loss='mse', optimizer='adam', metrics=['mae'])
-    model.fit(xs, ys, epochs=100, batch_size=20, validation_split=0.2)
+    model.fit(xs, ys, epochs=100, batch_size=1, validation_split=0.2)
 
 
     loss = model.evaluate(xs, ys)
