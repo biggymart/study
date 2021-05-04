@@ -1,5 +1,4 @@
 # binary classifier
-
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
@@ -31,10 +30,11 @@ lr = ReduceLROnPlateau(monitor='val_loss', patience=3, factor=0.5, verbose=2)
 #   save_weights_only=True, monitor='val_loss', verbose=1
 # )
 
-clf.fit(x_train, y_train,
-          epochs=10,
-          validation_split=0.2,
-          callbacks=[es, lr]
+clf.fit(x_train, 
+        y_train,
+        epochs=10,
+        validation_split=0.2,
+        callbacks=[es, lr]
 )
 
 #4. evaluate
@@ -42,11 +42,11 @@ results = clf.evaluate(x_test, y_test)
 print(results)
 
 #5. save model
-model2 = model.export_model()
+model2 = clf.export_model()
 try:
   model2.save('./keras/keras3/save/model2_cancer/', save_format='tf')
 except Exception:
   model2.save('model2_cancer.h5')
 
-best_model = model.tuner.get_best_model()
+best_model = clf.tuner.get_best_model()
 best_model.save("./keras/keras3/save/best_model_cancer/", save_format='tf')
